@@ -2,7 +2,11 @@
 
 A bilingual Saudi ecommerce storefront preview with an Arabic-first shopping experience, original HUBB product artwork, generated Saudi campaign scenes, and consumer-first moments of sharing and the founder's development story.
 
-**Private preview: no payment collected, no live order received or accepted.** Payments, inventory, fulfilment, order acceptance and review storage are not connected. A WhatsApp link opens a message for the visitor to review and send; opening it does not prove the business received an enquiry. The supplied business number is +966 55 312 7999.
+**Public website preview: no payment collected, no live order received or accepted.** Payments, inventory, fulfilment, order acceptance and review storage are not connected. A WhatsApp link opens a message for the visitor to review and send; opening it does not prove the business received an enquiry. The supplied business number is +966 55 312 7999.
+
+Public preview: https://hubb-saudi-gathering-store.r0shan911.chatgpt.site/
+
+Source: https://github.com/Roshanmahamoodnk/hubb-saudi-store
 
 ## Open and run
 
@@ -14,12 +18,12 @@ Run `npm start` and open http://127.0.0.1:8788. No package installation or exter
 - Online formats are the five-sachet Journey Cup, twenty-sachet Family Mix and twenty-four-sachet retail case. Individual 30 g sachets are not sold online, including as add-ons.
 - Product details, contents, quantity selection, Arabic/English search and a persistent local cart.
 - Saudi contact/address validation and a no-payment order preview; no automatic order submission.
-- Quote-only wholesale estimates with explicit volume boundaries and a user-controlled enquiry path.
+- Price-free B2B volume enquiries for wholesale offers, availability, delivery and supply terms.
 - Original package artwork and clearly labelled AI campaign scenes; actual customer reviews begin empty and real feedback is invited without fabricated ratings.
 - “A little HUBB. Happiness to share.” leads the experience. Two years of founder-reported development now sit in About HUBB, after shopping and everyday sharing scenes. See `CONTENT_DIRECTION_V3.md` for the current bilingual direction.
 - Eight separate format renders: a five-sachet cup and 24-sachet open counter-display carton for each flavour. The selected pack image follows the shopper through product cards, product pages, details, cart and order preview.
 - Four new original lifestyle concepts: a football break, colleagues after lunch, a family across adult generations, and a parked road stop. Desktop scroll changes the pinned scene; mobile and reduced-motion layouts show each scene in sequence.
-- An original whole-seed → empty husks → kernel visual concept and an optional synthesized designed sound study. The audio is not an actual HUBB product recording or measured acoustic result.
+- A silent scroll-controlled ritual: the seed opens, the kernel emerges, and the empty husks arc into a separate paper bag. No sound button, synthetic audio or required step clicks. Short-screen, reduced-motion and no-JavaScript views use a static illustrated guide.
 - Keyboard-accessible dialogs, mobile layouts, reduced-motion support and complete Arabic/English controls.
 
 ## Proposed online offer
@@ -34,13 +38,13 @@ The 30 g sachet's **SAR 2.50** is a proposed supermarket retail reference only. 
 
 The current proposal is a **SAR 39 goods-subtotal minimum**, **SAR 15 delivery below SAR 75**, and **free delivery from SAR 75**. These are preview rules awaiting actual cost/fulfilment validation, not confirmed delivery economics. The minimum and threshold are calculated from merchandise after any supported merchandise discount and before delivery. Empty carts cannot proceed.
 
-Wholesale all-units case estimates remain 4–11 cases SAR 40, 12–23 SAR 38, 24+ SAR 36. Tax basis, freight, capacity and terms remain unresolved. See `PRICING.md` for price evidence, SPL public courier references and limitations.
+Wholesale prices are supplied individually by the Rozana team. No B2B tier, monetary subtotal or discount calculation appears in the page or prepared enquiry. See `PRICING.md` for price evidence, SPL public courier references and limitations.
 
 ## Content and artwork status
 
 Product source: the owner-provided guide https://roshanmahamoodnk.github.io/hubb-companion/video_review/ and current V5 local briefs. Current owner instructions supersede older product ideas. Saudi-manufacturer positioning and R&D history are owner-reported; no crop-origin, programme certification, Japanese-process provenance or retailer-partnership claim is established.
 
-**Arabic: Draft pending Saudi copywriter validation.** Generated product renders are design concepts; typeset page facts take precedence over generated small print. No third-party SKU imagery or Howcast footage is used as advertising. Prompts and provenance are in `assets/PROMPTS.md`, `assets/SKU_PROMPTS.md` and `assets/CRACK_PROMPT.md`. V3 prompts are in `assets/CUP_V3_PROMPTS.md`, `assets/CASE_V3_PROMPTS.md` and `assets/UGC_V3_PROMPTS.md`, `assets/DISPLAY_V4_PROMPTS.md`; scene guidance is in `SCENES_V3.md`. WebP files serve the site; original PNGs are preserved.
+**Arabic: Draft pending Saudi copywriter validation.** Generated product renders are design concepts; typeset page facts take precedence over generated small print. No third-party SKU imagery or Howcast footage is used as advertising. Prompts and provenance are in `assets/PROMPTS.md`, `assets/SKU_PROMPTS.md` and `assets/CRACK_PROMPT.md`. V3 prompts are in `assets/CUP_V3_PROMPTS.md`, `assets/CASE_V3_PROMPTS.md` and `assets/UGC_V3_PROMPTS.md`, `assets/DISPLAY_V4_PROMPTS.md` and `assets/RITUAL_V4_PROMPTS.md`; scene guidance is in `SCENES_V3.md`. WebP files serve the site; original PNGs are preserved.
 
 ## Owner-supplied contact and locations
 
@@ -52,4 +56,4 @@ These are owner-supplied contact/location references. Use “Riyadh warehouse”
 
 ## Launch dependencies
 
-See `_fleet/launch-checklist.md`. Product records, physical packaging validation, approved commercial/tax model, payment and order services, stock, fulfilment and customer-content infrastructure remain launch work. The business contact is supplied; monitoring and receipt handling still need operational testing. Private preview hosting and design review do not establish readiness to accept money or live orders.
+See `_fleet/launch-checklist.md`. Product records, physical packaging validation, approved commercial/tax model, payment and order services, stock, fulfilment and customer-content infrastructure remain launch work. The business contact is supplied; monitoring and receipt handling still need operational testing. Public preview hosting and design review do not establish readiness to accept money or live orders.

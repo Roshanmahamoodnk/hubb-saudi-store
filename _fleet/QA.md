@@ -41,3 +41,12 @@ This revision supersedes the V1 single-sachet and below-minimum checkout example
 - Reduced-motion and no-JavaScript static reading fallbacks inspected in source. A CPU-throttled frame-rate run and physical-device performance were not measured.
 - Module syntax, static build and final local-resource audit pass:11HTML pages, oneH1 each, no missing local resources, duplicate IDs or missing image alt attributes. The build now fails if any selected pack or lifestyle image is missing.
 - Same proposed39minimum/75free-delivery policy, supplied WhatsApp and factory/warehouse details remain. Payment, inventory, fulfilment and verified-review storage are unconnected. Arabic and generated pack microcopy remain draft pending qualified review.
+
+## Final corrections — silent ritual and B2B
+
+- Earlier V1/V2 wholesale tiers and synthetic sound checks above are historical and superseded. The table, unit-price function, savings nudge, monetary B2B subtotal, sound button and AudioContext implementation are removed.
+- Desktop1440×900: whole seed, shell split, separate kernel and final kernel-plus-paper-bag states observed. Scroll progress and transforms update; both empty husks end hidden inside the front-occluded bag.
+- Arabic390×844: sticky artwork, evolving shell/kernel and bag sequence observed while scrolling. Four Arabic instruction chapters remain in order; no horizontal overflow and zero audio controls.
+- Short-screen844×390: animation disables, artwork returns to ordinary positioning, all four steps remain and no horizontal overflow. Reduced-motion preference uses the same static branch; preference emulation itself was not exercised.
+- English volume form:12cartons yields288sachets/8.64kg. Synthetic business/city/supply notes produced a draft asking for volume offers, availability, delivery lead time and payment/supply terms. No SAR amount or wholesale price appears in this draft. The WhatsApp URL uses the supplied966553127999number. No link was sent; dialog closed and synthetic fields discarded.
+- Original selected pack-format, language, cart, sharing-scene and contact checks from V3 remain applicable. Final source and build verification follow the last CSS/documentation edits.

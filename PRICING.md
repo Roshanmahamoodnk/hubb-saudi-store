@@ -17,26 +17,11 @@ The cup's small price benefit leaves room for its additional outer pack and shel
 
 All amounts above are illustrative displayed SAR totals for like-for-like comparison. This proposal does not calculate a VAT split or assign tax registration status. Before transactional launch, confirm the seller's tax setup and final tax-inclusive consumer prices. Bulk quotes must state their actual tax and freight basis; do not silently add a second tax amount to the preview numbers.
 
-## Bulk estimate tiers — quote only
+## B2B volume enquiries — no published price tiers
 
-One case always means **24 sachets × 30 g = 720 g**. Cases remain single-flavour; the buyer may request different flavours across whole cases. Whether mixed selections qualify across the volume bands is proposed here as yes, subject to fulfilment capability and final commercial approval.
+Owner correction, 6 September 2026: remove wholesale price tables, tier calculations, savings nudges and computed subtotals. Businesses request an individual volume offer from Rozana. The form records flavour, expected cartons, total sachets/product weight, business, city and supply notes. The prepared enquiry asks for availability, delivery/collection, lead times and commercial terms. No wholesale price is calculated or sent in the draft.
 
-| Total cases in enquiry | Indicative SAR / case | SAR / sachet | SAR / 100 g | Reduction vs SAR 42 base case | Minimum tier quantity | Indicative subtotal at tier minimum |
-|---|---:|---:|---:|---:|---|---:|
-| 1–3 | 42.00 | 1.7500 | 5.8333 | 0% | 24 sachets; 0.72 kg | 42.00 |
-| 4–11 | 40.00 | 1.6667 | 5.5556 | 4.76% | 96 sachets; 2.88 kg | 160.00 |
-| 12–23 | 38.00 | 1.5833 | 5.2778 | 9.52% | 288 sachets; 8.64 kg | 456.00 |
-| 24+ | 36.00 | 1.5000 | 5.0000 | 14.29% | 576 sachets; 17.28 kg | 864.00 |
-
-At the exact 4/12/24-case thresholds, the savings against that quantity at SAR 42/case are SAR 8 / SAR 48 / SAR 144. Effective reductions against the same quantity of SAR 2.50 singles are 33.33% / 36.67% / 40.00%. These are gross sticker comparisons, not retailer profit margins or manufacturer contribution.
-
-Use a functioning estimate calculator with the label **“Indicative bulk estimate · final price by quote” / “تقدير مبدئي للجملة · السعر النهائي حسب عرض السعر”**. The action is **“Prepare a quote request” / “جهّز طلب عرض السعر”**. The owner supplied WhatsApp **+966 55 312 7999** (`https://wa.me/966553127999`). A prepared enquiry may open there for the visitor to inspect and send. Merely opening WhatsApp is not receipt or acceptance; downloadable/copyable drafts remain unsent until the visitor sends them. No payment or confirmed-order state is supported by this preview.
-
-For the preview, apply the tier's unit price to all selected cases once the threshold is reached. The mathematical model is `cases × applicable_case_price`; do not stack a second percentage discount. The 24-case threshold makes 24 cases cost less than 23; make that benefit explicit as described below.
-
-### Make the 24-case threshold clear
-
-All-units tiers produce 11 × 40 = SAR 440 followed by 12 × 38 = SAR 456, and 23 × 38 = SAR 874 followed by 24 × 36 = SAR 864. Only the 24-case boundary decreases the total. For a clearer customer experience, the bulk calculator can show “24 cases costs SAR 10 less than 23 at the preceding tier” or treat 24+ as an enquiry band with a displayed estimate. Do not conceal the comparison. These are intentionally quote estimates, so any final quotation can resolve the commercial treatment.
+One display carton contains 24 × 30 g sachets of one flavour. The quantity input supports 1–10,000 estimated cartons as an enquiry, without asserting a commercial minimum. The user reviews and sends any WhatsApp draft themselves. Contact: +966 55 312 7999.
 
 ## Primary retailer observations
 
@@ -50,7 +35,7 @@ Research retrieval date: **6 September 2026**. This is a limited shelf-price sca
 | [Bin Afif Roasters — roasted sunflower seeds](https://binafifroasters.com/en/products/Roasted-sunflower-Seeds) | 250 g | 7.00 | 2.80 | Opened direct seller page, final crawl indicator today. Out of stock. The same page lists 500 g at SAR 14 and 1 kg at SAR 28. |
 | [Aeen — Baja product category](https://aeen.shop/en/categories/1349743/%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA-%D8%A8%D8%A7%D8%AC%D8%A9?page=1) | 15 g | 1.50 | 10.00 | Direct retailer category search extract, recorded crawl two weeks ago. Product title says salted sunflower seeds; direct open timed out. Secondary support for small-pack premium only. |
 
-The proposed HUBB supermarket sachet reference is SAR 8.33/100 g: above the larger branded packs in this limited scan and below the observed 15 g mini-pack equivalent. The Family Mix reaches SAR 6.50/100 g while retaining twenty separate sachets and an outer sharing pack. That is a proposed premium position for convenience, flavour choice and original packaging; these references do not prove shoppers will pay that premium. The SAR 36 bulk case yields SAR 5/100 g, broadly near some larger branded-pack references, but the manufacturer must still cover 24 individual sachets, a case and trade costs.
+The proposed HUBB supermarket sachet reference is SAR 8.33/100 g: above the larger branded packs in this limited scan and below the observed 15 g mini-pack equivalent. The Family Mix reaches SAR 6.50/100 g while retaining twenty separate sachets and an outer sharing pack. That is a proposed premium position for convenience, flavour choice and original packaging; these references do not prove shoppers will pay that premium. Wholesale offers must be assessed individually against actual packaging and supply costs.
 
 We excluded organic/baking-kernel products, non-Saudi prices, old promotional PDFs and marketplace price-comparison aggregators from the core price basis. Primary [Baja product information](https://baja.com.sa/product-detail.php?productId=12) confirms salted sunflower seed offerings but exposes no price usable for this ladder.
 
@@ -98,7 +83,7 @@ If the low tier cannot cover the cost and required contribution, change the quot
 
 - Product data can use `priceStatus: "proposed"` and one consistent global preview notice rather than placing internal research text inside every product card.
 - Online product chooser prices: cup 12.00; family 39.00; case 42.00. No single-sachet option or add-on. Same format price across the four flavours; Family Mix is a separate bundle.
-- Bulk starts with selectable case quantities, whole-case flavour allocations and the exact count/weight displayed; the current estimate is always labelled quote-only.
+- Bulk starts with selectable case quantities, whole-case flavour allocations and the exact count/weight displayed; no price or monetary subtotal is displayed or included in the enquiry.
 - V2 explicitly proposes a SAR 39 merchandise minimum, SAR 15 delivery below SAR 75, and free delivery from SAR 75. Label these as preview terms until economics and coverage are approved. No delivery timeline, current-stock quantity, retailer partnership, approved payment method, certification mark or artificial urgency is established.
 - On the About page, “A Saudi manufacturer” can be attributed to the owner's statement. “Saudi-grown seeds”, an owner-supplied map pin and “Saudi Made” programme certification are separate claims. Use supplied locations only with their supplied role; a pin does not verify programme certification, factory ownership or dispatch coverage.
 

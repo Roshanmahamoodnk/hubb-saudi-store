@@ -1,6 +1,7 @@
-import { products, formats, onlinePolicy, money, getLang, t, bulkUnitPrice, packImage } from './catalog.js';
+import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
 import { initCommerce, openProduct, addToCart, openCart, openSearch } from './commerce.js';
 import { initStory } from './story.js';
+import { initCrack } from './crack-scroll.js';
 import { initMotion, refreshMotion } from './motion.js';
 
 const WHATSAPP_NUMBER = '966553127999';
@@ -42,19 +43,9 @@ function updateBulk() {
   const input = $('#bulk-quantity');
   if (!input) return;
   const quantity = Number(input.value);
-  if ($('#bulk-nudge')) $('#bulk-nudge').textContent = '';
-  if (!Number.isInteger(quantity) || quantity < 4 || quantity > 10000) {
-    if ($('#bulk-total')) $('#bulk-total').textContent = '—';
-    if ($('#bulk-count')) $('#bulk-count').textContent = t('أدخل عددًا صحيحًا من ٤ إلى ١٠٬٠٠٠.', 'Enter a whole number from 4 to 10,000.');
-    return;
-  }
-  if ($('#bulk-total')) $('#bulk-total').textContent = money(quantity * bulkUnitPrice(quantity));
-  if ($('#bulk-count')) $('#bulk-count').textContent = `${num(quantity * 24)} ${t('كيس', 'sachets')} · ${num(quantity * .72)} ${t('كغ إجمالي', 'kg total')}`;
-  let nudge = $('#bulk-nudge');
-  if (!nudge && $('#bulk-count')) { nudge = document.createElement('div'); nudge.id = 'bulk-nudge'; nudge.className = 'bulk-nudge'; $('#bulk-count').after(nudge); }
-  const saving = quantity * bulkUnitPrice(quantity) - (quantity + 1) * bulkUnitPrice(quantity + 1);
-  if (nudge && saving > 0) nudge.textContent = t(`أضف كرتونًا واحدًا ووفّر ${money(saving)} في إجمالي المنتجات المقترح.`, `Add one case and save ${money(saving)} on the proposed goods subtotal.`);
-  document.querySelectorAll('.bulk-table tbody tr').forEach((row, index) => { row.dataset.active = String(index === (quantity >= 24 ? 2 : quantity >= 12 ? 1 : 0)); });
+  if ($('#bulk-count')) $('#bulk-count').textContent = Number.isInteger(quantity) && quantity >= 1 && quantity <= 10000
+    ? `${num(quantity * 24)} ${t('كيسًا', 'sachets')} · ${num(quantity * .72)} ${t('كغ من المنتج', 'kg of product')}`
+    : t('أدخل عددًا صحيحًا من ١ إلى ١٠٬٠٠٠.', 'Enter a whole number from 1 to 10,000.');
 }
 
 function renderBulkOptions() {
@@ -168,14 +159,14 @@ function downloadDraft(body, name) {
 function showBulkRequest() {
   const quantity = Number($('#bulk-quantity')?.value);
   const product = flavours().find((p) => p.id === $('#bulk-flavour')?.value);
-  if (!Number.isInteger(quantity) || quantity < 4 || quantity > 10000 || !product) return;
-  showDialog(`<p class="eyebrow">${t('طلب عرض سعر · مسودة', 'QUOTE REQUEST · DRAFT')}</p><h2>${t('حُبّ لأعمالك.', 'HUBB for your business.')}</h2><p>${esc(localized(product.name))} · ${num(quantity)} ${t('كرتون', 'cases')} · ${num(quantity * 24)} ${t('كيس', 'sachets')}<br>${t('إجمالي المنتجات المقترح:', 'Proposed goods subtotal:')} ${money(quantity * bulkUnitPrice(quantity))}</p><form id="quote-form">${inputField('quote-company', 'company', t('اسم المنشأة', 'Business name'), 'autocomplete="organization"')}${inputField('quote-city', 'city', t('المدينة', 'City'), 'autocomplete="address-level2"')}<label for="quote-notes">${t('ملاحظات التوريد (اختياري)', 'Supply notes (optional)')}</label><textarea id="quote-notes" name="notes" maxlength="1200"></textarea><p class="small-text" style="margin-top:15px">${t('راجع المسودة ثم نزّلها أو افتح رسالتها الجاهزة في واتساب. البيانات لا تُحفظ في المتصفح. الأسعار والشحن والضرائب وشروط التوريد تحتاج تأكيدًا في العرض النهائي.', 'Review the draft, then download it or open the prepared WhatsApp message. Details are not saved in this browser. Pricing, freight, tax and supply terms require confirmation in the final quote.')}</p><button type="submit" class="button primary">${t('جهّز طلب عرض السعر', 'Prepare quote request')}</button></form>`);
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10000 || !product) return;
+  showDialog(`<p class="eyebrow">${t('طلب كميات للأعمال', 'VOLUME PURCHASE · B2B')}</p><h2>${t('حُبّ لأعمالك.', 'HUBB for your business.')}</h2><p>${esc(localized(product.name))} · ${num(quantity)} ${t('كرتون', 'cases')} · ${num(quantity * 24)} ${t('كيس', 'sachets')}</p><form id="quote-form">${inputField('quote-company', 'company', t('اسم المنشأة', 'Business name'), 'autocomplete="organization"')}${inputField('quote-city', 'city', t('المدينة', 'City'), 'autocomplete="address-level2"')}<label for="quote-notes">${t('ملاحظات التوريد (اختياري)', 'Supply notes (optional)')}</label><textarea id="quote-notes" name="notes" maxlength="1200"></textarea><p class="small-text" style="margin-top:15px">${t('راجع المسودة ثم نزّلها أو افتح رسالتها الجاهزة في واتساب. البيانات لا تُحفظ في المتصفح. الأسعار والشحن والضرائب وشروط التوريد تحتاج تأكيدًا في العرض النهائي.', 'Review the draft, then download it or open the prepared WhatsApp message. Details are not saved in this browser. Pricing, freight, tax and supply terms require confirmation in the final quote.')}</p><button type="submit" class="button primary">${t('اطلب عرضًا للكميات', 'Request a volume offer')}</button></form>`);
   $('#quote-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
     if (!event.target.reportValidity()) return;
     const data = new FormData(event.target);
     if (['company', 'city'].some((key) => String(data.get(key)).trim().length < 2)) { toast(t('يرجى إكمال اسم المنشأة والمدينة.', 'Please complete the business name and city.')); return; }
-    const body = `HUBB — ${t('مسودة طلب عرض سعر', 'Draft quote request')}\n${t('للنقاش — ليس طلب شراء مؤكدًا', 'FOR DISCUSSION — NOT A CONFIRMED PURCHASE ORDER')}\n\n${t('المنشأة', 'Business')}: ${String(data.get('company')).trim()}\n${t('المدينة', 'City')}: ${String(data.get('city')).trim()}\n${t('المنتج', 'Product')}: ${product.name.en} / ${product.name.ar}\n${t('الكمية', 'Quantity')}: ${quantity} cases × 24 sachets × 30 g\n${t('الإجمالي', 'Total')}: ${quantity * 24} sachets / ${(quantity * .72).toFixed(2)} kg\n${t('سعر الكرتون المقترح', 'Proposed case price')}: SAR ${bulkUnitPrice(quantity).toFixed(2)}\n${t('إجمالي المنتجات المقترح', 'Proposed goods subtotal')}: SAR ${(quantity * bulkUnitPrice(quantity)).toFixed(2)}\n\n${t('ملاحظات', 'Notes')}: ${String(data.get('notes') || '—').trim()}\n\n${t('الأسعار مقترحة وتحتاج تأكيد المصنع. الضرائب والشحن والمخزون وشروط الدفع والتوريد غير مشمولة أو مؤكدة. لا تُحصّل مبالغ ولا يُرسل هذا الطلب تلقائيًا.', 'Prices are proposed and require factory confirmation. Tax, shipping, stock, payment and supply terms are not included or confirmed. No payment is collected and this draft is not sent automatically.')}\n`;
+    const body = `HUBB — ${t('مسودة طلب عرض سعر', 'Draft quote request')}\n${t('للنقاش — ليس طلب شراء مؤكدًا', 'FOR DISCUSSION — NOT A CONFIRMED PURCHASE ORDER')}\n\n${t('المنشأة', 'Business')}: ${String(data.get('company')).trim()}\n${t('المدينة', 'City')}: ${String(data.get('city')).trim()}\n${t('المنتج', 'Product')}: ${product.name.en} / ${product.name.ar}\n${t('الكمية', 'Quantity')}: ${quantity} cases × 24 sachets × 30 g\n${t('الإجمالي', 'Total')}: ${quantity * 24} sachets / ${(quantity * .72).toFixed(2)} kg\n\n${t('ملاحظات', 'Notes')}: ${String(data.get('notes') || '—').trim()}\n\n${t('يرجى مشاركة عرض للكميات، وتوفّر المنتجات، وخيارات التوصيل ومدته، وشروط الدفع والتوريد لهذه المدينة.', 'Please share a volume offer, product availability, delivery options and lead time, and payment and supply terms for this city.')}\n`;
     showDialog(`<p class="eyebrow">${t('مسودة جاهزة · لم تُرسل', 'DRAFT READY · NOT SENT')}</p><h2>${t('طلبك جاهز للمراجعة.', 'Ready for a conversation.')}</h2><p>${t('راجع النص أدناه. استخدم واتساب للتواصل مع الفريق، أو نزّل نسخة مطابقة من طلب عرض السعر.', 'Review the text below. Open WhatsApp to contact the team, or download an identical copy of your quote request.')}</p><pre class="draft-output">${esc(body)}</pre>${preparedMessageLink(body)}<button type="button" class="button secondary" id="quote-download" style="margin-top:14px">${t('تنزيل طلب عرض السعر', 'Download quote request')} ↓</button>`);
     $('#quote-download')?.addEventListener('click', () => downloadDraft(body, `HUBB-quote-request-${quantity}-cases.txt`));
   });
@@ -194,6 +185,7 @@ applyLanguage(initialLanguage);
 initCommerce();
 initStory();
 initMotion();
+initCrack();
 $('#language-toggle')?.addEventListener('click', () => location.assign(`/${getLang() === 'ar' ? 'en' : 'ar'}/`));
 $('#search-button')?.addEventListener('click', openSearch);
 $('#cart-button')?.addEventListener('click', openCart);
@@ -208,7 +200,7 @@ document.addEventListener('click', (event) => {
   const moment = event.target.closest('[data-moment]'); if (moment) showMoment(moment.dataset.moment);
   const partner = event.target.closest('[data-partner]'); if (partner) showPartner(partner.dataset.partner);
   const change = event.target.closest('[data-bulk-change]');
-  if (change && $('#bulk-quantity')) { const current = Number($('#bulk-quantity').value) || 4; $('#bulk-quantity').value = Math.min(10000, Math.max(4, current + Number(change.dataset.bulkChange))); updateBulk(); }
+  if (change && $('#bulk-quantity')) { const current = Number($('#bulk-quantity').value) || 1; $('#bulk-quantity').value = Math.min(10000, Math.max(1, current + Number(change.dataset.bulkChange))); updateBulk(); }
 });
 document.querySelectorAll('[data-format]').forEach((button) => button.addEventListener('click', () => {
   if (!['cup', 'case'].includes(button.dataset.format)) return;

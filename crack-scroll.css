@@ -1,0 +1,51 @@
+.crack-section{overflow:visible;background:#ece3d3;padding-bottom:44px}
+.crack-scroll-track{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:8%;align-items:start;position:relative}
+.crack-stage{height:min(650px,86svh);min-height:360px;position:relative;direction:ltr;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#f8f0e0 0%,#ece3d3 67%);border-block:1px solid #b8a78c66}
+.crack-stage-top,.crack-stage-footer{position:absolute;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between;gap:15px;z-index:7;color:#725b3f;font-size:9px;letter-spacing:.12em}
+.crack-stage-top{top:23px}.crack-stage-top>span:first-child{font-size:15px;letter-spacing:.23em;color:#34402d}
+.crack-stage-footer{bottom:24px;font-size:9px;letter-spacing:.04em}
+.crack-stage-meter{height:1px;background:#af977555;flex:1;overflow:hidden}.crack-stage-meter i{display:block;height:100%;background:#9d4c30;transform:scaleX(1);transform-origin:left}
+.crack-orbit{position:absolute;left:50%;top:43%;width:74%;aspect-ratio:1;border:1px solid #b6a78e33;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.crack-object{position:absolute;left:0;top:0;width:42%;height:auto!important;max-width:none;user-select:none;pointer-events:none;transform-origin:center;opacity:1}
+.crack-whole-left,.crack-whole-right{z-index:5;opacity:0}.crack-whole-left{clip-path:inset(0 50% 0 0)}.crack-whole-right{clip-path:inset(0 0 0 50%)}
+.crack-husk-left,.crack-husk-right{z-index:3;width:40%}.crack-husk-left{transform:translate(8%,15%) rotate(-18deg) scale(.65)}.crack-husk-right{transform:translate(100%,15%) rotate(18deg) scale(.65)}
+.crack-kernel{z-index:2;width:27%;transform:translate(104%,14%) scale(.75)}
+.crack-bag-back,.crack-bag-front{width:34%;transform:translate(162%,85%)}.crack-bag-back{z-index:1}.crack-bag-front{z-index:4;clip-path:polygon(0 8%,100% 8%,100% 100%,0 100%)}
+.crack-kernel-label,.crack-bag-label{position:absolute;font-size:8px;letter-spacing:.08em;line-height:1.6;text-align:center;color:#665239;z-index:6;white-space:nowrap;transform:translateX(-50%)}
+.crack-kernel-label{left:27%;top:53%}.crack-bag-label{left:72%;bottom:7%}
+.crack-scroll-hint{display:none}.is-scroll-driven .crack-scroll-hint{display:block}
+.crack-chapters{list-style:none;padding:0;margin:0;counter-reset:none}
+.crack-chapter{padding:25px 0;border-bottom:1px solid #b8a78c55}
+.crack-chapter-number{font:12px/1.5 Georgia,serif;color:#9d4c30;letter-spacing:.1em;display:block;margin-bottom:22px}
+.crack-chapter h3{font:32px/1.22 Georgia,serif;margin:0 0 20px;letter-spacing:-.02em}
+html[lang=ar] .crack-chapter h3{font-family:'Aref Ruqaa',serif;font-size:35px;line-height:1.55;letter-spacing:0}
+.crack-chapter p{font-size:15px;line-height:1.9;margin:0 0 18px;color:#605446}
+.crack-chapter small{font-size:11px;line-height:1.8;display:block;color:#6e624f;border-inline-start:2px solid #9d4c3055;padding-inline-start:12px}
+.is-scroll-driven .crack-stage{position:sticky;top:24px}
+.is-scroll-driven .crack-chapter{min-height:74svh;display:flex;flex-direction:column;justify-content:center;border-bottom:0;opacity:.55;transition:opacity .25s}
+.is-scroll-driven .crack-chapter.is-active{opacity:1}
+.crack-concept-note{font-size:10px!important;color:#796b58;text-align:center;padding-top:30px;margin:0}
+.trade-benefits{list-style:none;margin:30px 0 18px;padding:0}.trade-benefits li{display:flex;gap:22px;padding:22px 0;border-top:1px solid var(--line)}.trade-benefits li>span{font:12px Georgia,serif;color:var(--accent);padding-top:5px}.trade-benefits strong{font-size:15px;font-weight:500}.trade-benefits p{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.8}.trade-phone{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:12px}.trade-phone bdi{font-size:15px}.trade-offer-note{font-size:12px;line-height:1.9;margin:26px 0;color:var(--muted)}.bulk-calculator{align-self:start}.bulk-calculator>.eyebrow{margin-bottom:26px}
+@media(max-width:760px){
+ .crack-scroll-track{display:block}.crack-stage{height:46svh;min-height:270px;max-height:440px;margin-inline:-8px}
+ .is-scroll-driven .crack-stage{top:0;z-index:2}
+ .crack-stage-top{top:12px;left:14px;right:14px;font-size:7px}.crack-stage-top>span:first-child{font-size:11px}.crack-stage-footer{bottom:14px;left:14px;right:14px;font-size:8px}
+ .crack-orbit{width:60%}.crack-object{width:33%}.crack-husk-left,.crack-husk-right{width:32%}.crack-kernel{width:22%}.crack-bag-back,.crack-bag-front{width:27%}
+ .crack-kernel-label,.crack-bag-label{font-size:6px}.crack-kernel-label{top:57%}.crack-bag-label{bottom:7%}
+ .crack-chapter{padding:27px 5px}.is-scroll-driven .crack-chapter{min-height:55svh;padding:30px 5px;opacity:1}
+ .crack-chapter h3{font-size:28px;max-width:330px;margin-bottom:14px}.crack-chapter p{font-size:13px;line-height:1.85;margin-bottom:14px}.crack-chapter small{font-size:10px}.crack-chapter-number{margin-bottom:16px}
+ html[lang=ar] .crack-chapter h3{font-size:31px;line-height:1.5}.crack-concept-note{font-size:9px!important;line-height:1.8}
+ .crack-section .section-heading h2{font-size:38px!important}.trade-phone{gap:10px}.trade-benefits{margin-top:20px}
+}
+@media(prefers-reduced-motion:reduce),(max-height:480px){
+ .crack-scroll-track{align-items:start}.is-scroll-driven .crack-stage{position:relative;top:auto}.is-scroll-driven .crack-chapter{min-height:0;opacity:1;transition:none}
+ .crack-scroll-hint{display:none!important}.crack-stage{height:420px;min-height:300px}
+}
+
+/* Static exploded illustration for no-JS, reduced motion and short viewports. */
+.crack-scroll-track:not(.is-scroll-driven) .crack-husk-left{left:22%;top:29%;transform:translate(-50%,-50%) rotate(-18deg) scale(.6)}
+.crack-scroll-track:not(.is-scroll-driven) .crack-husk-right{left:49%;top:29%;transform:translate(-50%,-50%) rotate(18deg) scale(.6)}
+.crack-scroll-track:not(.is-scroll-driven) .crack-kernel{left:77%;top:27%;transform:translate(-50%,-50%) scale(.85)}
+.crack-scroll-track:not(.is-scroll-driven) .crack-bag-back,.crack-scroll-track:not(.is-scroll-driven) .crack-bag-front{left:59%;top:72%;width:25%;transform:translate(-50%,-50%)}
+.crack-scroll-track:not(.is-scroll-driven) .crack-kernel-label{left:77%;top:50%}.crack-scroll-track:not(.is-scroll-driven) .crack-bag-label{left:59%;bottom:8%}
+.crack-scroll-track:not(.is-scroll-driven) .crack-stage-count{visibility:hidden}

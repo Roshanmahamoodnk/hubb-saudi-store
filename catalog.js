@@ -14,7 +14,6 @@ export const products=[
 {id:'pepper-lime',name:{ar:'فلفل ولايم',en:'Pepper Lime'},description:{ar:'نكهة الفلفل واللايم. غيّر طعم جلستك.',en:'Pepper and lime for a change of mood. A flavour to open, share and talk about.'},note:{ar:'غيّر جوّك',en:'A brighter mood'},color:'#526536',pale:'#e5e8d3',image:'/assets/pepper-lime.webp'},
 {id:'fire-salt',name:{ar:'ملح حار',en:'Fire Salt'},description:{ar:'نكهة الملح الحار. للّمة اللي تحب التغيير.',en:'A little heat for the gathering. Fire Salt for the friend who always reaches for the bold flavour.'},note:{ar:'لحبّ التغيير',en:'Turn up the mood'},color:'#a33f2b',pale:'#f0dcd0',image:'/assets/fire-salt.webp'},
 {id:'family-mix',name:{ar:'خلطة العائلة',en:'Family Mix'},description:{ar:'أربع نكهات في عبوة واحدة. ٢٠ كيسًا مغلقًا، خمسة من كل نكهة. الوزن الصافي ٦٠٠ غ.',en:'Four flavours, one gathering. 20 sealed sachets, five of each flavour. Net contents 600 g.'},note:{ar:'لكل واحد نكهته',en:'Something for everyone'},color:'#725137',pale:'#e8dbc7',image:'/assets/family-mix.webp'}];
-export const bulkUnitPrice=q=>q>=24?36:q>=12?38:q>=4?40:42;
 
 // Each online format has its own original pack render. The sachet remains the inside-pack reference.
 export const packImage=(product,format='cup')=>product.id==='family-mix'?product.image:format==='case'?`/assets/case-${product.id}-display-v4.webp`:format==='cup'?`/assets/cup-${product.id}-v3.webp`:product.image;
