@@ -1,6 +1,7 @@
-import { products, formats, onlinePolicy, money, getLang, t, bulkUnitPrice } from './catalog.js';
+import { products, formats, onlinePolicy, money, getLang, t, bulkUnitPrice, packImage } from './catalog.js';
 import { initCommerce, openProduct, addToCart, openCart, openSearch } from './commerce.js';
 import { initStory } from './story.js';
+import { initMotion, refreshMotion } from './motion.js';
 
 const WHATSAPP_NUMBER = '966553127999';
 let selectedFormat = 'cup';
@@ -29,10 +30,11 @@ function renderProducts() {
   if (!grid) return;
   const format = formats.find((item) => item.id === selectedFormat);
   if (!format) return;
-  grid.innerHTML = flavours().map((p) => `<article class="product-card" style="--flavour:${esc(p.color)};--tint:${esc(p.pale)}"><button class="product-image-button" data-product="${esc(p.id)}" aria-label="${esc(t(`تفاصيل ${p.name.ar}`, `${p.name.en} details`))}"><span class="product-note">${esc(localized(p.note))}</span><img src="${esc(asset(p.image))}" alt="${esc(localized(p.name) + t(' — تصميم النكهة للتوضيح', ' — flavour artwork for illustration'))}" width="1086" height="1448" loading="lazy"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="/${getLang()}/products/${encodeURIComponent(p.id)}/">${esc(localized(p.name))}</a></h3><div class="product-meta"><span>${esc(localized(format.name))} · ${num(format.count)} × ${num(30)} ${t('غ', 'g')}</span><span>${num(format.grams)} ${t('غ إجمالي', 'g total')}</span></div><button class="product-add" data-add="${esc(p.id)}" aria-label="${esc(t(`أضف ${p.name.ar} إلى السلة`, `Add ${p.name.en} to bag`))}"><span>${money(format.price)}</span><span>${t('أضف للسلة', 'Add to bag')} +</span></button></article>`).join('');
+  grid.innerHTML = flavours().map((p) => `<article class="product-card" style="--flavour:${esc(p.color)};--tint:${esc(p.pale)}"><button class="product-image-button" data-product="${esc(p.id)}" aria-label="${esc(t(`تفاصيل ${p.name.ar}`, `${p.name.en} details`))}"><span class="product-note">${esc(localized(p.note))}</span><img src="${esc(asset(packImage(p,selectedFormat)))}" alt="${esc(localized(p.name) + ' · ' + localized(format.name) + t(' — تصوّر العبوة', ' — pack concept'))}" width="1086" height="1448" loading="lazy"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="/${getLang()}/products/${encodeURIComponent(p.id)}/?pack=${selectedFormat}">${esc(localized(p.name))}</a></h3><div class="product-meta"><span>${esc(localized(format.name))} · ${num(format.count)} × ${num(30)} ${t('غ', 'g')}</span><span>${num(format.grams)} ${t('غ إجمالي', 'g total')}</span></div><button class="product-add" data-add="${esc(p.id)}" aria-label="${esc(t(`أضف ${p.name.ar} إلى السلة`, `Add ${p.name.en} to bag`))}"><span>${money(format.price)}</span><span>${t('أضف للسلة', 'Add to bag')} +</span></button></article>`).join('');
   if ($('#format-explanation')) $('#format-explanation').textContent = selectedFormat === 'cup'
-    ? t('كوب الرحلة: ٥ أكياس مغلقة من نكهة واحدة + كيس منفصل للقشور. الصورة تعرض تصميم النكهة؛ شاهد محتويات الكوب في التفاصيل.', 'Journey Cup: five sealed same-flavour sachets + a separate shell bag. Flavour artwork shown; see cup contents in product details.')
-    : t('كرتون التجزئة: ٢٤ كيسًا مغلقًا من نكهة واحدة. الصور تعرض تصميم النكهة للتوضيح.', 'Retail case: 24 sealed sachets of one flavour. Images show flavour artwork for illustration.');
+    ? t('كوب الرحلة: ٥ أكياس مغلقة من نكهة واحدة + كيس منفصل للقشور. الصورة تعرض الكوب، وشاهد الكيس الموجود بداخله في التفاصيل.', 'Journey Cup: five sealed same-flavour sachets + a separate shell bag. The cup is shown; see the sachet inside in product details.')
+    : t('كرتون عرض: ٢٤ كيسًا مغلقًا من نكهة واحدة. يظهر مفتوحًا للعرض على الكاونتر أو للّمة الأكبر.', 'Display carton: 24 sealed sachets of one flavour. Shown open, ready for the counter or a bigger gathering.');
+  refreshMotion(grid);
   if ($('#family-price')) $('#family-price').textContent = money(formats.find((item) => item.id === 'family').price);
 }
 
@@ -70,7 +72,7 @@ function applyLanguage(lang) {
   document.querySelectorAll('[data-ar][data-en]').forEach((element) => { element.textContent = element.dataset[lang]; });
   document.querySelectorAll('[data-alt-ar]').forEach((element) => { element.alt = element.dataset[lang === 'ar' ? 'altAr' : 'altEn']; });
   if ($('#language-toggle')) { $('#language-toggle').textContent = lang === 'ar' ? 'EN' : 'عربي'; $('#language-toggle').setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'); }
-  document.title = lang === 'ar' ? 'حُبّ | عامان. وقرمشة تستاهل.' : 'HUBB | Two years. One good crack.';
+  document.title = lang === 'ar' ? 'حُبّ | حبّة حُبّ. ولمّة تحلى.' : 'HUBB | A little HUBB. Happiness to share.';
   renderProducts();
   renderBulkOptions();
   window.dispatchEvent(new Event('hubb:language'));
@@ -80,6 +82,9 @@ function showDialog(html) {
   if (!dialog || !content) return;
   if (!dialog.open) dialogOpener = document.activeElement;
   content.innerHTML = html;
+  const heading = content.querySelector('h2');
+  if (heading) { heading.id = 'editorial-dialog-title'; dialog.setAttribute('aria-labelledby', heading.id); }
+  else { dialog.removeAttribute('aria-labelledby'); dialog.setAttribute('aria-label', t('تفاصيل حُبّ', 'HUBB details')); }
   if (!dialog.open) dialog.showModal();
 }
 function closeDialog() { dialog?.close(); if (content) content.innerHTML = ''; if (dialogOpener?.isConnected) dialogOpener.focus?.(); }
@@ -188,6 +193,7 @@ const initialLanguage = location.pathname.split('/').filter(Boolean)[0] === 'en'
 applyLanguage(initialLanguage);
 initCommerce();
 initStory();
+initMotion();
 $('#language-toggle')?.addEventListener('click', () => location.assign(`/${getLang() === 'ar' ? 'en' : 'ar'}/`));
 $('#search-button')?.addEventListener('click', openSearch);
 $('#cart-button')?.addEventListener('click', openCart);

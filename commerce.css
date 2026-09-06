@@ -237,3 +237,5 @@ html.hc-modal-open { overflow: hidden; }
   .hc-dialog[open], .hc-cart-dialog[open] { animation: none; }
   .hc-dialog *, .hc-dialog *::before, .hc-dialog *::after { transition: none !important; }
 }
+
+.hc-inside-sachet{display:flex;align-items:center;gap:15px;max-width:330px;text-align:start}.hc-inside-sachet img{width:75px;height:100px;object-fit:contain;flex-shrink:0}.hc-inside-sachet figcaption{font-size:11px;line-height:1.7;margin:0}.hc-product-image{mix-blend-mode:multiply}.hc-has-pack-preview>.hc-product-image{height:350px}@media(max-width:680px){.hc-has-pack-preview>.hc-product-image{height:250px}.hc-inside-sachet img{height:75px;width:55px}}

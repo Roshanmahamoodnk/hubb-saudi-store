@@ -28,3 +28,16 @@ This revision supersedes the V1 single-sachet and below-minimum checkout example
 - Commerce implementation checks covered38.99/39/74.99/75/75.01 boundaries, malformed stored rows, removal of old retail sachets without upsizing, and rejection of sachet add/open requests. These checks were performed by the commerce implementer; root independently verified the main UI boundary flows above.
 - Built11HTML documents: root, two locale homes, eight product pages. Source includes distinct product copy, canonical/hreflang, OpenGraph, truthful Product/Breadcrumb data without offers or ratings, and a10URL sitemap. Local HTML/link audit found oneH1 perpage, no duplicateIDs or missing local references. Preview stays noindex and robots-disallowed.
 - Module syntax and static build completed successfully. Test cart items were removed through the UI; modal test fields were cleared on close. Payment/order backend, message delivery, real reviews, actual courier economics and final Arabic/label validation remain unverified.
+
+
+## V3 sharing story and open display correction — 6 September 2026
+
+- Consumer-first Arabic/English hero and page order reviewed. Shopping and everyday sharing scenes precede About HUBB. Two-year founder history stays lower in the page. Product pages carry the same direction, including “Care you can share.”
+- Four original cup renders and four open display-carton renders inspected. All eight pack files load in the browser. Open cartons use the owner reference for physical structure only and retain HUBB cream/brush/woven art. Final display arrangement was corrected to three across and eight rows; all four images retain it.
+- Cup/carton selector changes all four product images. Pepper Lime display image verified in product details, cart and checkout summary; inside-sachet image stays Pepper Lime. One carton produced goods42 + delivery15 = preview total57. The test item was removed and cart returned to0. No order or message was sent.
+- Product-name link opened the case-selected product page. Arabic language navigation preserved both the case query and the open-carton hero image. Gallery selection remains keyboard accessible.
+- Desktop1440 and phone390 layouts inspected; additional343px shop layout observed without horizontal overflow. Four lifestyle scene images all loaded. Scrolling switched the desktop pinned image from football to work break; mobile uses individual scene photos with visible concept disclosure. Family scene includes adult generations; the road scene uses a parked car.
+- Editorial feedback dialog now has an accessible name linked to its heading. Escape closes it and restores focus to its opener.
+- Reduced-motion and no-JavaScript static reading fallbacks inspected in source. A CPU-throttled frame-rate run and physical-device performance were not measured.
+- Module syntax, static build and final local-resource audit pass:11HTML pages, oneH1 each, no missing local resources, duplicate IDs or missing image alt attributes. The build now fails if any selected pack or lifestyle image is missing.
+- Same proposed39minimum/75free-delivery policy, supplied WhatsApp and factory/warehouse details remain. Payment, inventory, fulfilment and verified-review storage are unconnected. Arabic and generated pack microcopy remain draft pending qualified review.

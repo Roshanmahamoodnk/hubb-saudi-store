@@ -1,4 +1,4 @@
-import { products, formats, onlinePolicy, money, getLang, t } from './catalog.js';
+import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
 
 const STORAGE_KEY = 'hubb.cart.v1';
 const MAX_QUANTITY = 99;
@@ -212,11 +212,11 @@ function renderProduct() {
   );
   replaceDialog(dialogs.product, `<div class="hc-product-layout">
     ${closeButton()}
-    <div class="hc-product-visual ${format.id === 'cup' ? 'hc-has-pack-preview' : ''}" style="--hc-product-color:${escape(product.color || '#9b3b2b')}">
+    <div class="hc-product-visual ${product.id !== 'family-mix' ? 'hc-has-pack-preview' : ''}" style="--hc-product-color:${escape(product.color || '#9b3b2b')}">
       <span class="hc-visual-label">${escape(t('حبّ · من السعودية', 'HUBB · FROM SAUDI'))}</span>
       <div class="hc-product-orbit" aria-hidden="true"></div>
-      <img class="hc-product-image" src="${escape(product.image)}" alt="${escape(localized(product.name))}" width="640" height="800">
-      ${format.id === 'cup' ? `<figure class="hc-pack-preview"><img src="/assets/cup-unpacked.webp" alt="${escape(t('مثال لتجهيز كوب الرحلة بنكهة الفلفل واللايم، مع خمسة أكياس مغلقة وكيس منفصل للقشور', 'Journey Cup packing example in Pepper Lime, with five sealed sachets and a separate shell bag'))}" width="1536" height="1024"><figcaption>${escape(t('مثال لترتيب العبوة · الصورة بنكهة الفلفل واللايم', 'Pack structure example · Pepper Lime shown'))}</figcaption></figure>` : ''}
+      <img class="hc-product-image" src="${escape(packImage(product,format.id))}" alt="${escape(localized(product.name))}" width="640" height="800">
+      ${product.id !== 'family-mix' ? `<figure class="hc-pack-preview hc-inside-sachet"><img src="${escape(product.image)}" alt="${escape(localized(product.name)+t(' — كيس مغلق ٣٠ غ من داخل العبوة',' — one sealed 30 g sachet inside the pack'))}" width="1086" height="1448"><figcaption>${escape(t(`بداخلها ${format.count} أكياس مغلقة من النكهة نفسها · ٣٠ غ للكيس`,`${format.count} same-flavour sealed sachets inside · 30 g each`))}</figcaption></figure>` : ''}
       <p class="hc-art-caption">${escape(selectedPackCaption)}<small>${escape(t('تصوّر للتغليف · التفاصيل النهائية قيد الاعتماد', 'Packaging concept · final details pending approval'))}</small></p>
     </div>
     <div class="hc-product-copy">
@@ -248,7 +248,7 @@ function renderCart() {
       const product = productFor(item.id);
       const format = formatFor(item.format);
       const key = keyFor(item);
-      return `<article class="hc-cart-item"><div class="hc-cart-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(product.image)}" alt="${escape(localized(product.name))}" width="100" height="130"></div><div class="hc-cart-item-copy"><h3>${escape(localized(product.name))}</h3><p>${escape(localized(format.name))} · ${escape(formatDetails(format))}</p><p class="hc-unit-price">${escape(money(format.price))} ${escape(t('للعبوة', 'each'))}</p><div class="hc-cart-item-controls">${quantityControl(item.quantity, 'cart', key)}<button type="button" class="hc-remove" data-action="remove" data-key="${escape(key)}" aria-label="${escape(t(`إزالة ${localized(product.name)}`, `Remove ${localized(product.name)}`))}">${escape(t('إزالة', 'Remove'))}</button></div></div><strong class="hc-line-price">${escape(money(format.price * item.quantity))}</strong></article>`;
+      return `<article class="hc-cart-item"><div class="hc-cart-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(packImage(product,format.id))}" alt="${escape(localized(product.name))}" width="100" height="130"></div><div class="hc-cart-item-copy"><h3>${escape(localized(product.name))}</h3><p>${escape(localized(format.name))} · ${escape(formatDetails(format))}</p><p class="hc-unit-price">${escape(money(format.price))} ${escape(t('للعبوة', 'each'))}</p><div class="hc-cart-item-controls">${quantityControl(item.quantity, 'cart', key)}<button type="button" class="hc-remove" data-action="remove" data-key="${escape(key)}" aria-label="${escape(t(`إزالة ${localized(product.name)}`, `Remove ${localized(product.name)}`))}">${escape(t('إزالة', 'Remove'))}</button></div></div><strong class="hc-line-price">${escape(money(format.price * item.quantity))}</strong></article>`;
     }).join('')}</div>` : `<div class="hc-empty hc-cart-empty">${iconBag}<h3>${escape(t('جمعتك تبدأ من هنا', 'Your gathering starts here'))}</h3><p>${escape(t(`الطلبات الإلكترونية من ${money(onlinePolicy.minimumOrder)}. ابدأ بخلطة العائلة، أو اجمع أكوابك ونكهاتك المفضلة.`, `Online orders start at ${money(onlinePolicy.minimumOrder)}. Start with Family Mix or build a bag of your favourite cups and cases.`))}</p></div>`}
     ${minimumSuggestions(amounts)}</div>
     <footer class="hc-cart-footer">${amountRows(amounts)}<p class="hc-price-note">${escape(priceNote())}<br>${escape(policyNote())}</p><button type="button" class="hc-button hc-button-primary" data-action="checkout" ${!checkoutAllowed() ? 'disabled aria-describedby="hc-minimum-message"' : ''}>${escape(t('معاينة الطلب', 'Preview checkout'))}<span aria-hidden="true">↗</span></button><button type="button" class="hc-button hc-button-text" data-action="close">${escape(t('أكمل التسوّق', 'Keep shopping'))}</button></footer>
@@ -265,7 +265,7 @@ function checkoutSummary() {
   return `<aside class="hc-checkout-summary"><p class="hc-eyebrow">${escape(t('في سلّتك', 'IN YOUR BAG'))}</p><div class="hc-checkout-lines">${cart.map((item) => {
     const product = productFor(item.id);
     const format = formatFor(item.format);
-    return `<div class="hc-checkout-line"><img src="${escape(product.image)}" alt="" width="52" height="66"><div><strong>${escape(localized(product.name))}</strong><small>${escape(localized(format.name))} × ${item.quantity}</small></div><b>${escape(money(format.price * item.quantity))}</b></div>`;
+    return `<div class="hc-checkout-line"><img src="${escape(packImage(product,format.id))}" alt="" width="52" height="66"><div><strong>${escape(localized(product.name))}</strong><small>${escape(localized(format.name))} × ${item.quantity}</small></div><b>${escape(money(format.price * item.quantity))}</b></div>`;
   }).join('')}</div>${amountRows()}${shippingProgress()}<p class="hc-fine-print">${escape(policyNote())} ${escape(t('السعر النهائي والمعالجة الضريبية يُؤكّدان قبل تفعيل الشراء الفعلي.', 'Final pricing and tax treatment will be confirmed before live checkout is activated.'))}</p></aside>`;
 }
 
@@ -315,7 +315,7 @@ function renderSearchResults() {
   });
   const results = dialogs.search.querySelector('.hc-search-results');
   if (!results) return;
-  results.innerHTML = matches.length ? matches.map((product) => `<button type="button" class="hc-search-result" data-action="search-product" data-id="${escape(product.id)}"><span class="hc-search-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(product.image)}" alt="" width="72" height="86"></span><span><strong>${escape(localized(product.name))}</strong><small class="hc-search-kind">${escape(product.id === 'family-mix' ? t('عبوة مشتركة · أربع نكهات', 'Mixed pack · four flavours') : t('نكهة مستقلة · أكواب وكراتين', 'Single flavour · cups and cases'))}</small><small>${escape(localized(product.description))}</small></span><span aria-hidden="true">↗</span></button>`).join('') : `<div class="hc-search-empty"><h3>${escape(t('لم نجد هذا المنتج', 'No products found'))}</h3><p>${escape(t('جرّب اسم منتج آخر أو امسح البحث لتصفح جميع المنتجات.', 'Try another product name or clear your search to see everything.'))}</p><button type="button" class="hc-button hc-button-text" data-action="clear-search">${escape(t('مسح البحث', 'Clear search'))}</button></div>`;
+  results.innerHTML = matches.length ? matches.map((product) => `<button type="button" class="hc-search-result" data-action="search-product" data-id="${escape(product.id)}"><span class="hc-search-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(packImage(product,'cup'))}" alt="" width="72" height="86"></span><span><strong>${escape(localized(product.name))}</strong><small class="hc-search-kind">${escape(product.id === 'family-mix' ? t('عبوة مشتركة · أربع نكهات', 'Mixed pack · four flavours') : t('نكهة مستقلة · أكواب وكراتين', 'Single flavour · cups and cases'))}</small><small>${escape(localized(product.description))}</small></span><span aria-hidden="true">↗</span></button>`).join('') : `<div class="hc-search-empty"><h3>${escape(t('لم نجد هذا المنتج', 'No products found'))}</h3><p>${escape(t('جرّب اسم منتج آخر أو امسح البحث لتصفح جميع المنتجات.', 'Try another product name or clear your search to see everything.'))}</p><button type="button" class="hc-button hc-button-text" data-action="clear-search">${escape(t('مسح البحث', 'Clear search'))}</button></div>`;
   const status = dialogs.search.querySelector('.hc-search-status');
   status.textContent = t(`${matches.length} منتجات`, `${matches.length} ${matches.length === 1 ? 'product' : 'products'}`);
 }
