@@ -1,4 +1,6 @@
 import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
+import { postsFor } from './ugc-posts.js';
+import { sitePath } from './paths.js';
 
 const STORAGE_KEY = 'hubb.cart.v1';
 const MAX_QUANTITY = 99;
@@ -223,6 +225,7 @@ function renderProduct() {
       <p class="hc-eyebrow">${escape(t('تسوّق حبّ', 'THE HUBB SHOP'))}</p>
       <h2 id="hc-product-title">${escape(localized(product.name))}</h2>
       <p class="hc-description">${escape(localized(product.description))}</p>
+      ${postsFor(product.id).length ? `<div class="hc-ugc-strip"><p class="hc-small-label">${escape(t('في لحظة عادية', 'IN AN ORDINARY MOMENT'))}</p><div class="hc-ugc-posts">${postsFor(product.id).map((post) => `<figure class="hc-ugc-post"><img src="${escape(sitePath(post.image))}" alt="${escape(localized(post.alt))}" width="240" height="360" loading="lazy"><figcaption><small>${escape(localized(post.place))}</small><span>${escape(localized(post.caption))}</span></figcaption></figure>`).join('')}</div><p class="hc-ugc-note">${escape(t('مشاهد تصوّرية مولّدة بالذكاء الاصطناعي · ليست منشورات عملاء', 'AI-generated concept scenes · not customer posts'))}</p></div>` : ''}
       <fieldset class="hc-fieldset"><legend>${escape(t('اختر المنتج', 'Choose a product'))}</legend>
         <div class="hc-product-choice-group"><span class="hc-choice-label">${escape(t('أربع نكهات', 'Four flavours'))}</span><div class="hc-flavours">${products.filter((item) => item.id !== 'family-mix').map(productChoice).join('')}</div></div>
         <div class="hc-product-choice-group hc-mix-choice"><span class="hc-choice-label">${escape(t('عبوة مشتركة · النكهات الأربع معًا', 'Mixed pack · all four flavours together'))}</span><div class="hc-flavours">${products.filter((item) => item.id === 'family-mix').map(productChoice).join('')}</div></div>

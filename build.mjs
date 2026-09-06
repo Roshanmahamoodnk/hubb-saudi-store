@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {generateSeoPages} from './seo-pages.mjs';
 import {products,formats,packImage} from './catalog.js';
+import {postsFor,skuUgcImages} from './ugc-posts.js';
 import {renderScenes,scenes} from './scenes.js';
 import {renderCrack} from './crack-scroll.js';
 const root=path.dirname(fileURLToPath(import.meta.url));
@@ -11,10 +12,10 @@ const deployment=new URL(process.env.HUBB_SITE_URL||'https://hubb-saudi-gatherin
 if(!['https:','http:'].includes(deployment.protocol)||deployment.username||deployment.password||deployment.search||deployment.hash)throw new Error('HUBB_SITE_URL must be a plain HTTP(S) deployment URL');
 const basePath=deployment.pathname.replace(/\/+$/,'');
 const origin=deployment.origin+basePath;
-const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
+const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...skuUgcImages,...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
 await Promise.all(requiredImages.map(file=>fs.access(path.join(root,file.replace(/^\//,'')))));
 await fs.mkdir(path.join(out,'assets'),{recursive:true});
-for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
+for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js','ugc-posts.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
 for(const file of await fs.readdir(path.join(root,'assets'))){if(file.endsWith('.webp')||file==='favicon.svg')await fs.copyFile(path.join(root,'assets',file),path.join(out,'assets',file));}
 const source=await fs.readFile(path.join(root,'index.html'),'utf8');
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -28,7 +29,10 @@ const meta=`<link rel="canonical" href="${origin}${route}"><link rel="alternate"
 html=html.replace('</head>',meta+'</head>');
 html=html.replace('id="language-toggle" class="language-button" aria-label="Switch to English">EN','id="language-toggle" class="language-button" aria-label="'+(lang==='ar'?'Switch to English':'التبديل إلى العربية')+'">'+(lang==='ar'?'EN':'عربي'));
 const cup=formats.find(f=>f.id==='cup');
-const cards=products.slice(0,4).map(p=>`<article class="product-card" style="--flavour:${p.color};--tint:${p.pale}"><button class="product-image-button" data-product="${p.id}" aria-label="${escape(p.name[lang])}"><span class="product-note">${escape(p.note[lang])}</span><img src="${packImage(p,'cup')}" width="1086" height="1448" loading="lazy" alt="${escape(p.name[lang])}"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="/${lang}/products/${p.id}/">${escape(p.name[lang])}</a></h3><div class="product-meta"><span>${escape(cup.name[lang])} · 5 × 30 g</span><span>150 g</span></div><button class="product-add" data-add="${p.id}"><span>SAR 12.00</span><span>${lang==='ar'?'أضف للسلة':'Add to bag'} +</span></button></article>`).join('');
+const cards=products.slice(0,4).map(p=>{
+ const ugc=postsFor(p.id).map(post=>`<img src="${post.image}" alt="${escape(post.alt[lang])}" width="240" height="360" loading="lazy">`).join('');
+ return `<article class="product-card" style="--flavour:${p.color};--tint:${p.pale}"><button class="product-image-button" data-product="${p.id}" aria-label="${escape(p.name[lang])}"><span class="product-note">${escape(p.note[lang])}</span><img src="${packImage(p,'cup')}" width="1086" height="1448" loading="lazy" alt="${escape(p.name[lang])}"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="/${lang}/products/${p.id}/">${escape(p.name[lang])}</a></h3><div class="product-meta"><span>${escape(cup.name[lang])} · 5 × 30 g</span><span>150 g</span></div>${ugc?`<a class="product-ugc" href="/${lang}/products/${p.id}/#ugc"><span class="product-ugc-label">${lang==='ar'?'في يوم عادي':'In an ordinary day'}</span><span class="product-ugc-thumbs">${ugc}</span></a>`:''}<button class="product-add" data-add="${p.id}"><span>SAR 12.00</span><span>${lang==='ar'?'أضف للسلة':'Add to bag'} +</span></button></article>`;
+}).join('');
 html=html.replace('<div id="product-grid" class="product-grid"></div>',`<div id="product-grid" class="product-grid">${cards}</div>`);
 return html;}
 await fs.writeFile(path.join(out,'index.html'),localized('ar','/'));
