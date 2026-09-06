@@ -28,7 +28,7 @@ All new pack and lifestyle images are generated with the built-in image tool, us
 
 Do not call these verified UGC. Human texture, different faces/ages, meaningful hand placement and varied environments create a candid visual style. They remain openly identified creative concepts. Do not imply a professional athlete endorsement, club partnership or actual customer testimonial.
 
-Prompt records: assets/CUP_V3_PROMPTS.md, assets/CASE_V3_PROMPTS.md, assets/UGC_V3_PROMPTS.md. Original PNGs are preserved; WebP derivatives serve the site.
+Prompt records: assets/CUP_V3_PROMPTS.md, assets/CASE_V3_PROMPTS.md, assets/UGC_V3_PROMPTS.md. SKU UGC posts: assets/UGC_SKU_V4_PROMPTS.md. Original PNGs are preserved; WebP derivatives serve the site.
 
 ## Motion intent
 

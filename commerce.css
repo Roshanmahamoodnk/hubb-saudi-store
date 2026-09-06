@@ -1,6 +1,6 @@
 html.hc-modal-open { overflow: hidden; }
 .hc-dialog, .hc-dialog * { box-sizing: border-box; }
-.hc-dialog { --hc-ink: var(--ink, #39281f); --hc-paper: var(--paper, #f7f2e8); --hc-accent: var(--accent, #a33f2b); position: fixed; border: 0; padding: 0; color: var(--hc-ink); background: var(--hc-paper); width: calc(100% - 40px); max-width: 1040px; max-height: min(92dvh, 960px); margin: auto; border-radius: 4px; box-shadow: 0 24px 100px #170e0c55; font: inherit; }
+.hc-dialog { --hc-ink: var(--ink, #39281f); --hc-paper: var(--paper, #f7f2e8); --hc-accent: var(--accent, #a33f2b); position: fixed; border: 0; padding: 0; color: var(--hc-ink); background: var(--hc-paper); width: calc(100% - 40px); max-width: 1040px; max-height: min(92dvh, 960px); margin: auto; border-radius: 4px; box-shadow: 0 24px 100px #170e0c55; font: inherit; overflow: auto; }
 .hc-dialog::backdrop { background: #24160dcc; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .hc-dialog[open] { animation: hc-enter 240ms cubic-bezier(.2,.8,.2,1); }
 .hc-dialog button, .hc-dialog input { font: inherit; }
@@ -43,7 +43,7 @@ html.hc-modal-open { overflow: hidden; }
 .hc-art-caption small { display: block; margin-top: 5px; color: #fff4dfbf; font-size: 9px; line-height: 1.6; }
 .hc-pack-note { display: flex; gap: 9px; align-items: flex-start; margin-top: 12px !important; font-size: 11px; line-height: 1.7; color: #765a44; }
 .hc-pack-note > span { flex-shrink: 0; font-size: 16px; line-height: 1.2; }
-.hc-product-copy { padding: 44px 40px 30px; }
+.hc-product-copy { padding: 44px 40px 30px; overflow: auto; }
 .hc-product-copy > .hc-eyebrow { padding-inline-end: 30px; margin-bottom: 12px; }
 .hc-product-copy h2 { margin-bottom: 12px; }
 .hc-description { max-width: 40ch; font-size: 14px; line-height: 1.75; opacity: .76; }

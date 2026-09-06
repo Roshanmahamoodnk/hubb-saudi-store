@@ -1,0 +1,45 @@
+.sku-ugc,.sku-ugc-home{margin-top:42px}
+.sku-ugc-intro{max-width:720px;margin-bottom:22px}
+.sku-ugc-kicker{margin:0 0 10px;font-size:11px;letter-spacing:.12em;font-weight:600;color:#71583f}
+:lang(ar) .sku-ugc-kicker{letter-spacing:.04em;font-size:12px}
+.sku-ugc-title{margin:0 0 10px;font-family:var(--display, 'Aref Ruqaa', serif);font-size:clamp(26px,2.6vw,38px);line-height:1.35;font-weight:700}
+:lang(en) .sku-ugc-title{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.04em;line-height:1.18}
+.sku-ugc-lead{margin:0;max-width:52ch;font-size:14px;line-height:1.8;color:#655242}
+.sku-ugc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.sku-ugc-home-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.sku-ugc-post{display:flex;flex-direction:column;width:100%;margin:0;padding:0;border:1px solid #d9cbb5;background:#faf6ee;color:inherit;text-align:start;border-radius:3px;overflow:hidden}
+button.sku-ugc-post{cursor:pointer;font:inherit}
+button.sku-ugc-post:hover{border-color:#a33f2b}
+button.sku-ugc-post:hover img{transform:scale(1.03)}
+.sku-ugc-head{display:flex;align-items:baseline;gap:8px;padding:11px 13px 10px;border-bottom:1px solid #eadfce}
+.sku-ugc-brand{font-family:var(--display, 'Aref Ruqaa', serif);font-size:22px;line-height:1;font-weight:700}
+.sku-ugc-handle{font-size:10px;letter-spacing:.18em;color:#7a6759}
+.sku-ugc-label{margin-inline-start:auto;font-size:9px;letter-spacing:.08em;color:#8a7360;background:#efe6d6;padding:3px 7px}
+:lang(ar) .sku-ugc-label{letter-spacing:.02em;font-size:10px}
+.sku-ugc-photo{margin:0;background:#eee5d6;overflow:hidden}
+.sku-ugc-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 42%;transition:transform .45s}
+.sku-ugc-body{padding:13px 14px 15px}
+.sku-ugc-place{margin:0 0 6px;font-size:10px;letter-spacing:.1em;font-weight:600;color:#71583f}
+:lang(ar) .sku-ugc-place{letter-spacing:.03em;font-size:11px}
+.sku-ugc-caption{margin:0;font-size:13px;line-height:1.7;color:#4d3b30}
+.sku-ugc-note{margin:16px 0 0;font-size:12px;line-height:1.7;color:#746251}
+.sku-ugc.is-compact{margin-top:22px;padding-top:18px;border-top:1px solid #39281f18}
+.sku-ugc.is-compact .sku-ugc-title{font-size:22px}
+.sku-ugc.is-compact .sku-ugc-grid{gap:10px}
+.sku-ugc.is-compact .sku-ugc-head{padding:8px 10px}
+.sku-ugc.is-compact .sku-ugc-brand{font-size:18px}
+.sku-ugc.is-compact .sku-ugc-body{padding:9px 10px 11px}
+.sku-ugc.is-compact .sku-ugc-caption{font-size:11px;line-height:1.55}
+.sku-ugc.is-compact .sku-ugc-photo img{aspect-ratio:4/5;max-height:210px}
+.sku-ugc-page .sku-ugc{margin-top:0}
+.sku-ugc-page .sku-ugc-title{margin:0 0 12px}
+.hc-product-copy .sku-ugc.is-compact{margin-top:18px}
+@media(max-width:1100px){.sku-ugc-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){
+  .sku-ugc,.sku-ugc-home{margin-top:28px}
+  .sku-ugc-grid,.sku-ugc-home-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .sku-ugc-caption{font-size:12px}
+  .sku-ugc-brand{font-size:18px}
+  .sku-ugc.is-compact .sku-ugc-grid{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){.sku-ugc-photo img,button.sku-ugc-post:hover img{transition:none;transform:none}}

@@ -25,6 +25,7 @@ Run `npm start` and open http://127.0.0.1:8788. No package installation or exter
 - “A little HUBB. Happiness to share.” leads the experience. Two years of founder-reported development now sit in About HUBB, after shopping and everyday sharing scenes. See `CONTENT_DIRECTION_V3.md` for the current bilingual direction.
 - Eight separate format renders: a five-sachet cup and 24-sachet open counter-display carton for each flavour. The selected pack image follows the shopper through product cards, product pages, details, cart and order preview.
 - Four new original lifestyle concepts: a football break, colleagues after lunch, a family across adult generations, and a parked road stop. Desktop scroll changes the pinned scene; mobile and reduced-motion layouts show each scene in sequence.
+- Realistic SKU UGC posts for each flavour, labelled as AI-generated concepts: two posts per flavour on the product page and in product details, plus a four-post strip under the shop.
 - A silent scroll-controlled ritual: the seed opens along its side edge, the kernel emerges, and the empty husks arc into a separate paper bag. No sound button, synthetic audio or required step clicks. Short-screen, reduced-motion and no-JavaScript views use a static illustrated guide.
 - Keyboard-accessible dialogs, mobile layouts, reduced-motion support and complete Arabic/English controls.
 
