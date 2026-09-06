@@ -87,13 +87,15 @@ function preparedMessageLink(body) {
 
 function showMoment(id) {
   const moment = {
-    majlis: { title: t('سوالف ما تخلص', 'One more story'), body: t('قهوة على الطاولة، كيس ينفتح، وسالفة تجرّ سالفة. تصوّر لحملة حُبّ في المجلس السعودي.', 'Coffee on the table. A pack opens. One story becomes another. A HUBB campaign concept set in a Saudi majlis.'), product: 'sea-salt' },
-    roadtrip: { title: t('الطريق له رفيق', 'Take the long way'), body: t('وقفة هادئة على الطريق. افتح كوب الرحلة، خذ كيسًا وخلّ الباقي مغلقًا. مشهد تصوّري في استراحة آمنة والسيارة متوقفة.', 'A quiet stop along the way. Open a Journey Cup, take one sachet and keep the others sealed. A concept scene at a safe stop with the car parked.'), product: 'pepper-lime' },
-    game: { title: t('باقي جولة', 'Just one more round'), body: t('كل واحد له نكهته، وباقي جولة تجمعنا. تصوّر لحملة حُبّ حول جلسة لعب ومشاركة.', 'Everyone has a flavour. There’s still one more round. A HUBB campaign concept around a shared game-night table.'), product: 'family-mix' },
+    'sea-salt': { title: t('هدوء آخر اليوم.', 'A quiet end to the day.'), body: t('كوب الملح البحري في لقطة يومية بإضاءة المساء، مع أكياس مغلقة وكيس منفصل للقشور.', 'Classic Sea Salt in an everyday evening frame, with sealed sachets and a separate shell bag.'), product: 'sea-salt', format: 'cup' },
+    'garlic-salt': { title: t('استراحة بنكهة مالحة.', 'A savoury little pause.'), body: t('كوب ملح بالثوم على طاولة المطبخ، في لحظة بسيطة بين مشاوير اليوم.', 'A Garlic Salt cup on the kitchen counter in a small pause between everyday errands.'), product: 'garlic-salt', format: 'cup' },
+    'pepper-lime': { title: t('خمس دقايق تكفي للّمة.', 'Five minutes is enough to gather.'), body: t('كوب فلفل ولايم يمرّ بين الزملاء بعد الغداء، قبل ما يرجع كل واحد لشغله.', 'A Pepper Lime cup shared by colleagues after lunch, before everyone gets back to work.'), product: 'pepper-lime', format: 'cup' },
+    'fire-salt': { title: t('باقي جولة.', 'Just one more round.'), body: t('كوب الملح الحار وسط طاولة اللعب، وكيس ينتقل من يد ليد.', 'A Fire Salt cup at the game-night table, with one sachet passing from hand to hand.'), product: 'fire-salt', format: 'cup' },
+    'family-mix': { title: t('كل واحد له نكهته.', 'A flavour for everyone.'), body: t('خلطة العائلة بعد الغداء: أربع نكهات، وكل واحد يختار كيسه للّمة.', 'Family Mix after lunch: four flavours, with everyone choosing a sachet for the gathering.'), product: 'family-mix', format: 'family' },
   }[id];
   if (!moment) return;
-  showDialog(`<p class="eyebrow">${t('مشهد حملة مولّد بالذكاء الاصطناعي', 'AI-GENERATED CAMPAIGN CONCEPT')}</p><h2>${moment.title}</h2><img src="${sitePath(`/assets/ugc-${id}.webp`)}" alt="${esc(moment.title)}"><p style="margin-top:20px">${moment.body}</p><button class="button primary" id="moment-shop">${t('تسوّق هذه اللحظة', 'Shop this moment')} ↗</button>`);
-  $('#moment-shop')?.addEventListener('click', () => { closeDialog(); openProduct(moment.product, moment.product === 'family-mix' ? 'family' : 'cup'); });
+  showDialog(`<p class="eyebrow">${t('تصوّر بأسلوب محتوى المستخدم · مولّد بالذكاء الاصطناعي', 'UGC-STYLE CONCEPT · AI-GENERATED')}</p><h2>${moment.title}</h2><img src="${sitePath(`/assets/ugc-${id}-post.webp`)}" alt="${esc(moment.title)}"><p style="margin-top:20px">${moment.body}</p><p class="small-text">${t('هذه لقطة تصوّرية وليست منشور عميل أو تجربة أو توصية حقيقية.', 'This is a creative concept, not a real customer post, experience or endorsement.')}</p><button class="button primary" id="moment-shop">${t('شاهد المنتج', 'View product')} ↗</button>`);
+  $('#moment-shop')?.addEventListener('click', () => { closeDialog(); openProduct(moment.product, moment.format); });
 }
 
 const info = {
