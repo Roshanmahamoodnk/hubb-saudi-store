@@ -4,6 +4,17 @@ Created 2026-09-06. Original generated editorial concept imagery, using only the
 
 All outputs: 1024 × 1536 PNG masters and WebP derivatives at quality88. WebP conversion only; no scene retouching. These are 2:3 portrait masters, usable with considered 3:4 crops. Wide crops require deliberate framing to retain faces, pack and stationary-car context.
 
+## SKU UGC-style product posts
+
+Added 2026-09-06 as four square, AI-generated product concepts for the website's flavour feed:
+
+- `ugc-sku-sea-salt.webp` — an afternoon balcony coffee break.
+- `ugc-sku-garlic-salt.webp` — an everyday office desk break.
+- `ugc-sku-pepper-lime.webp` — a neighbourhood park picnic.
+- `ugc-sku-fire-salt.webp` — a home game night.
+
+The images use candid smartphone framing and realistic everyday details while keeping each 30 g sachet as the focal point. They are explicitly labelled on the website as AI-generated UGC-style concepts, not real customer posts, reviews, testimonials or endorsements. No fictional names, handles, ratings or engagement counts are attached to them.
+
 ## References inspected before generation
 
 - `/Users/mac/Desktop/hubb-saudi-store/assets/family-mix.webp` — family format, four colours, sealed sachets.
