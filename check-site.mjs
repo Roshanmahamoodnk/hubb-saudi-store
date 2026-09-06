@@ -30,7 +30,7 @@ for(const file of pages){
  const relative=path.relative(out,file).replace(/index\.html$/,'');
  const documentUrl=siteRoot+relative;
  assert.equal((html.match(/<h1\b/g)||[]).length,1,`${relative}: one H1`);
- assert.ok(!html.includes('id="scene-story-root"')&&!html.includes('id="crack-scroll-root"'),`${relative}: unbuilt placeholder`);
+ assert.ok(!html.includes('id="scene-story-root"')&&!html.includes('id="crack-scroll-root"')&&!html.includes('id="sku-ugc-root"'),`${relative}: unbuilt placeholder`);
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(new Set(ids).size,ids.length,`${relative}: duplicate IDs`);
  const locale=relative.startsWith('en/')?'en':'ar';
