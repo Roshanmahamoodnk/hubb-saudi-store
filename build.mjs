@@ -8,7 +8,7 @@ import {renderCrack} from './crack-scroll.js';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const out=path.join(root,'out');
 const origin='https://hubb-saudi-gathering-store.r0shan911.chatgpt.site';
-const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id}-v4.webp`)];
+const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
 await Promise.all(requiredImages.map(file=>fs.access(path.join(root,file.replace(/^\//,'')))));
 await fs.mkdir(path.join(out,'assets'),{recursive:true});
 for(const file of ['crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));

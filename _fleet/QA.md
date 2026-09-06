@@ -50,3 +50,7 @@ This revision supersedes the V1 single-sachet and below-minimum checkout example
 - Short-screen844×390: animation disables, artwork returns to ordinary positioning, all four steps remain and no horizontal overflow. Reduced-motion preference uses the same static branch; preference emulation itself was not exercised.
 - English volume form:12cartons yields288sachets/8.64kg. Synthetic business/city/supply notes produced a draft asking for volume offers, availability, delivery lead time and payment/supply terms. No SAR amount or wholesale price appears in this draft. The WhatsApp URL uses the supplied966553127999number. No link was sent; dialog closed and synthetic fields discarded.
 - Original selected pack-format, language, cart, sharing-scene and contact checks from V3 remain applicable. Final source and build verification follow the last CSS/documentation edits.
+
+## Edge-first opening correction
+
+Owner requested a side-edge crack while preserving the existing separated-husk view. A new three-quarter closed-seed cutout places the natural join near the curved right edge. Complementary curved SVG clips replace the central straight split, with a restrained tip-first pivot before the outer faces turn away. The kernel appears behind the opening. Existing empty inner husks, disposal path and bag remain. The right-edge clip and new asset were observed in the browser at the opening stage; the interior reveal remains the same. Generated alpha was verified before WebP conversion. Prompt: assets/RITUAL_EDGE_V5_PROMPT.md.

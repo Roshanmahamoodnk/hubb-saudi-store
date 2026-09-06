@@ -19,14 +19,14 @@
     "reduced_motion": "No entrance, reveal, image drift or crossfade. Each image and its story remain visible in a static grid or mobile stack.",
     "without_javascript": "Each scene is visible inline; no content relies on motion for comprehension.",
     "performance_evidence": "Inspected native event-driven scheduling and bounds. Desktop and mobile layouts observed in browser. CPU-throttled frame rate and physical-device GPU performance were not measured.",
-    "ritual": "Seven object layers: two clipped outer shell faces, two empty inner husks, edible kernel, bag back and occluding bag front. Transform/opacity follow normalized native scroll. No audio APIs or click-to-advance.",
+    "ritual": "Silent scroll animation: three-quarter closed seed opens along curved right edge using complementary clips and a restrained tip-first pivot; two empty inner husks separate, kernel emerges, husks drop behind bag front.",
     "ritual_mobile": "Sticky 46svh artwork with four flowing text chapters. Height480px or below, reduced motion and no JavaScript show a static exploded guide."
   },
   "assets": {
     "cups": "Four original cup-v3 PNG/WebP assets",
     "cartons": "Four open counter-display carton assets using owner reference for structure only; current HUBB artwork preserved",
     "lifestyle": "Four original AI-generated2:3 portrait concepts; labelled as concepts in the page",
-    "ritual": "Four generated alpha cutouts; original PNGs and WebP copies in assets/ritual-*-v4; prompts in assets/RITUAL_V4_PROMPTS.md"
+    "ritual": "Selected whole seed: ritual-whole-edge-v5 PNG/WebP. Existing ritual-husk/kernel/bag-v4 remain. Prompts: RITUAL_V4_PROMPTS.md and RITUAL_EDGE_V5_PROMPT.md."
   },
   "content": "Consumer happiness and sharing lead. Two years of care appear under About HUBB. No market-superiority, award, certification, fabricated-customer-review or real-endorsement claims.",
   "commerce": "B2B quantity/count/weight only; visitor prepares price-free enquiry asking team for offers, availability and delivery/supply terms."
