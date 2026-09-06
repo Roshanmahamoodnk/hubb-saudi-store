@@ -6,7 +6,7 @@ This is an interactive store preview. Live payments, fulfilment, inventory, orde
 
 ## Open and run
 
-Run `npm start` and open http://127.0.0.1:8788. No package installation or external JavaScript dependencies required. `npm run check` checks module syntax. `npm run build` creates the exact static public output for hosting.
+Run `npm start` and open http://127.0.0.1:8788. No package installation or external JavaScript dependencies required. `npm run check` checks module syntax. `npm run build` creates the exact static output for hosting.
 
 ## Included
 
