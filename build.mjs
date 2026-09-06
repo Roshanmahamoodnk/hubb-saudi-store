@@ -14,7 +14,7 @@ const origin=deployment.origin+basePath;
 const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
 await Promise.all(requiredImages.map(file=>fs.access(path.join(root,file.replace(/^\//,'')))));
 await fs.mkdir(path.join(out,'assets'),{recursive:true});
-for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
+for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','ugc-posts.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
 for(const file of await fs.readdir(path.join(root,'assets'))){if(file.endsWith('.webp')||file==='favicon.svg')await fs.copyFile(path.join(root,'assets',file),path.join(out,'assets',file));}
 const source=await fs.readFile(path.join(root,'index.html'),'utf8');
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
