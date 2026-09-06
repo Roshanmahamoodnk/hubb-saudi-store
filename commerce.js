@@ -1,4 +1,4 @@
-import { products, formats, money, getLang, t } from './catalog.js';
+import { products, formats, onlinePolicy, money, getLang, t } from './catalog.js';
 
 const STORAGE_KEY = 'hubb.cart.v1';
 const MAX_QUANTITY = 99;
@@ -9,13 +9,15 @@ let cart = [];
 let productState = { id: '', format: 'cup', quantity: 1 };
 let searchQuery = '';
 let previewReady = false;
+let availabilitySnapshot = null;
 let announcement;
+let removedRetailSachets = false;
 
 const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 const localized = (value) => typeof value === 'object' && value ? value[getLang()] || value.en || value.ar || '' : value || '';
 const productFor = (id) => products.find((product) => product.id === id);
 const formatFor = (id) => formats.find((format) => format.id === id);
-const allowedFormats = (id) => formats.filter((format) => id === 'family-mix' ? format.id === 'family' : ['sachet', 'cup', 'case'].includes(format.id));
+const allowedFormats = (id) => formats.filter((format) => id === 'family-mix' ? format.id === 'family' : ['cup', 'case'].includes(format.id));
 const validPair = (id, format) => Boolean(productFor(id) && allowedFormats(id).some((item) => item.id === format));
 const priceFor = (item) => Number(formatFor(item.format)?.price) || 0;
 const quantityFor = (quantity) => Math.min(MAX_QUANTITY, Math.max(1, Math.floor(Number(quantity) || 1)));
@@ -23,24 +25,88 @@ const total = () => cart.reduce((sum, item) => sum + priceFor(item) * item.quant
 const count = () => cart.reduce((sum, item) => sum + item.quantity, 0);
 const keyFor = (item) => `${item.id}:${item.format}`;
 const priceNote = () => t('أسعار مقترحة · لن يتم تحصيل أي مبلغ', 'Proposed prices · no payment collected');
+const policyNote = () => t('سياسة الطلب والتوصيل مقترحة وقيد التأكيد.', 'Order and delivery policy is proposed and pending confirmation.');
 const iconClose = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 const iconBag = '<svg viewBox="0 0 48 48" width="56" height="56" aria-hidden="true"><path d="M12 16h24l3 26H9l3-26Zm6 0v-5a6 6 0 0 1 12 0v5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 const closeButton = (label = t('إغلاق', 'Close')) => `<button class="hc-icon-button hc-close" type="button" data-action="close" aria-label="${escape(label)}">${iconClose}</button>`;
 
-function readCart(raw) {
+function parseStoredCart(raw) {
   try {
     const stored = JSON.parse(raw || '[]');
-    if (!Array.isArray(stored)) return [];
+    if (!Array.isArray(stored)) return { items: [], removedSachets: false };
     const clean = [];
+    let removedSachets = false;
     for (const entry of stored.slice(0, 100)) {
+      if (entry?.format === 'sachet') removedSachets = true;
       if (!entry || typeof entry !== 'object' || !validPair(entry.id, entry.format)) continue;
       if (!Number.isInteger(entry.quantity) || entry.quantity < 1 || entry.quantity > MAX_QUANTITY) continue;
       const existing = clean.find((item) => keyFor(item) === keyFor(entry));
       if (existing) existing.quantity = Math.min(MAX_QUANTITY, existing.quantity + entry.quantity);
       else clean.push({ id: entry.id, format: entry.format, quantity: entry.quantity });
     }
-    return clean;
-  } catch { return []; }
+    return { items: clean, removedSachets };
+  } catch { return { items: [], removedSachets: false }; }
+}
+
+const readCart = (raw) => parseStoredCart(raw).items;
+
+function restoreCart(raw) {
+  const result = parseStoredCart(raw);
+  cart = result.items;
+  removedRetailSachets ||= result.removedSachets;
+}
+
+function orderAmounts(subtotal) {
+  const cents = (value) => Math.round(Number(value) * 100);
+  const rawSubtotalCents = cents(subtotal);
+  const subtotalCents = Number.isSafeInteger(rawSubtotalCents) ? Math.max(0, rawSubtotalCents) : 0;
+  const minimumCents = cents(onlinePolicy.minimumOrder);
+  const freeShippingCents = cents(onlinePolicy.freeShippingThreshold);
+  const minimumMet = subtotalCents >= minimumCents;
+  const freeShipping = minimumMet && subtotalCents >= freeShippingCents;
+  const shippingCents = minimumMet ? (freeShipping ? 0 : cents(onlinePolicy.shippingFee)) : null;
+  return {
+    subtotal: subtotalCents / 100,
+    minimumMet,
+    minimumRemaining: Math.max(0, minimumCents - subtotalCents) / 100,
+    freeShipping,
+    freeShippingRemaining: Math.max(0, freeShippingCents - subtotalCents) / 100,
+    shipping: shippingCents === null ? null : shippingCents / 100,
+    grandTotal: shippingCents === null ? null : (subtotalCents + shippingCents) / 100,
+  };
+}
+
+function checkoutAllowed() {
+  return cart.length > 0 && cart.every((item) => validPair(item.id, item.format) && Number.isInteger(item.quantity) && item.quantity > 0 && item.quantity <= MAX_QUANTITY) && orderAmounts(total()).minimumMet;
+}
+
+function minimumMessage(amounts = orderAmounts(total())) {
+  return t(`أضف منتجات بقيمة ${money(amounts.minimumRemaining)} للوصول إلى الحد الأدنى للطلب ${money(onlinePolicy.minimumOrder)}.`, `Add ${money(amounts.minimumRemaining)} in products to reach the ${money(onlinePolicy.minimumOrder)} order minimum.`);
+}
+
+function shippingProgress(amounts = orderAmounts(total())) {
+  const progress = Math.min(100, Math.max(0, amounts.subtotal / onlinePolicy.freeShippingThreshold * 100));
+  const message = amounts.freeShipping ? t('شحن مجاني لهذا الطلب في المعاينة', 'Free delivery for this order in the preview') : t(`باقي ${money(amounts.freeShippingRemaining)} للشحن المجاني.`, `${money(amounts.freeShippingRemaining)} away from free delivery.`);
+  return `<div class="hc-shipping-progress ${amounts.freeShipping ? 'is-complete' : ''}"><p>${escape(message)}</p><div class="hc-progress-track" role="progressbar" aria-label="${escape(t('التقدم نحو الشحن المجاني', 'Progress toward free delivery'))}" aria-valuemin="0" aria-valuemax="${onlinePolicy.freeShippingThreshold}" aria-valuenow="${Math.min(amounts.subtotal, onlinePolicy.freeShippingThreshold)}" aria-valuetext="${escape(message)}"><span style="width:${progress}%"></span></div><small>${escape(t(`شحن مجاني من ${money(onlinePolicy.freeShippingThreshold)} · سياسة مقترحة`, `Free delivery from ${money(onlinePolicy.freeShippingThreshold)} · proposed policy`))}</small></div>`;
+}
+
+function minimumSuggestions(amounts = orderAmounts(total())) {
+  if (amounts.minimumMet) return '';
+  const cup = formatFor('cup');
+  const family = formatFor('family');
+  const cupProduct = productFor(cart.find((item) => item.id !== 'family-mix')?.id) || products.find((product) => product.id !== 'family-mix');
+  const cupQuantity = Math.max(1, Math.ceil(amounts.minimumRemaining / cup.price));
+  const familyQuantity = Math.max(1, Math.ceil(amounts.minimumRemaining / family.price));
+  return `<div class="hc-minimum-guidance"><p id="hc-minimum-message">${escape(minimumMessage(amounts))}</p><div class="hc-suggestions"><button type="button" data-action="add-recommendation" data-id="family-mix" data-format="family" data-quantity="${familyQuantity}"><span>${escape(t(`أضف ${familyQuantity > 1 ? `${familyQuantity} × ` : ''}خلطة العائلة`, `Add ${familyQuantity > 1 ? `${familyQuantity} × ` : ''}Family Mix`))}</span><strong>${escape(money(family.price * familyQuantity))}</strong></button><button type="button" data-action="add-recommendation" data-id="${escape(cupProduct.id)}" data-format="cup" data-quantity="${cupQuantity}"><span>${escape(t(`أضف ${cupQuantity} × كوب ${localized(cupProduct.name)}`, `Add ${cupQuantity} × ${localized(cupProduct.name)} cup`))}</span><strong>${escape(money(cup.price * cupQuantity))}</strong></button></div></div>`;
+}
+
+function migrationNotice() {
+  if (!removedRetailSachets) return '';
+  return `<div class="hc-cart-notice" role="status"><p>${escape(t('الأكياس الفردية مخصصة للتجزئة، لذلك أزلناها من سلّتك الإلكترونية. يمكنك اختيار كوب أو كرتون أو خلطة العائلة؛ لم نضف أي عبوة بديلة.', 'Single sachets are retail-only, so we removed them from your online bag. Choose cups, cases or Family Mix; no replacement pack was added.'))}</p><button type="button" class="hc-icon-button" data-action="dismiss-notice" aria-label="${escape(t('إخفاء التنبيه', 'Dismiss notice'))}">${iconClose}</button></div>`;
+}
+
+function amountRows(amounts = orderAmounts(total())) {
+  return `<div class="hc-summary-row hc-subtotal-row"><span>${escape(t('إجمالي المنتجات', 'Product subtotal'))}</span><strong>${escape(money(amounts.subtotal))}</strong></div><div class="hc-summary-row hc-shipping-row"><span>${escape(t('التوصيل المقترح', 'Proposed delivery'))}</span><span>${escape(amounts.shipping === null ? t('بعد بلوغ الحد الأدنى', 'Once minimum is reached') : amounts.freeShipping ? t('مجاني', 'Free') : money(amounts.shipping))}</span></div><div class="hc-summary-row hc-grand-total"><span>${escape(t('إجمالي المعاينة', 'Preview total'))}</span><strong>${escape(amounts.grandTotal === null ? '—' : money(amounts.grandTotal))}</strong></div>`;
 }
 
 function announce(message) {
@@ -50,6 +116,7 @@ function announce(message) {
 }
 
 function syncCart({ persist = true } = {}) {
+  restoreCart(JSON.stringify(cart));
   if (persist) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch { /* A private browser still supports a cart for this visit. */ }
   }
@@ -58,6 +125,7 @@ function syncCart({ persist = true } = {}) {
   if (dialogs.cart?.open) renderCart();
   if (dialogs.checkout?.open) {
     previewReady = false;
+    availabilitySnapshot = null;
     renderCheckout(readCheckoutFields());
   }
 }
@@ -76,6 +144,7 @@ function makeDialog(name, className) {
   dialog.addEventListener('close', () => {
     if (name === 'checkout') {
       previewReady = false;
+      availabilitySnapshot = null;
       dialog.querySelector('form')?.reset();
       dialog.replaceChildren();
     }
@@ -92,6 +161,11 @@ function makeDialog(name, className) {
 }
 
 function showDialog(name) {
+  if (name === 'checkout' && !checkoutAllowed()) {
+    openCart();
+    announce(minimumMessage());
+    return;
+  }
   const dialog = dialogs[name];
   if (dialog.open) return;
   const previous = Object.values(dialogs).find((item) => item.open);
@@ -131,6 +205,7 @@ function renderProduct() {
   if (!product) return;
   const format = formatFor(productState.format);
   const available = allowedFormats(product.id);
+  const productChoice = (item) => `<button type="button" class="hc-flavour ${item.id === product.id ? 'is-selected' : ''}" data-action="flavour" data-id="${escape(item.id)}" data-focus="flavour-${escape(item.id)}" aria-pressed="${item.id === product.id}"><span style="background:${escape(item.color || '#9b3b2b')}" aria-hidden="true"></span>${escape(localized(item.name))}</button>`;
   const selectedPackCaption = t(
     `${product.id === 'family-mix' ? 'تصميم المنتج' : 'تصميم النكهة'} معروض للتوضيح. العبوة المختارة: ${localized(format.name)} · عدد الأكياس المغلقة: ${format.count}.`,
     `${product.id === 'family-mix' ? 'Product' : 'Flavour'} artwork shown; selected pack: ${localized(format.name)} · ${format.count} sealed ${format.count === 1 ? 'sachet' : 'sachets'}.`
@@ -141,7 +216,7 @@ function renderProduct() {
       <span class="hc-visual-label">${escape(t('حبّ · من السعودية', 'HUBB · FROM SAUDI'))}</span>
       <div class="hc-product-orbit" aria-hidden="true"></div>
       <img class="hc-product-image" src="${escape(product.image)}" alt="${escape(localized(product.name))}" width="640" height="800">
-      ${format.id === 'cup' ? `<figure class="hc-pack-preview"><img src="./assets/cup-unpacked.webp" alt="${escape(t('مثال لتجهيز كوب الرحلة بنكهة الفلفل واللايم، مع خمسة أكياس مغلقة وكيس منفصل للقشور', 'Journey Cup packing example in Pepper Lime, with five sealed sachets and a separate shell bag'))}" width="1536" height="1024"><figcaption>${escape(t('مثال لترتيب العبوة · الصورة بنكهة الفلفل واللايم', 'Pack structure example · Pepper Lime shown'))}</figcaption></figure>` : ''}
+      ${format.id === 'cup' ? `<figure class="hc-pack-preview"><img src="/assets/cup-unpacked.webp" alt="${escape(t('مثال لتجهيز كوب الرحلة بنكهة الفلفل واللايم، مع خمسة أكياس مغلقة وكيس منفصل للقشور', 'Journey Cup packing example in Pepper Lime, with five sealed sachets and a separate shell bag'))}" width="1536" height="1024"><figcaption>${escape(t('مثال لترتيب العبوة · الصورة بنكهة الفلفل واللايم', 'Pack structure example · Pepper Lime shown'))}</figcaption></figure>` : ''}
       <p class="hc-art-caption">${escape(selectedPackCaption)}<small>${escape(t('تصوّر للتغليف · التفاصيل النهائية قيد الاعتماد', 'Packaging concept · final details pending approval'))}</small></p>
     </div>
     <div class="hc-product-copy">
@@ -149,7 +224,8 @@ function renderProduct() {
       <h2 id="hc-product-title">${escape(localized(product.name))}</h2>
       <p class="hc-description">${escape(localized(product.description))}</p>
       <fieldset class="hc-fieldset"><legend>${escape(t('اختر المنتج', 'Choose a product'))}</legend>
-        <div class="hc-flavours">${products.map((item) => `<button type="button" class="hc-flavour ${item.id === product.id ? 'is-selected' : ''}" data-action="flavour" data-id="${escape(item.id)}" data-focus="flavour-${escape(item.id)}" aria-pressed="${item.id === product.id}"><span style="background:${escape(item.color || '#9b3b2b')}" aria-hidden="true"></span>${escape(localized(item.name))}</button>`).join('')}</div>
+        <div class="hc-product-choice-group"><span class="hc-choice-label">${escape(t('أربع نكهات', 'Four flavours'))}</span><div class="hc-flavours">${products.filter((item) => item.id !== 'family-mix').map(productChoice).join('')}</div></div>
+        <div class="hc-product-choice-group hc-mix-choice"><span class="hc-choice-label">${escape(t('عبوة مشتركة · النكهات الأربع معًا', 'Mixed pack · all four flavours together'))}</span><div class="hc-flavours">${products.filter((item) => item.id === 'family-mix').map(productChoice).join('')}</div></div>
       </fieldset>
       <fieldset class="hc-fieldset"><legend>${escape(t('اختر العبوة', 'Choose your pack'))}</legend>
         <div class="hc-formats">${available.map((item) => `<button type="button" class="hc-format ${item.id === format.id ? 'is-selected' : ''}" data-action="format" data-format="${escape(item.id)}" data-focus="format-${escape(item.id)}" aria-pressed="${item.id === format.id}"><span><strong>${escape(localized(item.name))}</strong><small>${escape(formatDetails(item))}</small></span><b>${escape(money(item.price))}</b></button>`).join('')}</div>
@@ -158,20 +234,24 @@ function renderProduct() {
       <div class="hc-product-total"><div><span class="hc-small-label">${escape(t('الإجمالي للمنتجات', 'Product total'))}</span><strong>${escape(money(format.price * productState.quantity))}</strong></div>${quantityControl(productState.quantity, 'product')}</div>
       <button class="hc-button hc-button-primary" type="button" data-action="add-product">${escape(t('أضف للسلة', 'Add to bag'))}<span aria-hidden="true">↗</span></button>
       <p class="hc-price-note">${escape(priceNote())}</p>
-      <p class="hc-fine-print">${escape(t('تُحدّد رسوم الشحن عند تفعيل الدفع. هذه تجربة تسوّق تجريبية.', 'Shipping is calculated when checkout is activated. This is a shopping preview.'))}</p>
+      <p class="hc-fine-print">${escape(t(`الحد الأدنى ${money(onlinePolicy.minimumOrder)} · التوصيل ${money(onlinePolicy.shippingFee)}، ومجاني من ${money(onlinePolicy.freeShippingThreshold)}. سياسة مقترحة.`, `Minimum order ${money(onlinePolicy.minimumOrder)} · delivery ${money(onlinePolicy.shippingFee)}, free from ${money(onlinePolicy.freeShippingThreshold)}. Proposed policy.`))}</p>
     </div>
   </div>`);
 }
 
 function renderCart() {
+  const amounts = orderAmounts(total());
   replaceDialog(dialogs.cart, `<div class="hc-drawer-layout">
     <header class="hc-dialog-header"><div><p class="hc-eyebrow">${escape(t('جهّز جمعتك', 'MAKE ROOM FOR THE GATHERING'))}</p><h2 id="hc-cart-title">${escape(t('سلّتك', 'Your bag'))} <span class="hc-title-count">${count()}</span></h2></div>${closeButton()}</header>
+    <div class="hc-cart-scroll">${migrationNotice()}${shippingProgress(amounts)}
     ${cart.length ? `<div class="hc-cart-items">${cart.map((item) => {
       const product = productFor(item.id);
       const format = formatFor(item.format);
       const key = keyFor(item);
       return `<article class="hc-cart-item"><div class="hc-cart-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(product.image)}" alt="${escape(localized(product.name))}" width="100" height="130"></div><div class="hc-cart-item-copy"><h3>${escape(localized(product.name))}</h3><p>${escape(localized(format.name))} · ${escape(formatDetails(format))}</p><p class="hc-unit-price">${escape(money(format.price))} ${escape(t('للعبوة', 'each'))}</p><div class="hc-cart-item-controls">${quantityControl(item.quantity, 'cart', key)}<button type="button" class="hc-remove" data-action="remove" data-key="${escape(key)}" aria-label="${escape(t(`إزالة ${localized(product.name)}`, `Remove ${localized(product.name)}`))}">${escape(t('إزالة', 'Remove'))}</button></div></div><strong class="hc-line-price">${escape(money(format.price * item.quantity))}</strong></article>`;
-    }).join('')}</div><footer class="hc-cart-footer"><div class="hc-summary-row"><span>${escape(t('إجمالي المنتجات', 'Product subtotal'))}</span><strong>${escape(money(total()))}</strong></div><div class="hc-summary-row hc-shipping-row"><span>${escape(t('الشحن', 'Shipping'))}</span><span>${escape(t('يُحدّد عند تفعيل الدفع', 'Calculated at live checkout'))}</span></div><p class="hc-price-note">${escape(priceNote())}</p><button type="button" class="hc-button hc-button-primary" data-action="checkout">${escape(t('معاينة الطلب', 'Preview checkout'))}<span aria-hidden="true">↗</span></button><button type="button" class="hc-button hc-button-text" data-action="close">${escape(t('أكمل التسوّق', 'Keep shopping'))}</button></footer>` : `<div class="hc-empty">${iconBag}<h3>${escape(t('جمعتك تبدأ من هنا', 'Your gathering starts here'))}</h3><p>${escape(t('اختر نكهتك وأضف أول عبوة إلى السلّة.', 'Pick your flavour and put a little HUBB in your bag.'))}</p><button type="button" class="hc-button hc-button-primary" data-action="close">${escape(t('استكشف النكهات', 'Explore the flavours'))}</button></div>`}
+    }).join('')}</div>` : `<div class="hc-empty hc-cart-empty">${iconBag}<h3>${escape(t('جمعتك تبدأ من هنا', 'Your gathering starts here'))}</h3><p>${escape(t(`الطلبات الإلكترونية من ${money(onlinePolicy.minimumOrder)}. ابدأ بخلطة العائلة، أو اجمع أكوابك ونكهاتك المفضلة.`, `Online orders start at ${money(onlinePolicy.minimumOrder)}. Start with Family Mix or build a bag of your favourite cups and cases.`))}</p></div>`}
+    ${minimumSuggestions(amounts)}</div>
+    <footer class="hc-cart-footer">${amountRows(amounts)}<p class="hc-price-note">${escape(priceNote())}<br>${escape(policyNote())}</p><button type="button" class="hc-button hc-button-primary" data-action="checkout" ${!checkoutAllowed() ? 'disabled aria-describedby="hc-minimum-message"' : ''}>${escape(t('معاينة الطلب', 'Preview checkout'))}<span aria-hidden="true">↗</span></button><button type="button" class="hc-button hc-button-text" data-action="close">${escape(t('أكمل التسوّق', 'Keep shopping'))}</button></footer>
   </div>`);
 }
 
@@ -186,14 +266,32 @@ function checkoutSummary() {
     const product = productFor(item.id);
     const format = formatFor(item.format);
     return `<div class="hc-checkout-line"><img src="${escape(product.image)}" alt="" width="52" height="66"><div><strong>${escape(localized(product.name))}</strong><small>${escape(localized(format.name))} × ${item.quantity}</small></div><b>${escape(money(format.price * item.quantity))}</b></div>`;
-  }).join('')}</div><div class="hc-summary-row"><span>${escape(t('إجمالي المنتجات', 'Product subtotal'))}</span><strong>${escape(money(total()))}</strong></div><div class="hc-summary-row hc-shipping-row"><span>${escape(t('الشحن', 'Shipping'))}</span><span>${escape(t('غير محسوب في المعاينة', 'Not included in preview'))}</span></div><p class="hc-fine-print">${escape(t('السعر النهائي والضرائب ورسوم التوصيل تُؤكّد قبل إتمام أي شراء فعلي.', 'Final pricing, taxes and delivery charges must be confirmed before any live purchase.'))}</p></aside>`;
+  }).join('')}</div>${amountRows()}${shippingProgress()}<p class="hc-fine-print">${escape(policyNote())} ${escape(t('السعر النهائي والمعالجة الضريبية يُؤكّدان قبل تفعيل الشراء الفعلي.', 'Final pricing and tax treatment will be confirmed before live checkout is activated.'))}</p></aside>`;
+}
+
+function availabilityMessage() {
+  if (!previewReady || !availabilitySnapshot || !checkoutAllowed()) return '';
+  const { city, items, amounts } = availabilitySnapshot;
+  const lines = items.map((item) => {
+    const product = productFor(item.id);
+    const format = formatFor(item.format);
+    return `${localized(product.name)} — ${localized(format.name)} × ${item.quantity} (${item.quantity * format.count} ${t('كيسًا مغلقًا', 'sealed sachets')})`;
+  });
+  return `HUBB — ${t('استفسار عن التوفر وعرض السعر', 'Availability and quote inquiry')}\n${t('المدينة', 'City')}: ${city}\n\n${lines.join('\n')}\n\n${t('إجمالي المنتجات المقترح', 'Proposed product subtotal')}: ${money(amounts.subtotal)}\n${t('رسوم التوصيل المقترحة', 'Proposed delivery')}: ${money(amounts.shipping)}\n${t('إجمالي المعاينة', 'Preview total')}: ${money(amounts.grandTotal)}\n\n${t('يرجى تأكيد التوفر والسعر النهائي والضرائب والتوصيل وشروط الدفع. هذا استفسار وليس طلبًا مؤكدًا؛ لم يتم تحصيل أي مبلغ.', 'Please confirm stock, final pricing, tax, delivery and payment terms. This is an inquiry, not a confirmed order; no payment has been collected.')}`;
+}
+
+function availabilityAction() {
+  const message = availabilityMessage();
+  if (!message) return '';
+  return `<p>${escape(t('تواصل مع الفريق لتأكيد المخزون والأسعار النهائية وشروط التوصيل والدفع.', 'Contact the team to confirm stock, final prices, delivery and payment terms.'))}</p><a class="hc-button hc-button-primary" href="${escape(`https://wa.me/966553127999?text=${encodeURIComponent(message)}`)}" target="_blank" rel="noopener noreferrer">${escape(t('تحقّق من التوفر عبر واتساب', 'Check availability on WhatsApp'))} ↗</a><p class="hc-fine-print" style="margin-top:12px">${escape(t('يفتح الرابط مسودة تتضمن المنتجات والكميات والأسعار المقترحة والمدينة فقط. راجعها ثم اضغط إرسال داخل واتساب؛ لا تُرسل تلقائيًا.', 'The link opens a draft with items, quantities, proposed amounts and your city only. Review it and press Send in WhatsApp; nothing is sent automatically.'))}</p>`;
 }
 
 function renderCheckout(values = {}) {
+  if (!checkoutAllowed()) { previewReady = false; availabilitySnapshot = null; }
   const field = (name, label, attrs = '', full = false) => `<label class="hc-input-label ${full ? 'hc-input-full' : ''}"><span>${escape(label)}</span><input name="${name}" value="${escape(values[name] || '')}" ${attrs}></label>`;
   replaceDialog(dialogs.checkout, `<div class="hc-checkout-layout"><header class="hc-dialog-header"><div><p class="hc-eyebrow">${escape(t('تجربة المتجر', 'STORE PREVIEW'))}</p><h2 id="hc-checkout-title">${escape(t(previewReady ? 'معاينة طلبك جاهزة' : 'معاينة الطلب', previewReady ? 'Your order preview is ready' : 'Preview your order'))}</h2></div>${closeButton()}</header>
     <div class="hc-preview-banner" role="note"><span aria-hidden="true">◌</span><p>${escape(t('معاينة فقط. لن يتم إرسال طلب أو تحصيل مبلغ. بياناتك لا تُرسل ولا تُحفظ.', 'Preview only. No order is placed and no payment is collected. Your details are not sent or saved.'))}</p></div>
-    ${!cart.length ? `<div class="hc-empty"><h3>${escape(t('السلّة فارغة', 'Your bag is empty'))}</h3><button type="button" class="hc-button hc-button-primary" data-action="close">${escape(t('تابع التسوّق', 'Continue shopping'))}</button></div>` : `<div class="hc-checkout-columns">${previewReady ? `<div class="hc-preview-success" role="status"><span class="hc-success-mark" aria-hidden="true">✓</span><h3>${escape(t('معاينة الطلب جاهزة', 'Order preview ready'))}</h3><p>${escape(t('لم يتم تقديم أي طلب أو تحصيل أي مبلغ.', 'No order has been placed and no payment has been collected.'))}</p><p>${escape(t('يمكنك العودة إلى السلّة لتعديل النكهات والكميات.', 'You can return to your bag to adjust flavours and quantities.'))}</p><button type="button" class="hc-button hc-button-primary" data-action="back-cart">${escape(t('العودة إلى السلّة', 'Back to your bag'))}</button><button type="button" class="hc-button hc-button-text" data-action="close">${escape(t('أكمل الاستكشاف', 'Keep exploring'))}</button></div>` : `<form class="hc-checkout-form" novalidate><p class="hc-form-intro">${escape(t('جرّب تفاصيل التوصيل داخل المملكة.', 'Try the delivery form for Saudi Arabia.'))}</p><div class="hc-input-grid">
+    ${!checkoutAllowed() ? `<div class="hc-empty"><h3>${escape(t('أكمل الحد الأدنى للطلب', 'Complete your minimum order'))}</h3><p>${escape(minimumMessage())}</p><button type="button" class="hc-button hc-button-primary" data-action="back-cart">${escape(t('العودة إلى السلّة لإضافة المنتجات', 'Back to your bag to add products'))}</button></div>` : `<div class="hc-checkout-columns">${previewReady ? `<div class="hc-preview-success" role="status"><span class="hc-success-mark" aria-hidden="true">✓</span><h3>${escape(t('معاينة الطلب جاهزة', 'Order preview ready'))}</h3><p>${escape(t('لم يتم تقديم أي طلب أو تحصيل أي مبلغ.', 'No order has been placed and no payment has been collected.'))}</p>${availabilityAction()}<button type="button" class="hc-button hc-button-text" data-action="back-cart">${escape(t('العودة إلى السلّة', 'Back to your bag'))}</button><button type="button" class="hc-button hc-button-text" data-action="close">${escape(t('أكمل الاستكشاف', 'Keep exploring'))}</button></div>` : `<form class="hc-checkout-form" novalidate><p class="hc-form-intro">${escape(t('جرّب تفاصيل التوصيل داخل المملكة.', 'Try the delivery form for Saudi Arabia.'))}</p><div class="hc-input-grid">
       ${field('fullName', t('الاسم الكامل', 'Full name'), 'autocomplete="name" required minlength="2" maxlength="100"', true)}
       ${field('mobile', t('رقم الجوال السعودي', 'Saudi mobile number'), `type="tel" inputmode="tel" autocomplete="tel" placeholder="05XXXXXXXX" required maxlength="20" aria-describedby="hc-mobile-help"`, true)}
       <small class="hc-input-help hc-input-full" id="hc-mobile-help">${escape(t('يبدأ بـ 05 أو ‎+9665', 'Starts with 05 or +9665'))}</small>
@@ -217,7 +315,7 @@ function renderSearchResults() {
   });
   const results = dialogs.search.querySelector('.hc-search-results');
   if (!results) return;
-  results.innerHTML = matches.length ? matches.map((product) => `<button type="button" class="hc-search-result" data-action="search-product" data-id="${escape(product.id)}"><span class="hc-search-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(product.image)}" alt="" width="72" height="86"></span><span><strong>${escape(localized(product.name))}</strong><small>${escape(localized(product.description))}</small></span><span aria-hidden="true">↗</span></button>`).join('') : `<div class="hc-search-empty"><h3>${escape(t('لم نجد هذا المنتج', 'No products found'))}</h3><p>${escape(t('جرّب اسم منتج آخر أو امسح البحث لتصفح جميع المنتجات.', 'Try another product name or clear your search to see everything.'))}</p><button type="button" class="hc-button hc-button-text" data-action="clear-search">${escape(t('مسح البحث', 'Clear search'))}</button></div>`;
+  results.innerHTML = matches.length ? matches.map((product) => `<button type="button" class="hc-search-result" data-action="search-product" data-id="${escape(product.id)}"><span class="hc-search-image" style="--hc-product-color:${escape(product.color || '#9b3b2b')}"><img src="${escape(product.image)}" alt="" width="72" height="86"></span><span><strong>${escape(localized(product.name))}</strong><small class="hc-search-kind">${escape(product.id === 'family-mix' ? t('عبوة مشتركة · أربع نكهات', 'Mixed pack · four flavours') : t('نكهة مستقلة · أكواب وكراتين', 'Single flavour · cups and cases'))}</small><small>${escape(localized(product.description))}</small></span><span aria-hidden="true">↗</span></button>`).join('') : `<div class="hc-search-empty"><h3>${escape(t('لم نجد هذا المنتج', 'No products found'))}</h3><p>${escape(t('جرّب اسم منتج آخر أو امسح البحث لتصفح جميع المنتجات.', 'Try another product name or clear your search to see everything.'))}</p><button type="button" class="hc-button hc-button-text" data-action="clear-search">${escape(t('مسح البحث', 'Clear search'))}</button></div>`;
   const status = dialogs.search.querySelector('.hc-search-status');
   status.textContent = t(`${matches.length} منتجات`, `${matches.length} ${matches.length === 1 ? 'product' : 'products'}`);
 }
@@ -232,6 +330,19 @@ function handleClick(event) {
   if (!button) return;
   const { action } = button.dataset;
   if (action === 'close') return button.closest('dialog').close();
+  if (action === 'dismiss-notice') {
+    removedRetailSachets = false;
+    renderCart();
+    dialogs.cart.querySelector('[data-action="close"]')?.focus({ preventScroll: true });
+    return;
+  }
+  if (action === 'add-recommendation') {
+    if (addToCart(button.dataset.id, button.dataset.format, Number(button.dataset.quantity))) {
+      openCart();
+      dialogs.cart.querySelector('[data-action="checkout"]:not(:disabled), .hc-suggestions button')?.focus({ preventScroll: true });
+    }
+    return;
+  }
   if (action === 'flavour') {
     const id = button.dataset.id;
     if (!productFor(id)) return;
@@ -270,7 +381,14 @@ function handleClick(event) {
     return openCart();
   }
   if (action === 'checkout') {
+    if (!checkoutAllowed()) {
+      syncCart();
+      openCart();
+      announce(minimumMessage());
+      return;
+    }
     previewReady = false;
+    availabilitySnapshot = null;
     renderCheckout();
     return showDialog('checkout');
   }
@@ -302,7 +420,7 @@ function validateCheckout(form) {
 export function initCommerce() {
   if (initialized) return;
   initialized = true;
-  try { cart = readCart(localStorage.getItem(STORAGE_KEY)); } catch { cart = []; }
+  try { restoreCart(localStorage.getItem(STORAGE_KEY)); } catch { cart = []; }
   announcement = document.createElement('div');
   announcement.className = 'hc-sr-only';
   announcement.setAttribute('role', 'status');
@@ -322,7 +440,14 @@ export function initCommerce() {
   });
   dialogs.checkout.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (!cart.length || !validateCheckout(event.target)) return;
+    if (!checkoutAllowed()) {
+      syncCart();
+      openCart();
+      announce(minimumMessage());
+      return;
+    }
+    if (!validateCheckout(event.target)) return;
+    availabilitySnapshot = { city: event.target.elements.namedItem('city').value.trim(), items: cart.map((item) => ({ ...item })), amounts: orderAmounts(total()) };
     event.target.reset();
     previewReady = true;
     renderCheckout();
@@ -338,15 +463,20 @@ export function initCommerce() {
   });
   window.addEventListener('storage', (event) => {
     if (event.key !== STORAGE_KEY && event.key !== null) return;
-    cart = readCart(event.newValue);
-    syncCart({ persist: false });
+    restoreCart(event.newValue);
+    syncCart({ persist: event.key === STORAGE_KEY && event.newValue !== JSON.stringify(cart) });
   });
-  syncCart({ persist: false });
+  syncCart();
+  if (removedRetailSachets) announce(t('أزلنا الأكياس الفردية من السلّة لأنها مخصصة للتجزئة. اختر كوبًا أو كرتونًا أو خلطة العائلة.', 'Single sachets were removed from your online bag because they are retail-only. Choose a cup, case or Family Mix.'));
 }
 
 export function openProduct(id, format = 'cup') {
   initCommerce();
   if (!productFor(id)) return false;
+  if (format === 'sachet') {
+    announce(t('الأكياس الفردية مخصصة للتجزئة. اختر كوبًا أو كرتونًا للطلب الإلكتروني.', 'Single sachets are retail-only. Choose a cup or case for an online order.'));
+    return false;
+  }
   const actualFormat = validPair(id, format) ? format : allowedFormats(id)[0]?.id;
   if (!actualFormat) return false;
   productState = { id, format: actualFormat, quantity: 1 };
@@ -357,7 +487,7 @@ export function openProduct(id, format = 'cup') {
 
 export function addToCart(id, format, quantity = 1) {
   initCommerce();
-  if (!validPair(id, format) || !Number.isFinite(Number(quantity)) || Number(quantity) < 1) return false;
+  if (!validPair(id, format) || !Number.isInteger(Number(quantity)) || Number(quantity) < 1) return false;
   const existing = cart.find((item) => item.id === id && item.format === format);
   if (existing) existing.quantity = quantityFor(existing.quantity + Number(quantity));
   else cart.push({ id, format, quantity: quantityFor(quantity) });
@@ -368,6 +498,7 @@ export function addToCart(id, format, quantity = 1) {
 
 export function openCart() {
   initCommerce();
+  restoreCart(JSON.stringify(cart));
   renderCart();
   showDialog('cart');
 }

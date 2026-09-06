@@ -1,11 +1,11 @@
 {
   "name": "hubb-saudi-store",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
-    "check": "node --input-type=module --check < app.js && node --input-type=module --check < catalog.js && node --input-type=module --check < commerce.js",
+    "start": "node build.mjs && node server.mjs",
+    "check": "node --input-type=module --check < app.js && node --input-type=module --check < catalog.js && node --input-type=module --check < commerce.js && node --input-type=module --check < story.js && node --input-type=module --check < seo-page.js && node --input-type=module --check < build.mjs",
     "build": "node build.mjs"
   }
 }

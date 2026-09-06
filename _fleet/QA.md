@@ -14,3 +14,17 @@ Observed browser checks on the working local website:
 - Source arithmetic independently checked for each format and wholesale tier. Module syntax checks pass. Browser console had no error entries during local test.
 
 Known limits: browser download control showed the generated request content and success state; the saved file destination was not independently located in the host Downloads folder. No live order, payment, shipping, email, tax, backend persistence, operational or print validation is claimed. Not an Awwwards submission or award certification.
+
+## V2 verification — 6 September 2026
+
+This revision supersedes the V1 single-sachet and below-minimum checkout examples above.
+
+- Updated built site inspected in the in-app browser at 1440×900 and 390×844. Arabic mobile hero typography corrected after visual review. No horizontal overflow at either width. No broken loaded images and no browser console errors in the final local session.
+- Founder narrative, original whole-seed/empty-husks/kernel study, four flavour cards, partner paths and supplied contact/map UI reviewed. Step controls changed guide text and marker state; sound control triggered the labelled synthesized sound study. No claim of acoustic or physical product validation.
+- Factory and warehouse controls resolved respectively to 25.131754,46.0797011 and24.5634184,46.7556442. Google map rendered; directions used the owner's corresponding place IDs. Public WhatsApp links use966553127999.
+- Three cups: goods36, checkout disabled. Adding Family Mix: goods75, proposed delivery0, total75. Removing cups: Family39, delivery15, total54. Checkout completed using synthetic test fields and produced an availability request containing items/counts/proposed totals/city only; no full address, name or mobile was included in that draft.
+- Feedback with “concept only” kept sensory answers unassessed and visibly identified no product tasting. The prepared WhatsApp draft contained that distinction and no fabricated review/verified-purchase badge. Distributor form accepted synthetic business data and produced the corresponding non-binding inquiry draft. No WhatsApp send action was performed.
+- English product-name link opened its actual local product page. Cup picker there loaded the pack preview and offered only cup/case. Arabic language link opened equivalent product route. Home language switch navigated/en/↔/ar/. Cart persisted across locale routes. Mobile navigation closed after anchor selection.
+- Commerce implementation checks covered38.99/39/74.99/75/75.01 boundaries, malformed stored rows, removal of old retail sachets without upsizing, and rejection of sachet add/open requests. These checks were performed by the commerce implementer; root independently verified the main UI boundary flows above.
+- Built11HTML documents: root, two locale homes, eight product pages. Source includes distinct product copy, canonical/hreflang, OpenGraph, truthful Product/Breadcrumb data without offers or ratings, and a10URL sitemap. Local HTML/link audit found oneH1 perpage, no duplicateIDs or missing local references. Preview stays noindex and robots-disallowed.
+- Module syntax and static build completed successfully. Test cart items were removed through the UI; modal test fields were cleared on close. Payment/order backend, message delivery, real reviews, actual courier economics and final Arabic/label validation remain unverified.

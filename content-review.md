@@ -1,6 +1,6 @@
 # HUBB Saudi store — content and creative review
 
-Prepared 6 September 2026. Development copy for the new ecommerce concept.
+Prepared 6 September 2026; updated for V2. Development copy and content boundaries for the private ecommerce preview. This document is not final V2 browser QA.
 
 **Arabic: Draft pending Saudi copywriter validation.** Product flavour names and package counts below are grounded in the current reference. Sensory language, lifestyle scenes, packaging artwork and prices are design proposals unless separately approved. The site must not claim an award has been won.
 
@@ -12,16 +12,21 @@ Prepared 6 September 2026. Development copy for the new ecommerce concept.
 4. `briefs/PACK_ARCHITECTURE_AND_PROTOTYPE.md` remains useful for exact count logic and user experience, with its visual style instructions superseded by V5.
 5. `briefs/GROWTH_AND_BRAND_STORY.md` supports sharing occasions and no-face scene direction. It does not establish retailer availability, commercial partnerships, fulfilment or sales results.
 
-## Verified product architecture
+6. Current owner direction for V2 limits the range to four flavours plus their Family Mix bundle. Individual sachets are supermarket retail references only; no online sachet sales or add-ons. Proposed online cup/family/case prices are SAR 12/39/42; minimum goods subtotal SAR 39, delivery SAR 15 below SAR 75 and free delivery from SAR 75. Economics remain unvalidated.
+7. The founder reports two years of R&D and boiling trials that reduced the desired kernel crunch. Attribute these to the founder; omit unverified Japanese provenance. A synthesized designed sound study is a creative interpretation, not an actual product recording.
+
+## Product architecture from the supplied source
 
 | Product | English factual description | Arabic draft | Contents |
 |---|---|---|---|
-| Single sachet | One sealed pack of flavoured in-shell sunflower seeds. | كيس واحد من بذور دوّار الشمس المنكّهة بقشرها. | 1 × 30 g; one flavour |
+| Supermarket sachet reference; unavailable online | One sealed pack of flavoured in-shell sunflower seeds. | كيس واحد من بذور دوّار الشمس المنكّهة بقشرها. | 1 × 30 g; one flavour |
 | Journey Cup | Five individually sealed sachets of one flavour, with a separate paper shell bag. Open one and keep the rest sealed. | خمسة أكياس مغلقة من نكهة واحدة، مع كيس ورقي منفصل للقشور. افتح كيسًا واترك البقية مغلقة. | 5 × 30 g = 150 g; one flavour |
 | Family Mix | Four flavours in one sharing bucket. Five sachets of each flavour. | أربع نكهات في عبوة واحدة للمشاركة. خمسة أكياس من كل نكهة. | 20 × 30 g = 600 g; 5 of each of four flavours |
 | Retail case | Twenty-four individually saleable sachets. | أربعة وعشرون كيسًا، يمكن بيع كل كيس على حدة. | 24 × 30 g = 720 g; same flavour assumed |
 
-The family mix is one bucket containing twenty sachets, not four cups. Four family shell bags remain a proposed component; do not promise this number on the live product page. Journey Cup dimensions and vehicle-holder fit are not confirmed. A 24-case product offered online should be clearly called a retail case and not silently treated as a mixed-flavour consumer bundle.
+The family mix is one bucket containing twenty sachets, not four cups. Four family shell bags remain a proposed component; do not promise this number on the live product page. Journey Cup dimensions and vehicle-holder fit are not confirmed. A 24-sachet case offered online should be clearly called a retail case and not silently treated as a mixed-flavour consumer bundle.
+
+There are exactly four flavours: Classic Sea Salt, Garlic Salt, Pepper Lime and Fire Salt. Family Mix is not a fifth flavour. Online format choices are cups, Family Mix and cases only. A 30 g sachet may be pictured to explain the contents, but must not expose a single-sachet purchase action. SAR 2.50 is a proposed supermarket retail reference; it is not an established former price or proof of stocking by a supermarket.
 
 ## Bilingual website copy
 
@@ -39,8 +44,8 @@ All Arabic in this document inherits the draft status above. This is polished de
 | Collection heading | Everyone has a favourite. | لكل واحد نكهته. |
 | Collection support | Pick a flavour for yourself, or bring all four to the table. | اختَر نكهتك، أو اجمع النكهات الأربع على الطاولة. |
 | Format heading | A little pack. A longer moment. | كيس صغير. وسوالف تطول. |
-| Sachet name | The little pack | الكيس الصغير |
-| Sachet occasion | One moment, your flavour. | لحظتك، ونكهتك. |
+| Sachet name, contents reference only | The little pack | الكيس الصغير |
+| Sachet occasion, contents reference only | One moment, your flavour. | لحظتك، ونكهتك. |
 | Cup name | Journey Cup | عبوة الطلعة |
 | Cup occasion | Five little packs, ready to pass around. | خمسة أكياس، جاهزة للمشاركة. |
 | Family name | Family Mix | تشكيلة اللمّة |
@@ -72,7 +77,7 @@ All Arabic in this document inherits the draft status above. This is polished de
 | Order review | Review your order | راجع طلبك |
 | Demo disclosure | Store preview · sample prices · no payment collected | معاينة المتجر · أسعار تجريبية · لا يتم تحصيل أي مبلغ |
 
-Use the hero eyebrow as an occasion proposition. Update from the owner on 6 September 2026: HUBB is a Saudi manufacturer, and developing a proposed retail/bulk price architecture is authorized. The store can reflect “A Saudi manufacturer” based on that owner statement. Crop origin, a specific factory location and certification/programme logos remain separate unverified claims. See `PRICING.md` for sourced shelf observations and the proposed SAR ladder.
+Use the hero eyebrow as an occasion proposition. Update from the owner on 6 September 2026: HUBB is a Saudi manufacturer, and developing a proposed retail/bulk price architecture is authorized. The store can reflect “A Saudi manufacturer” based on that owner statement. Crop origin and certification/programme logos remain separate unverified claims. The owner has also supplied factory and Riyadh-warehouse map pins, recorded below without inventing a district, hours or collection service. See `PRICING.md` for sourced shelf observations and the proposed SAR ladder.
 
 ## Flavour copy — proposed sensory language
 
@@ -121,14 +126,32 @@ The approved ingredient, allergen and nutrition information will appear on each 
 This is a store preview. You can explore products and build a sample bag; payment and order fulfilment are not active.  
 هذه معاينة للمتجر. يمكنك استكشاف المنتجات وتجربة إضافة المنتجات للسلة، لكن الدفع وتنفيذ الطلبات غير مفعّلين.
 
-Do not invent a shipping timeline, free-shipping threshold, return window, tax treatment or a payment-provider partnership for this FAQ.
+V2 explicitly proposes a SAR 39 minimum goods subtotal, SAR 15 delivery below SAR 75 and free delivery from SAR 75. Present these as preview terms pending actual economics and coverage validation. Do not invent a shipping timeline, return window, tax treatment or payment-provider partnership. The minimum and threshold apply to merchandise after any supported merchandise discount, before delivery. No paid or received order is created.
+
+## Founder story, crack imagery and designed sound
+
+**Story framing:** “Two years. For this one crack.” is based on the founder's reported development history. Keep attribution visible in the story rather than presenting a laboratory finding or independently audited duration. Draft Arabic headline: **“سنتان. من أجل هذه الطقّة.”**
+
+Suggested factual passage: “Our founder describes two years spent developing HUBB. In early boiling trials, the kernel lost some of the crunch they were looking for. That experience shaped the next round of development.” This does not establish a universal effect of boiling, a controlled comparison, a validated final process or a measured superiority claim. Omit the unverified Japanese origin/provenance suggestion.
+
+The `crack-study` image shows one intact striped seed, two distinct empty husk halves and a smaller pale-golden edible kernel. It is an original generated visual concept, not product-test evidence or a documentary specimen photograph. The edible part is the kernel; discarded husks stay separate from food.
+
+The optional audio must be explicitly identified as **“Designed sound study · synthesized, not an actual product recording.”** Draft Arabic: **“دراسة صوتية مصمّمة · صوت مُركّب، وليس تسجيلًا فعليًا للمنتج.”** Do not call it authentic product ASMR, claim a measured crack frequency or imply it proves texture. Sound starts only through a clear visitor action, has a stop/mute path and remains optional; meaningful content stays available without audio. No audio recording provenance is supplied.
+
+## Owner-supplied contact and locations
+
+- WhatsApp: [+966 55 312 7999](https://wa.me/966553127999).
+- [Rozana Al Riyadh Foodstuff Factory](https://www.google.com/maps/place/Rozana+Al+Riyadh+Foodstuff+Factory/@25.131754,46.0771262,17z/data=!3m1!4b1!4m6!3m5!1s0x3e2957ded4967ebb:0x9820725213d7f568!8m2!3d25.131754!4d46.0797011!16s%2Fg%2F11vpt7ngn7): 25.131754, 46.0797011.
+- [Riyadh warehouse — Rozana foodstuff](https://www.google.com/maps/place/Rozana+foodstuff/@24.5631677,46.7553478,19.8z/data=!4m6!3m5!1s0x3e2f093c04bcac1d:0x5bb58ad0c4dcee22!8m2!3d24.5634184!4d46.7556442!16s%2Fg%2F11n72754c1): 24.5634184, 46.7556442.
+
+These are owner-supplied contact/location references. Use “Riyadh warehouse” without adding an inferred district. The pins do not establish opening hours, visitor access, collection availability, a dispatch service area or programme certification. A visitor-controlled WhatsApp action does not establish message delivery or acceptance.
 
 ## UGC and review integrity
 
 - Use original generated lifestyle scenes as editorial brand concepts and label their collection “Concept scenes” or “مشاهد تصوّرية”. Do not use “Verified customer”, invented handles, customer quotes, fabricated engagement counts or star aggregates with generated people.
-- Let submitted customer reviews start from an empty state. A demonstration form must say when the data is stored only on this device or is not sent. Do not make a successful-submission message claim the brand received content unless a real service accepted it.
+- Invite real reviews through the supplied contact or a genuinely connected service, with no fabricated ratings, names, quotes or counts. Let submitted customer reviews start from an empty state. A demonstration form must say when the data is stored only on this device or is not sent. Do not make a successful-submission message claim the brand received content unless a real service accepted it.
 - A future real review needs provenance, permission, moderation and an actual connection between the reviewer and their experience; a verified-purchase badge requires an order match.
-- Concepts can show adult hands passing sachets at a contemporary Saudi home, at a parked roadside stop, or between rounds with controllers resting. Keep skin, sleeves, objects and seed scale physically plausible. No faces are needed for the established direction.
+- Concepts can show adult hands passing sachets at a contemporary Saudi home, at a parked roadside stop, or between rounds of an unbranded card game. Keep skin, sleeves, objects and seed scale physically plausible. No faces are needed for the established direction.
 - The Howcast tutorial and extracted GIFs are reference/analysis material. No commercial reuse licence is established; do not embed them as HUBB product advertising, UGC or branded tutorial footage.
 
 ## Creative critique and implementation priorities
@@ -157,7 +180,7 @@ This is a development dependency list, not an assertion of current law or a subs
 - Approved product master: ingredients, allergens, nutrition, origin, storage, shelf life, final labels, pack dimensions and component list.
 - Final Arabic and wordmark review by qualified Saudi copy/lettering specialists.
 - Physical filled-sachet packing trials, converter dielines, materials, closures, food-contact suitability and final product photography.
-- Approved SAR pricing, inventory source, discount rules, tax configuration, merchant identity and customer-support contact.
+- Approved SAR pricing and delivery contribution, inventory source, discount rules, tax configuration and merchant identity. The WhatsApp contact is supplied; response ownership and receipt handling still require an operational check.
 - Real checkout/payment integration, order service, fulfilment coverage, shipping cost/timing and approved returns/cancellation/privacy terms.
 - Product and brand rights for every image, video, font, creator contribution and review used publicly.
 - Working form destinations, consent handling and deletion/contact process appropriate to the chosen services.
@@ -172,4 +195,4 @@ This is a development dependency list, not an assertion of current law or a subs
 - `/Users/mac/Desktop/hubb-companion-public/briefs/PACK_ARCHITECTURE_AND_PROTOTYPE.md`
 - `/Users/mac/Desktop/hubb-companion-public/briefs/GROWTH_AND_BRAND_STORY.md`
 
-Current local sources were reread during this task. Memory was used only to locate the active packaging context and longstanding preference for original, culturally grounded design; those points were checked against the current source.
+The initial source review was supplemented with current owner instructions for V2. This documentation update checks content consistency; it does not claim the concurrently developed final interface, sound playback or connected operations were verified.

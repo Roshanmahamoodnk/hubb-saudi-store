@@ -1,14 +1,14 @@
 # HUBB Saudi price architecture
 
-Prepared 6 September 2026. **PROPOSED — commercial economics unvalidated.** The owner states that HUBB is a Saudi manufacturer and has asked us to develop retail and bulk prices. That supports the brand's manufacturer positioning but does not establish crop origin, certification, production costs, tax status or commercial readiness.
+Prepared 6 September 2026; updated for V2. **PROPOSED — commercial economics unvalidated.** The owner states that HUBB is a Saudi manufacturer and has asked us to develop retail and bulk prices. That supports the brand's manufacturer positioning but does not establish crop origin, certification, production costs, tax status or commercial readiness.
 
 ## Recommended price ladder
 
-Start the storefront with a **SAR 2.50** 30 g sachet, **SAR 12** Journey Cup, **SAR 39** Family Mix and **SAR 42** retail case. Keep the four flavours at the same proposed price so choosing a flavour feels simple. These are price proposals for review, not approved final offers.
+The online offer contains **SAR 12** Journey Cups, **SAR 39** Family Mix and **SAR 42** retail cases. **Individual 30 g sachets are not sold online, including as add-ons. SAR 2.50 is a proposed supermarket retail reference only.** Keep exactly four flavours at the same proposed format price; Family Mix is a bundle of those four, not a fifth flavour. These are proposals for review, not approved final offers or confirmed supermarket listings.
 
-| Format | Exact contents | Proposed SAR | SAR / sachet | SAR / g | SAR / 100 g | Difference vs buying the same number of SAR 2.50 singles |
+| Format | Exact contents | Proposed SAR | SAR / sachet | SAR / g | SAR / 100 g | Arithmetic comparison vs proposed SAR 2.50 supermarket sachet reference |
 |---|---|---:|---:|---:|---:|---:|
-| Single sachet | 1 × 30 g | 2.50 | 2.50 | 0.08333 | 8.33 | Base |
+| Supermarket sachet reference — unavailable online | 1 × 30 g | 2.50 | 2.50 | 0.08333 | 8.33 | Base |
 | Journey Cup | 5 × 30 g; one flavour; separate shell bag | 12.00 | 2.40 | 0.08000 | 8.00 | SAR 0.50 less; 4% |
 | Family Mix | 20 × 30 g; five of each of four flavours | 39.00 | 1.95 | 0.06500 | 6.50 | SAR 11.00 less; 22% |
 | Retail case | 24 × 30 g; one flavour per case | 42.00 | 1.75 | 0.05833 | 5.83 | SAR 18.00 less; 30% |
@@ -30,7 +30,7 @@ One case always means **24 sachets × 30 g = 720 g**. Cases remain single-flavou
 
 At the exact 4/12/24-case thresholds, the savings against that quantity at SAR 42/case are SAR 8 / SAR 48 / SAR 144. Effective reductions against the same quantity of SAR 2.50 singles are 33.33% / 36.67% / 40.00%. These are gross sticker comparisons, not retailer profit margins or manufacturer contribution.
 
-Use a functioning estimate calculator with the label **“Indicative bulk estimate · final price by quote” / “تقدير مبدئي للجملة · السعر النهائي حسب عرض السعر”**. The action is **“Prepare a quote request” / “جهّز طلب عرض السعر”**. Without a real sales destination, generate a downloadable or copyable enquiry and say that it has not been sent. Do not collect payment or display an order-confirmed state.
+Use a functioning estimate calculator with the label **“Indicative bulk estimate · final price by quote” / “تقدير مبدئي للجملة · السعر النهائي حسب عرض السعر”**. The action is **“Prepare a quote request” / “جهّز طلب عرض السعر”**. The owner supplied WhatsApp **+966 55 312 7999** (`https://wa.me/966553127999`). A prepared enquiry may open there for the visitor to inspect and send. Merely opening WhatsApp is not receipt or acceptance; downloadable/copyable drafts remain unsent until the visitor sends them. No payment or confirmed-order state is supported by this preview.
 
 For the preview, apply the tier's unit price to all selected cases once the threshold is reached. The mathematical model is `cases × applicable_case_price`; do not stack a second percentage discount. The 24-case threshold makes 24 cases cost less than 23; make that benefit explicit as described below.
 
@@ -50,9 +50,39 @@ Research retrieval date: **6 September 2026**. This is a limited shelf-price sca
 | [Bin Afif Roasters — roasted sunflower seeds](https://binafifroasters.com/en/products/Roasted-sunflower-Seeds) | 250 g | 7.00 | 2.80 | Opened direct seller page, final crawl indicator today. Out of stock. The same page lists 500 g at SAR 14 and 1 kg at SAR 28. |
 | [Aeen — Baja product category](https://aeen.shop/en/categories/1349743/%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA-%D8%A8%D8%A7%D8%AC%D8%A9?page=1) | 15 g | 1.50 | 10.00 | Direct retailer category search extract, recorded crawl two weeks ago. Product title says salted sunflower seeds; direct open timed out. Secondary support for small-pack premium only. |
 
-The proposed HUBB single is SAR 8.33/100 g: above the larger branded packs in this limited scan and below the observed 15 g mini-pack equivalent. The Family Mix reaches SAR 6.50/100 g while retaining twenty separate sachets and an outer sharing pack. That is a proposed premium position for convenience, flavour choice and original packaging; these references do not prove shoppers will pay that premium. The SAR 36 bulk case yields SAR 5/100 g, broadly near some larger branded-pack references, but the manufacturer must still cover 24 individual sachets, a case and trade costs.
+The proposed HUBB supermarket sachet reference is SAR 8.33/100 g: above the larger branded packs in this limited scan and below the observed 15 g mini-pack equivalent. The Family Mix reaches SAR 6.50/100 g while retaining twenty separate sachets and an outer sharing pack. That is a proposed premium position for convenience, flavour choice and original packaging; these references do not prove shoppers will pay that premium. The SAR 36 bulk case yields SAR 5/100 g, broadly near some larger branded-pack references, but the manufacturer must still cover 24 individual sachets, a case and trade costs.
 
 We excluded organic/baking-kernel products, non-Saudi prices, old promotional PDFs and marketplace price-comparison aggregators from the core price basis. Primary [Baja product information](https://baja.com.sa/product-detail.php?productId=12) confirms salted sunflower seed offerings but exposes no price usable for this ladder.
+
+## V2 basket and delivery proposal
+
+The preview goods-subtotal minimum is **SAR 39**. Delivery is **SAR 15** when qualifying merchandise is below **SAR 75**, and **SAR 0 from SAR 75**. The minimum and threshold use merchandise after any supported merchandise discount and before delivery; delivery cannot make an under-minimum basket qualify. An empty cart cannot proceed. These are proposed interface rules, not approved carrier economics, tax treatment or a delivery-time promise.
+
+| Example | Goods SAR | Can preview checkout proceed? | Proposed delivery SAR | Preview total SAR |
+|---|---:|---|---:|---:|
+| One Journey Cup | 12 | No; below minimum | Not an accepted order | Not an accepted order |
+| Three Journey Cups | 36 | No; below minimum | Not an accepted order | Not an accepted order |
+| One Family Mix | 39 | Yes | 15 | 54 |
+| One retail case | 42 | Yes | 15 | 57 |
+| Family Mix + three Journey Cups | 75 | Yes | 0 | 75 |
+| Two Family Mixes | 78 | Yes | 0 | 78 |
+
+“Proceed” means a local preview only. No order is received, accepted or paid. Bulk enquiries keep their separate quote and freight basis; do not silently apply consumer delivery rules to wholesale.
+
+### Public courier reference, not a HUBB contract
+
+The [official SPL SME platform](https://portal.splonline.com.sa/ar/smes-platform/) was reopened on 6 September 2026 (returned crawl marker: four days earlier). It lists domestic bundles for parcels up to 20 kg and a one-year bundle validity. Published bundle totals are:
+
+| Shipments | Bundle SAR | Calculated SAR per shipment |
+|---:|---:|---:|
+| 20 | 599 | 29.95 |
+| 50 | 1,299 | 25.98 |
+| 75 | 1,649 | 21.99 |
+| 250 | 4,999 | 20.00 |
+
+Per-shipment figures above divide bundle price by shipment count. SPL's approximate column shows 25 for the 50 bundle, so exact division is used here. These are public references, not a factory contract or verified checkout quote. Confirm tax basis, exclusions, dimensional/coverage rules, return costs and actual use before approval.
+
+**Inference:** Against this public range, charging SAR 15 would leave roughly SAR 5–14.95 of courier cost per delivery before other fulfilment costs; free delivery absorbs the full courier charge. This shows why the threshold needs contribution testing. It does not prove either rule is profitable or that HUBB will pay these rates.
 
 ## Economics that must be filled before approval
 
@@ -62,14 +92,14 @@ Record costs for finished flavoured seeds per kg; actual yield/loss; each printe
 
 For each format, evaluate: **net sales revenue minus product, packaging, channel and variable fulfilment costs = contribution before fixed overhead**. Apply the correct revenue basis once tax is confirmed. For a bulk quote, evaluate the specific order quantity and delivery destination rather than borrowing a DTC contribution rate.
 
-If the low tier cannot cover the cost and required contribution, change the quote rather than hiding the deficit with an unsupported “volume will fix it” assumption. Shipping a single SAR 2.50 sachet is unlikely to be an appropriate standalone owned-site order without a deliberate delivery policy; the single can function as an add-on or physical retail price reference while cups, family packs and cases anchor online baskets.
+If the low tier cannot cover the cost and required contribution, change the quote rather than hiding the deficit with an unsupported “volume will fix it” assumption. V2 excludes individual sachets from online purchase entirely; the SAR 2.50 figure is a supermarket retail reference. Cups, family packs and cases form online baskets. The proposed SAR 39 minimum and SAR 75 free-delivery threshold require contribution testing with actual carrier and fulfilment costs.
 
 ## Website implementation note
 
 - Product data can use `priceStatus: "proposed"` and one consistent global preview notice rather than placing internal research text inside every product card.
-- Product chooser prices: single 2.50; cup 12.00; family 39.00; case 42.00. Same price for each available single-flavour variant.
+- Online product chooser prices: cup 12.00; family 39.00; case 42.00. No single-sachet option or add-on. Same format price across the four flavours; Family Mix is a separate bundle.
 - Bulk starts with selectable case quantities, whole-case flavour allocations and the exact count/weight displayed; the current estimate is always labelled quote-only.
-- No current-stock quantities, free-shipping threshold, delivery promise, retailer partnership, approved payment method, certification mark or artificial urgency should be invented.
-- On the About page, “A Saudi manufacturer” can be attributed to the owner's statement. “Saudi-grown seeds”, a specific factory address and “Saudi Made” programme certification are separate claims and have not been established.
+- V2 explicitly proposes a SAR 39 merchandise minimum, SAR 15 delivery below SAR 75, and free delivery from SAR 75. Label these as preview terms until economics and coverage are approved. No delivery timeline, current-stock quantity, retailer partnership, approved payment method, certification mark or artificial urgency is established.
+- On the About page, “A Saudi manufacturer” can be attributed to the owner's statement. “Saudi-grown seeds”, an owner-supplied map pin and “Saudi Made” programme certification are separate claims. Use supplied locations only with their supplied role; a pin does not verify programme certification, factory ownership or dispatch coverage.
 
 Arabic text in this proposal is **Draft pending Saudi copywriter validation**.
