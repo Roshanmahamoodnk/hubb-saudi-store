@@ -224,7 +224,6 @@ function renderProduct() {
       <p class="hc-eyebrow">${escape(t('تسوّق حبّ', 'THE HUBB SHOP'))}</p>
       <h2 id="hc-product-title">${escape(localized(product.name))}</h2>
       <p class="hc-description">${escape(localized(product.description))}</p>
-      <div class="hc-ugc-slot">${renderProductPosts(product.id, getLang(), { compact: true })}</div>
       <fieldset class="hc-fieldset"><legend>${escape(t('اختر المنتج', 'Choose a product'))}</legend>
         <div class="hc-product-choice-group"><span class="hc-choice-label">${escape(t('أربع نكهات', 'Four flavours'))}</span><div class="hc-flavours">${products.filter((item) => item.id !== 'family-mix').map(productChoice).join('')}</div></div>
         <div class="hc-product-choice-group hc-mix-choice"><span class="hc-choice-label">${escape(t('عبوة مشتركة · النكهات الأربع معًا', 'Mixed pack · all four flavours together'))}</span><div class="hc-flavours">${products.filter((item) => item.id === 'family-mix').map(productChoice).join('')}</div></div>
@@ -237,6 +236,7 @@ function renderProduct() {
       <button class="hc-button hc-button-primary" type="button" data-action="add-product">${escape(t('أضف للسلة', 'Add to bag'))}<span aria-hidden="true">↗</span></button>
       <p class="hc-price-note">${escape(priceNote())}</p>
       <p class="hc-fine-print">${escape(t(`الحد الأدنى ${money(onlinePolicy.minimumOrder)} · التوصيل ${money(onlinePolicy.shippingFee)}، ومجاني من ${money(onlinePolicy.freeShippingThreshold)}. سياسة مقترحة.`, `Minimum order ${money(onlinePolicy.minimumOrder)} · delivery ${money(onlinePolicy.shippingFee)}, free from ${money(onlinePolicy.freeShippingThreshold)}. Proposed policy.`))}</p>
+      <div class="hc-ugc-slot">${renderProductPosts(product.id, getLang(), { compact: true })}</div>
     </div>
   </div>`);
 }
