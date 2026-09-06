@@ -21,10 +21,11 @@ Run `npm start` and open http://127.0.0.1:8788. No package installation or exter
 - Product details, contents, quantity selection, Arabic/English search and a persistent local cart.
 - Saudi contact/address validation and a no-payment order preview; no automatic order submission.
 - Price-free B2B volume enquiries for wholesale offers, availability, delivery and supply terms.
-- Original package artwork and clearly labelled AI campaign scenes; actual customer reviews begin empty and real feedback is invited without fabricated ratings.
+- Original package artwork and clearly labelled AI campaign scenes, including a flavour-by-flavour UGC-style post for each shoppable SKU. Actual customer reviews begin empty and real feedback is invited without fabricated ratings.
 - “A little HUBB. Happiness to share.” leads the experience. Two years of founder-reported development now sit in About HUBB, after shopping and everyday sharing scenes. See `CONTENT_DIRECTION_V3.md` for the current bilingual direction.
 - Eight separate format renders: a five-sachet cup and 24-sachet open counter-display carton for each flavour. The selected pack image follows the shopper through product cards, product pages, details, cart and order preview.
 - Four new original lifestyle concepts: a football break, colleagues after lunch, a family across adult generations, and a parked road stop. Desktop scroll changes the pinned scene; mobile and reduced-motion layouts show each scene in sequence.
+- Five SKU-specific UGC-style posts: Classic Sea Salt on a balcony, Garlic Salt after lunch, Pepper Lime on a rooftop, Fire Salt during a match night, and Family Mix at a park picnic. They appear after the shop, on flavour pages, and in product details, always labelled as imagined concepts.
 - A silent scroll-controlled ritual: the seed opens along its side edge, the kernel emerges, and the empty husks arc into a separate paper bag. No sound button, synthetic audio or required step clicks. Short-screen, reduced-motion and no-JavaScript views use a static illustrated guide.
 - Keyboard-accessible dialogs, mobile layouts, reduced-motion support and complete Arabic/English controls.
 
@@ -46,7 +47,7 @@ Wholesale prices are supplied individually by the Rozana team. No B2B tier, mone
 
 Product source: the owner-provided guide https://roshanmahamoodnk.github.io/hubb-companion/video_review/ and current V5 local briefs. Current owner instructions supersede older product ideas. Saudi-manufacturer positioning and R&D history are owner-reported; no crop-origin, programme certification, Japanese-process provenance or retailer-partnership claim is established.
 
-**Arabic: Draft pending Saudi copywriter validation.** Generated product renders are design concepts; typeset page facts take precedence over generated small print. No third-party SKU imagery or Howcast footage is used as advertising. Prompts and provenance are in `assets/PROMPTS.md`, `assets/SKU_PROMPTS.md` and `assets/CRACK_PROMPT.md`. V3 prompts are in `assets/CUP_V3_PROMPTS.md`, `assets/CASE_V3_PROMPTS.md` and `assets/UGC_V3_PROMPTS.md`, `assets/DISPLAY_V4_PROMPTS.md` and `assets/RITUAL_V4_PROMPTS.md` and `assets/RITUAL_EDGE_V5_PROMPT.md`; scene guidance is in `SCENES_V3.md`. WebP files serve the site; original PNGs are preserved.
+**Arabic: Draft pending Saudi copywriter validation.** Generated product renders are design concepts; typeset page facts take precedence over generated small print. No third-party SKU imagery or Howcast footage is used as advertising. Prompts and provenance are in `assets/PROMPTS.md`, `assets/SKU_PROMPTS.md` and `assets/CRACK_PROMPT.md`. V3 prompts are in `assets/CUP_V3_PROMPTS.md`, `assets/CASE_V3_PROMPTS.md`, `assets/UGC_V3_PROMPTS.md`, `assets/SKU_UGC_PROMPTS.md`, `assets/DISPLAY_V4_PROMPTS.md`, `assets/RITUAL_V4_PROMPTS.md` and `assets/RITUAL_EDGE_V5_PROMPT.md`; scene guidance is in `SCENES_V3.md`. WebP files serve the site; original PNGs are preserved.
 
 ## Owner-supplied contact and locations
 

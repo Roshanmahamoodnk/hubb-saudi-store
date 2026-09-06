@@ -1,4 +1,5 @@
 import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
+import { skuPostFor, skuPostImage } from './sku-posts.js';
 
 const STORAGE_KEY = 'hubb.cart.v1';
 const MAX_QUANTITY = 99;
@@ -200,6 +201,19 @@ function quantityControl(quantity, context, key = '') {
   </div>`;
 }
 
+function skuMomentMarkup(product) {
+  const post = skuPostFor(product.id);
+  if (!post) return '';
+  return `<aside class="hc-sku-moment">
+    <img src="${escape(skuPostImage(post))}" alt="${escape(localized(post.alt))}" width="240" height="360">
+    <div>
+      <p class="hc-eyebrow">${escape(t('منشور تصوّري · ليس تقييم عميل', 'CONCEPT POST · NOT A CUSTOMER REVIEW'))}</p>
+      <strong>${escape(localized(post.title))}</strong>
+      <p>${escape(localized(post.body))}</p>
+    </div>
+  </aside>`;
+}
+
 function renderProduct() {
   const product = productFor(productState.id);
   if (!product) return;
@@ -223,6 +237,7 @@ function renderProduct() {
       <p class="hc-eyebrow">${escape(t('تسوّق حبّ', 'THE HUBB SHOP'))}</p>
       <h2 id="hc-product-title">${escape(localized(product.name))}</h2>
       <p class="hc-description">${escape(localized(product.description))}</p>
+      ${skuMomentMarkup(product)}
       <fieldset class="hc-fieldset"><legend>${escape(t('اختر المنتج', 'Choose a product'))}</legend>
         <div class="hc-product-choice-group"><span class="hc-choice-label">${escape(t('أربع نكهات', 'Four flavours'))}</span><div class="hc-flavours">${products.filter((item) => item.id !== 'family-mix').map(productChoice).join('')}</div></div>
         <div class="hc-product-choice-group hc-mix-choice"><span class="hc-choice-label">${escape(t('عبوة مشتركة · النكهات الأربع معًا', 'Mixed pack · all four flavours together'))}</span><div class="hc-flavours">${products.filter((item) => item.id === 'family-mix').map(productChoice).join('')}</div></div>

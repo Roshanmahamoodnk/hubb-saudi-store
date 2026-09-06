@@ -4,7 +4,7 @@ const observed=new WeakSet();
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 export function refreshMotion(root=document){
  if(!revealObserver)return;
- root.querySelectorAll('.product-card,.research-priorities article,.partner-paths article,.section-heading,.research-heading,.family-visual,.moment-card,.location-card').forEach((node,i)=>{
+ root.querySelectorAll('.product-card,.research-priorities article,.partner-paths article,.section-heading,.research-heading,.family-visual,.moment-card,.sku-post,.location-card').forEach((node,i)=>{
   if(observed.has(node))return;
   observed.add(node);node.classList.add('reveal-target');node.style.setProperty('--reveal-delay',`${Math.min(i%4,3)*60}ms`);revealObserver.observe(node);
  });

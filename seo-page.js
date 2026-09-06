@@ -3,10 +3,11 @@ import { initCommerce, openProduct, openCart, openSearch } from './commerce.js';
 
 initCommerce();
 document.addEventListener('click', event => {
-  const productButton = event.target.closest('[data-seo-product]');
+  const productButton = event.target.closest('[data-seo-product], [data-product]');
   if (productButton) {
-    const format = productButton.dataset.seoFormat;
-    if (format === 'cup' || format === 'case') openProduct(productButton.dataset.seoProduct, format);
+    const format = productButton.dataset.seoFormat || productButton.dataset.productFormat;
+    const id = productButton.dataset.seoProduct || productButton.dataset.product;
+    if (format === 'cup' || format === 'case' || format === 'family') openProduct(id, format);
     return;
   }
   if (event.target.closest('[data-seo-cart]')) openCart();

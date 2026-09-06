@@ -25,10 +25,11 @@ All new pack and lifestyle images are generated with the built-in image tool, us
 - Work break: adult colleagues after lunch; a concept, not documentary proof of a specific factory or workforce.
 - Table: adults across generations, naturally sharing after a meal.
 - Road stop: the vehicle is parked; a pause on a journey, not eating while driving.
+- SKU posts: one candid concept per shoppable product (balcony, kitchen, rooftop, match night, picnic). Shown after the shop and on flavour pages.
 
 Do not call these verified UGC. Human texture, different faces/ages, meaningful hand placement and varied environments create a candid visual style. They remain openly identified creative concepts. Do not imply a professional athlete endorsement, club partnership or actual customer testimonial.
 
-Prompt records: assets/CUP_V3_PROMPTS.md, assets/CASE_V3_PROMPTS.md, assets/UGC_V3_PROMPTS.md. Original PNGs are preserved; WebP derivatives serve the site.
+Prompt records: assets/CUP_V3_PROMPTS.md, assets/CASE_V3_PROMPTS.md, assets/UGC_V3_PROMPTS.md, assets/SKU_UGC_PROMPTS.md. Original PNGs are preserved; WebP derivatives serve the site.
 
 ## Motion intent
 

@@ -30,7 +30,7 @@ for(const file of pages){
  const relative=path.relative(out,file).replace(/index\.html$/,'');
  const documentUrl=siteRoot+relative;
  assert.equal((html.match(/<h1\b/g)||[]).length,1,`${relative}: one H1`);
- assert.ok(!html.includes('id="scene-story-root"')&&!html.includes('id="crack-scroll-root"'),`${relative}: unbuilt placeholder`);
+ assert.ok(!html.includes('id="scene-story-root"')&&!html.includes('id="crack-scroll-root"')&&!html.includes('id="sku-posts-root"'),`${relative}: unbuilt placeholder`);
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(new Set(ids).size,ids.length,`${relative}: duplicate IDs`);
  const locale=relative.startsWith('en/')?'en':'ar';
@@ -58,4 +58,6 @@ assert.equal(sitePath('#ritual'),'#ritual');
 assert.equal(sitePath('https://wa.me/966553127999'),'https://wa.me/966553127999');
 const {products,packImage}=await import(pathToFileURL(path.join(out,'catalog.js')));
 for(const product of products)for(const format of ['cup','case','sachet'])await checkUrl(packImage(product,format),siteRoot);
+const {skuPosts}=await import(pathToFileURL(path.join(out,'sku-posts.js')));
+for(const post of skuPosts)await checkUrl(post.image,siteRoot);
 console.log(`Verified ${pages.length} pages and ${checked} local URLs at ${siteRoot}`);
