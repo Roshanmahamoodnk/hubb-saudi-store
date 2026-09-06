@@ -6,12 +6,15 @@ import {products,formats,packImage} from './catalog.js';
 import {renderScenes,scenes} from './scenes.js';
 import {renderCrack} from './crack-scroll.js';
 const root=path.dirname(fileURLToPath(import.meta.url));
-const out=path.join(root,'out');
-const origin='https://hubb-saudi-gathering-store.r0shan911.chatgpt.site';
+const out=path.join(root,process.env.HUBB_OUT_DIR||'out');
+const deployment=new URL(process.env.HUBB_SITE_URL||'https://hubb-saudi-gathering-store.r0shan911.chatgpt.site');
+if(!['https:','http:'].includes(deployment.protocol)||deployment.username||deployment.password||deployment.search||deployment.hash)throw new Error('HUBB_SITE_URL must be a plain HTTP(S) deployment URL');
+const basePath=deployment.pathname.replace(/\/+$/,'');
+const origin=deployment.origin+basePath;
 const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
 await Promise.all(requiredImages.map(file=>fs.access(path.join(root,file.replace(/^\//,'')))));
 await fs.mkdir(path.join(out,'assets'),{recursive:true});
-for(const file of ['crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
+for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
 for(const file of await fs.readdir(path.join(root,'assets'))){if(file.endsWith('.webp')||file==='favicon.svg')await fs.copyFile(path.join(root,'assets',file),path.join(out,'assets',file));}
 const source=await fs.readFile(path.join(root,'index.html'),'utf8');
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -32,4 +35,18 @@ await fs.writeFile(path.join(out,'index.html'),localized('ar','/'));
 for(const lang of ['ar','en']){await fs.mkdir(path.join(out,lang),{recursive:true});await fs.writeFile(path.join(out,lang,'index.html'),localized(lang,`/${lang}/`));}
 await generateSeoPages({root,out,origin});
 await fs.writeFile(path.join(out,'robots.txt'),'User-agent: *\nDisallow: /\n');
-console.log('Built bilingual storefront, 8 product pages, and private-preview sitemap in out/');
+// HTML is generated from root-relative source templates; scope only local URLs.
+async function scopeHtml(directory){
+ for(const entry of await fs.readdir(directory,{withFileTypes:true})){
+  const file=path.join(directory,entry.name);
+  if(entry.isDirectory())await scopeHtml(file);
+  else if(entry.name.endsWith('.html')){
+   const html=await fs.readFile(file,'utf8');
+   await fs.writeFile(file,html.replace(/(\b(?:src|href)=["'])\/(?!\/)/g,`$1${basePath}/`));
+  }
+ }
+}
+await scopeHtml(out);
+await fs.writeFile(path.join(out,'site-config.js'),`export const basePath = ${JSON.stringify(basePath)};\n`);
+await fs.writeFile(path.join(out,'.nojekyll'),'');
+console.log(`Built 11 bilingual pages for ${origin}/ in ${path.relative(root,out)}/`);

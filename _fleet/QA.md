@@ -54,3 +54,11 @@ This revision supersedes the V1 single-sachet and below-minimum checkout example
 ## Edge-first opening correction
 
 Owner requested a side-edge crack while preserving the existing separated-husk view. A new three-quarter closed-seed cutout places the natural join near the curved right edge. Complementary curved SVG clips replace the central straight split, with a restrained tip-first pivot before the outer faces turn away. The kernel appears behind the opening. Existing empty inner husks, disposal path and bag remain. The right-edge clip and new asset were observed in the browser at the opening stage; the interior reveal remains the same. Generated alpha was verified before WebP conversion. Prompt: assets/RITUAL_EDGE_V5_PROMPT.md.
+
+## GitHub Pages deployment correction
+
+The Pages API was configured to build `main:/` as a legacy branch site. Its served HTML was the raw source template with root-relative scripts and styles. The finished site requires the build output and a project-path prefix.
+
+Added a Pages Actions workflow that checks/builds the source and uploads only `out/`. Added configurable deployment URL/output, a generated base-path module, idempotent runtime URL handling, static HTML URL scoping, document-based locale initialization, relative product-page imports and complete SEO deployment paths.
+
+Both the default root build and the `/hubb-saudi-store/` build pass syntax and `check:site`:11pages and444local URL checks each, covering metadata, module imports and dynamic catalogue images. Static guide and audio/B2B corrections remain in the site. Public Pages deployment and live responses are verified after the workflow runs.

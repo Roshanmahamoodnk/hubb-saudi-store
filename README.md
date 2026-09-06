@@ -4,7 +4,9 @@ A bilingual Saudi ecommerce storefront preview with an Arabic-first shopping exp
 
 **Public website preview: no payment collected, no live order received or accepted.** Payments, inventory, fulfilment, order acceptance and review storage are not connected. A WhatsApp link opens a message for the visitor to review and send; opening it does not prove the business received an enquiry. The supplied business number is +966 55 312 7999.
 
-Public preview: https://hubb-saudi-gathering-store.r0shan911.chatgpt.site/
+Public GitHub Pages website: https://roshanmahamoodnk.github.io/hubb-saudi-store/
+
+Additional preview: https://hubb-saudi-gathering-store.r0shan911.chatgpt.site/
 
 Source: https://github.com/Roshanmahamoodnk/hubb-saudi-store
 
@@ -57,3 +59,13 @@ These are owner-supplied contact/location references. Use “Riyadh warehouse”
 ## Launch dependencies
 
 See `_fleet/launch-checklist.md`. Product records, physical packaging validation, approved commercial/tax model, payment and order services, stock, fulfilment and customer-content infrastructure remain launch work. The business contact is supplied; monitoring and receipt handling still need operational testing. Public preview hosting and design review do not establish readiness to accept money or live orders.
+
+## GitHub Pages publishing
+
+GitHub Pages must use **GitHub Actions** as its publishing source. `.github/workflows/pages.yml` builds the complete bilingual website and uploads only `out/`, then deploys it after checks succeed. Publishing the repository root directly serves the unbuilt template and breaks root-relative resources on a project URL.
+
+The workflow sets `HUBB_SITE_URL=https://roshanmahamoodnk.github.io/hubb-saudi-store`. This scopes static links, runtime product images, language switching, metadata and sitemap URLs to `/hubb-saudi-store/`. With no override, the existing root-hosted build remains the default. `HUBB_OUT_DIR` optionally places another build in a separate output directory for checks.
+
+Run `npm run check:site` after a build with the same environment settings. It checks all 11 pages, local resources and module imports, deployment metadata, dynamic product images and path-helper behaviour. No payment or order backend is added by publishing.
+
+Workflow reference: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages

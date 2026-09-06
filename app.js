@@ -1,3 +1,4 @@
+import { sitePath } from './paths.js';
 import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
 import { initCommerce, openProduct, addToCart, openCart, openSearch } from './commerce.js';
 import { initStory } from './story.js';
@@ -13,7 +14,7 @@ const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&
 const num = (value) => new Intl.NumberFormat(getLang() === 'ar' ? 'ar-SA' : 'en-SA').format(value);
 const flavours = () => products.filter((product) => product.id !== 'family-mix');
 const localized = (value) => value[getLang()];
-const asset = (path) => `/${String(path).replace(/^\.\//, '').replace(/^\/+/, '')}`;
+const asset = sitePath;
 const dialog = $('#editorial-dialog');
 const content = $('#editorial-content');
 
@@ -31,7 +32,7 @@ function renderProducts() {
   if (!grid) return;
   const format = formats.find((item) => item.id === selectedFormat);
   if (!format) return;
-  grid.innerHTML = flavours().map((p) => `<article class="product-card" style="--flavour:${esc(p.color)};--tint:${esc(p.pale)}"><button class="product-image-button" data-product="${esc(p.id)}" aria-label="${esc(t(`تفاصيل ${p.name.ar}`, `${p.name.en} details`))}"><span class="product-note">${esc(localized(p.note))}</span><img src="${esc(asset(packImage(p,selectedFormat)))}" alt="${esc(localized(p.name) + ' · ' + localized(format.name) + t(' — تصوّر العبوة', ' — pack concept'))}" width="1086" height="1448" loading="lazy"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="/${getLang()}/products/${encodeURIComponent(p.id)}/?pack=${selectedFormat}">${esc(localized(p.name))}</a></h3><div class="product-meta"><span>${esc(localized(format.name))} · ${num(format.count)} × ${num(30)} ${t('غ', 'g')}</span><span>${num(format.grams)} ${t('غ إجمالي', 'g total')}</span></div><button class="product-add" data-add="${esc(p.id)}" aria-label="${esc(t(`أضف ${p.name.ar} إلى السلة`, `Add ${p.name.en} to bag`))}"><span>${money(format.price)}</span><span>${t('أضف للسلة', 'Add to bag')} +</span></button></article>`).join('');
+  grid.innerHTML = flavours().map((p) => `<article class="product-card" style="--flavour:${esc(p.color)};--tint:${esc(p.pale)}"><button class="product-image-button" data-product="${esc(p.id)}" aria-label="${esc(t(`تفاصيل ${p.name.ar}`, `${p.name.en} details`))}"><span class="product-note">${esc(localized(p.note))}</span><img src="${esc(asset(packImage(p,selectedFormat)))}" alt="${esc(localized(p.name) + ' · ' + localized(format.name) + t(' — تصوّر العبوة', ' — pack concept'))}" width="1086" height="1448" loading="lazy"><span class="product-open" aria-hidden="true">↗</span></button><h3><a href="${sitePath(`/${getLang()}/products/${encodeURIComponent(p.id)}/?pack=${selectedFormat}`)}">${esc(localized(p.name))}</a></h3><div class="product-meta"><span>${esc(localized(format.name))} · ${num(format.count)} × ${num(30)} ${t('غ', 'g')}</span><span>${num(format.grams)} ${t('غ إجمالي', 'g total')}</span></div><button class="product-add" data-add="${esc(p.id)}" aria-label="${esc(t(`أضف ${p.name.ar} إلى السلة`, `Add ${p.name.en} to bag`))}"><span>${money(format.price)}</span><span>${t('أضف للسلة', 'Add to bag')} +</span></button></article>`).join('');
   if ($('#format-explanation')) $('#format-explanation').textContent = selectedFormat === 'cup'
     ? t('كوب الرحلة: ٥ أكياس مغلقة من نكهة واحدة + كيس منفصل للقشور. الصورة تعرض الكوب، وشاهد الكيس الموجود بداخله في التفاصيل.', 'Journey Cup: five sealed same-flavour sachets + a separate shell bag. The cup is shown; see the sachet inside in product details.')
     : t('كرتون عرض: ٢٤ كيسًا مغلقًا من نكهة واحدة. يظهر مفتوحًا للعرض على الكاونتر أو للّمة الأكبر.', 'Display carton: 24 sealed sachets of one flavour. Shown open, ready for the counter or a bigger gathering.');
@@ -91,7 +92,7 @@ function showMoment(id) {
     game: { title: t('باقي جولة', 'Just one more round'), body: t('كل واحد له نكهته، وباقي جولة تجمعنا. تصوّر لحملة حُبّ حول جلسة لعب ومشاركة.', 'Everyone has a flavour. There’s still one more round. A HUBB campaign concept around a shared game-night table.'), product: 'family-mix' },
   }[id];
   if (!moment) return;
-  showDialog(`<p class="eyebrow">${t('مشهد حملة مولّد بالذكاء الاصطناعي', 'AI-GENERATED CAMPAIGN CONCEPT')}</p><h2>${moment.title}</h2><img src="/assets/ugc-${id}.webp" alt="${esc(moment.title)}"><p style="margin-top:20px">${moment.body}</p><button class="button primary" id="moment-shop">${t('تسوّق هذه اللحظة', 'Shop this moment')} ↗</button>`);
+  showDialog(`<p class="eyebrow">${t('مشهد حملة مولّد بالذكاء الاصطناعي', 'AI-GENERATED CAMPAIGN CONCEPT')}</p><h2>${moment.title}</h2><img src="${sitePath(`/assets/ugc-${id}.webp`)}" alt="${esc(moment.title)}"><p style="margin-top:20px">${moment.body}</p><button class="button primary" id="moment-shop">${t('تسوّق هذه اللحظة', 'Shop this moment')} ↗</button>`);
   $('#moment-shop')?.addEventListener('click', () => { closeDialog(); openProduct(moment.product, moment.product === 'family-mix' ? 'family' : 'cup'); });
 }
 
@@ -180,13 +181,13 @@ dialog?.addEventListener('click', (event) => {
 });
 dialog?.addEventListener('close', () => { if (content) content.innerHTML = ''; });
 
-const initialLanguage = location.pathname.split('/').filter(Boolean)[0] === 'en' ? 'en' : 'ar';
+const initialLanguage = document.documentElement.lang === 'en' ? 'en' : 'ar';
 applyLanguage(initialLanguage);
 initCommerce();
 initStory();
 initMotion();
 initCrack();
-$('#language-toggle')?.addEventListener('click', () => location.assign(`/${getLang() === 'ar' ? 'en' : 'ar'}/`));
+$('#language-toggle')?.addEventListener('click', () => location.assign(sitePath(`/${getLang() === 'ar' ? 'en' : 'ar'}/`)));
 $('#search-button')?.addEventListener('click', openSearch);
 $('#cart-button')?.addEventListener('click', openCart);
 $('#review-button')?.addEventListener('click', showReview);

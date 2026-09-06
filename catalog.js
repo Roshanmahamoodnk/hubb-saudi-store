@@ -1,3 +1,4 @@
+import { sitePath } from './paths.js';
 export const getLang=()=>document.documentElement.lang==='en'?'en':'ar';
 export const t=(ar,en)=>getLang()==='ar'?ar:en;
 export const money=value=>new Intl.NumberFormat(getLang()==='ar'?'ar-SA':'en-SA',{style:'currency',currency:'SAR',minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
@@ -15,5 +16,7 @@ export const products=[
 {id:'fire-salt',name:{ar:'ملح حار',en:'Fire Salt'},description:{ar:'نكهة الملح الحار. للّمة اللي تحب التغيير.',en:'A little heat for the gathering. Fire Salt for the friend who always reaches for the bold flavour.'},note:{ar:'لحبّ التغيير',en:'Turn up the mood'},color:'#a33f2b',pale:'#f0dcd0',image:'/assets/fire-salt.webp'},
 {id:'family-mix',name:{ar:'خلطة العائلة',en:'Family Mix'},description:{ar:'أربع نكهات في عبوة واحدة. ٢٠ كيسًا مغلقًا، خمسة من كل نكهة. الوزن الصافي ٦٠٠ غ.',en:'Four flavours, one gathering. 20 sealed sachets, five of each flavour. Net contents 600 g.'},note:{ar:'لكل واحد نكهته',en:'Something for everyone'},color:'#725137',pale:'#e8dbc7',image:'/assets/family-mix.webp'}];
 
+for (const product of products) product.image = sitePath(product.image);
+
 // Each online format has its own original pack render. The sachet remains the inside-pack reference.
-export const packImage=(product,format='cup')=>product.id==='family-mix'?product.image:format==='case'?`/assets/case-${product.id}-display-v4.webp`:format==='cup'?`/assets/cup-${product.id}-v3.webp`:product.image;
+export const packImage=(product,format='cup')=>sitePath(product.id==='family-mix'?product.image:format==='case'?`/assets/case-${product.id}-display-v4.webp`:format==='cup'?`/assets/cup-${product.id}-v3.webp`:product.image);

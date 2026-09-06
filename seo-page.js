@@ -1,10 +1,5 @@
-import { products, packImage } from '/catalog.js';
-import { initCommerce, openProduct, openCart, openSearch } from '/commerce.js';
-
-// The shared catalogue uses relative assets on the homepage. Detail pages are nested.
-for (const product of products) {
-  if (product.image?.startsWith('./')) product.image = '/' + product.image.slice(2);
-}
+import { products, packImage } from './catalog.js';
+import { initCommerce, openProduct, openCart, openSearch } from './commerce.js';
 
 initCommerce();
 document.addEventListener('click', event => {
