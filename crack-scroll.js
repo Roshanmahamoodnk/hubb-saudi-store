@@ -1,3 +1,4 @@
+import {onScrollFrame,requestScrollFrame} from './scroll-frame.js';
 const copy = [
  {title:['حبّة، على مهلك.','One seed. Take your time.'],body:['خذ حبّة من الكيس.','Take one seed from the sachet.'],note:['النواة للأكل. القشر لا يؤكل.','Eat the kernel. Discard the husk.']},
  {title:['طقّة من الطرف.','A little crack at the edge.'],body:['افتح القشر بخفّة، وافصله عن النواة.','Gently crack the shell and separate the kernel.'],note:['لا تمضغ الحبّة بقشرها.','Do not chew the whole shell.']},
@@ -20,16 +21,17 @@ export function initCrack(){
  const clamp=v=>Math.max(0,Math.min(1,v));
  const ease=v=>{v=clamp(v);return v*v*(3-2*v);};
  const phase=(p,start,end)=>ease((p-start)/(end-start));
- let scheduled=false,enabled=false,lastChapter=-1;
+ let enabled=false,lastChapter=-1;
  function setObject(id,x,y,rotation,scale,opacity,w,h,xScale=1){
   const n=objects[id];n.style.transform=`translate3d(${x*w}px,${y*h}px,0) translate(-50%,-50%) rotate(${rotation}deg) scale(${scale}) scaleX(${xScale})`;n.style.opacity=opacity;
  }
  function paint(){
-  scheduled=false;if(!enabled)return;
+  if(!enabled)return;
   const rect=track.getBoundingClientRect(),stageHeight=stage.clientHeight,h=stageHeight-138,w=stage.clientWidth;
-  if(!w||!h)return;
+  if(!w||!h||rect.bottom<0||rect.top>innerHeight+160)return;
   const top=parseFloat(getComputedStyle(stage).top)||0;
   const p=clamp((top-rect.top)/Math.max(1,rect.height-stageHeight));
+  return ()=>{
   stage.dataset.progress=p.toFixed(3);
   stage.style.setProperty('--art-height',`${h}px`);
   const reward=phase(p,.44,.63),bag=phase(p,.66,.77),moveKernel=phase(p,.59,.70);
@@ -57,15 +59,16 @@ export function initCrack(){
   stage.querySelector('.crack-stage-meter i').style.transform=`scaleX(${p})`;
   const chapter=p<.12?0:p<.40?1:p<.66?2:3;
   if(chapter!==lastChapter){lastChapter=chapter;const lang=document.documentElement.lang==='ar'?0:1;stage.querySelector('.crack-live-caption h3').textContent=copy[chapter].title[lang];stage.querySelector('.crack-live-caption p').textContent=copy[chapter].body[lang];stage.querySelector('.crack-stage-count').textContent=`0${chapter+1} / 04`;chapters.forEach((n,i)=>n.classList.toggle('is-active',i===chapter));}
+  };
  }
- function schedule(){if(!scheduled&&enabled){scheduled=true;requestAnimationFrame(paint);}}
+ function schedule(){requestScrollFrame();}
  function configure(){
   enabled=!preference.matches&&innerHeight>480;
   track.classList.toggle('is-scroll-driven',enabled);
   if(!enabled){stage.querySelectorAll('[style]').forEach(n=>n.removeAttribute('style'));chapters.forEach(n=>n.classList.remove('is-active'));lastChapter=-1;}
   schedule();
  }
- addEventListener('scroll',schedule,{passive:true});addEventListener('resize',configure,{passive:true});
+ onScrollFrame(paint);addEventListener('resize',configure,{passive:true});
  addEventListener('pageshow',schedule);addEventListener('hubb:language',()=>{lastChapter=-1;schedule();});preference.addEventListener('change',configure);
  if('ResizeObserver' in window)new ResizeObserver(schedule).observe(track);
  configure();

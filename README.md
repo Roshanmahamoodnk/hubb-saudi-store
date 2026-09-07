@@ -40,6 +40,14 @@ The owner confirmed that the existing live layout should stay. The cream/olive p
 
 Original image outputs and exact prompts are preserved in `assets/story-*-v4.png` and `assets/STORIES_V4_PROMPTS.md`. The earlier shorter-layout proposal in `_fleet/plans/HUBB_V4_VISUAL_STORY_PLAN.md` was superseded by the owner's direction to keep the live layout.
 
+## Scroll experience — 8 September 2026
+
+The existing layout now responds to ordinary page scrolling. Each flavour has four photographic beats, with short captions and a progress line. On phones with enough room, the existing story panel stays visible briefly as its four moments unfold. Smaller screens keep the ordinary document flow. The three sharing-gallery cards also change photographs as they cross the viewport; their existing full-story dialogs remain available.
+
+Cups, cartons, Family Mix and product-page renders drift and turn gently with scroll position. Text enters gradually and section underlines draw into view. Product buttons remain stationary. All these effects and the silent edge-to-kernel-to-husk-pouch ritual share one event-driven animation frame scheduler, with no continuous idle loop or replacement scrolling system.
+
+Reduced motion presents the four photographs together with their labels, and the seed ritual becomes a static guide. Only empty husks go into the pouch; the edible kernel stays separate. Existing generated-concept disclosures and commerce preview rules remain in place.
+
 ## Proposed online offer
 
 | Format | Count | Net contents | Proposed SAR |

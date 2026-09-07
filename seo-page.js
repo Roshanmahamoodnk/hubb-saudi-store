@@ -1,3 +1,4 @@
+import {initMotion} from './motion.js';
 import { products, packImage } from './catalog.js';
 import { initCommerce, openProduct, openCart, openSearch } from './commerce.js';
 
@@ -25,3 +26,5 @@ function showPack(format){
 }
 showPack(new URLSearchParams(location.search).get('pack')==='case'?'case':'cup');
 document.querySelectorAll('[data-gallery-format]').forEach(b=>b.addEventListener('click',()=>showPack(b.dataset.galleryFormat)));
+
+initMotion();
