@@ -234,10 +234,17 @@ def make_plate(record: dict) -> None:
     draw = ImageDraw.Draw(canvas, "RGBA")
 
     draw.rectangle((0, 0, image.width, header_h), fill="#1F2933")
-    draw.text((38, 28), f"{record['id']}  /  CURRENT-CONDITIONS SURVEY", font=font(23, True), fill="#E8B65E")
-    draw.text((38, 64), record["zone"].upper(), font=font(32, True), fill="#FFF8ED")
-    draw.text((38, 111), "DIRECTION KEY: Project North* = foliage / exterior glazing reference", font=font(18), fill="#D7E3EA")
-    draw.text((38, 141), "Camera-facing and left / ahead / right labels are relative to this photo.", font=font(18), fill="#D7E3EA")
+    draw.text((28, 23), f"{record['id']}  /  CURRENT-CONDITIONS SURVEY", font=font(19, True), fill="#E8B65E")
+    title_bottom = bounded_text(
+        draw,
+        (28, 53),
+        record["zone"].upper(),
+        image.width - 195,
+        font(25, True),
+        "#FFF8ED",
+    )
+    draw.text((28, title_bottom + 1), "N* = exterior foliage / glazing (project reference)", font=font(15), fill="#D7E3EA")
+    draw.text((28, title_bottom + 26), "Relative labels: camera-facing, left, ahead, right.", font=font(15), fill="#D7E3EA")
     draw_compass(draw, image.width - 87, 101)
 
     # Directional field-of-view arrow in the image body.
