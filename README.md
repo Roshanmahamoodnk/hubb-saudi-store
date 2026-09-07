@@ -69,3 +69,7 @@ The workflow sets `HUBB_SITE_URL=https://roshanmahamoodnk.github.io/hubb-saudi-s
 Run `npm run check:site` after a build with the same environment settings. It checks all 11 pages, local resources and module imports, deployment metadata, dynamic product images and path-helper behaviour. No payment or order backend is added by publishing.
 
 Workflow reference: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+
+## Roza Lab interior design (documentation)
+
+A photo-surveyed interior design briefing for the Roza Lab marketing / monitoring / R&D office lives in [`docs/roza-lab/README.md`](docs/roza-lab/README.md). It is documentation only and is not part of the public storefront build.
