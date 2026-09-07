@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+<title id="title">Roza Lab CCTV and central monitoring coverage diagram</title>
+<desc id="desc">Schematic showing cameras covering common circulation, lab entry and window gallery, with no camera inside the private CEO office.</desc>
+<style>
+ .bg{fill:#f8f3ea}.outline{fill:none;stroke:#21282f;stroke-width:8}.zone{stroke:#21282f;stroke-width:3}.label{font:700 24px Arial;fill:#21282f}.sub{font:16px Arial;fill:#384651}.small{font:14px Arial;fill:#384651}.cam{fill:#bd4b43;stroke:#fff8ed;stroke-width:3}.cone{fill:#d79a3b;fill-opacity:.20;stroke:#d79a3b;stroke-width:2;stroke-dasharray:8 6}.screen{fill:#263b47;stroke:#d7e3ea;stroke-width:3}.wire{fill:none;stroke:#4b7890;stroke-width:4;stroke-dasharray:7 6}
+</style>
+<rect width="1400" height="760" class="bg"/>
+<text x="60" y="62" style="font:700 34px Arial;fill:#21282f">CENTRAL MONITORING + CCTV COVERAGE</text>
+<text x="60" y="90" class="sub">Common-area coverage only • No camera inside CEO office • confirm local privacy, notice and retention requirements</text>
+<rect x="70" y="140" width="1120" height="500" class="outline"/>
+<rect x="70" y="140" width="300" height="190" class="zone" fill="#eee4d7"/>
+<text x="105" y="200" class="label">CEO OFFICE</text><text x="105" y="230" class="sub">NO CAMERA — private work / meetings</text>
+<rect x="370" y="140" width="440" height="190" class="zone" fill="#f3dfd5"/>
+<text x="408" y="200" class="label">TEST LAB + QC</text><text x="408" y="230" class="sub">Entry and equipment zone only</text>
+<rect x="810" y="140" width="380" height="190" class="zone" fill="#dce7ef"/>
+<text x="840" y="200" class="label">ENTRY PASSAGE</text><text x="840" y="230" class="sub">Door / egress view</text>
+<rect x="70" y="330" width="480" height="310" class="zone" fill="#e8efe9"/>
+<text x="108" y="380" class="label">CENTRAL HALL + OPS</text><text x="108" y="408" class="sub">3 × 55″ wall + operator console</text>
+<rect x="550" y="330" width="640" height="310" class="zone" fill="#f2e5cf"/>
+<text x="590" y="380" class="label">WINDOW GALLERY / MARKETING</text><text x="590" y="408" class="sub">Common circulation and gallery edge</text>
+<rect x="108" y="480" width="244" height="58" rx="6" class="screen"/><rect x="362" y="480" width="66" height="58" rx="6" class="screen"/>
+<text x="112" y="568" class="small">MONITOR WALL + NVR/UPS (locked cabinet)</text>
+<circle cx="430" cy="345" r="17" class="cam"/><text x="422" y="351" style="font:700 13px Arial;fill:white">C1</text>
+<path d="M430 345 L140 610 L530 610Z" class="cone"/>
+<circle cx="800" cy="350" r="17" class="cam"/><text x="792" y="356" style="font:700 13px Arial;fill:white">C2</text>
+<path d="M800 350 L570 610 L1130 610Z" class="cone"/>
+<circle cx="785" cy="305" r="17" class="cam"/><text x="777" y="311" style="font:700 13px Arial;fill:white">C3</text>
+<path d="M785 305 L470 160 L470 310Z" class="cone"/>
+<circle cx="835" cy="310" r="17" class="cam"/><text x="827" y="316" style="font:700 13px Arial;fill:white">C4</text>
+<path d="M835 310 L1170 160 L1170 315Z" class="cone"/>
+<path d="M430 345 C410 390, 410 430, 400 480 M800 350 C690 420, 600 450, 428 500 M785 305 C700 365, 540 420, 420 500 M835 310 C780 400, 610 440, 428 520" class="wire"/>
+<rect x="1220" y="165" width="130" height="100" rx="8" fill="#fff8ed" stroke="#21282f" stroke-width="2"/>
+<text x="1245" y="198" class="label">KEY</text><circle cx="1240" cy="224" r="10" class="cam"/><text x="1260" y="230" class="small">camera</text><rect x="1230" y="242" width="20" height="10" class="cone"/><text x="1260" y="254" class="small">view cone</text>
+<text x="70" y="688" class="small">C1 common hall / entry • C2 gallery • C3 lab entry and heat equipment (not personal screens) • C4 passage/door. Conduits route to the locked NVR/UPS at the monitoring console.</text>
+<text x="70" y="716" class="small">Set views and retention after a privacy review; do not cover desk screens, the private office or wash / changing areas. Provide a visible CCTV notice at entry.</text>
+</svg>

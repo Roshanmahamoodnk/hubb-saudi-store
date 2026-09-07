@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roza Lab — Interior Design Review Board</title>
+  <style>
+    :root { --ink:#21282f; --cream:#f8f3ea; --paper:#fffdf8; --coffee:#76543e; --gold:#d79a3b; --line:#d9cec0; }
+    * { box-sizing: border-box; }
+    body { margin:0; color:var(--ink); background:var(--cream); font:16px/1.5 Inter,ui-sans-serif,system-ui,sans-serif; }
+    header { padding:46px max(24px,calc((100vw - 1180px)/2)); color:#fff8ed; background:#21282f; }
+    h1 { max-width:1180px; margin:0; font-size:clamp(2rem,5vw,4.2rem); letter-spacing:-.04em; }
+    header p { max-width:850px; margin:12px 0 0; color:#d7e3ea; }
+    main { width:min(1180px,calc(100% - 48px)); margin:38px auto 80px; }
+    section { margin-top:42px; }
+    h2 { margin:0 0 16px; font-size:1.55rem; }
+    .notice { padding:15px 18px; border-left:5px solid var(--gold); background:#fff8ed; }
+    .plan { width:100%; display:block; background:var(--paper); border:1px solid var(--line); border-radius:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:18px; }
+    article { overflow:hidden; background:var(--paper); border:1px solid var(--line); border-radius:12px; }
+    article img { display:block; width:100%; aspect-ratio:3/4; object-fit:cover; background:#ddd; }
+    article h3, article p { margin:14px 15px; }
+    article p { color:#53616a; font-size:.9rem; }
+    .survey { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
+    .survey img { min-width:0; aspect-ratio:3/4; }
+    footer { padding:32px 24px; color:#d7e3ea; background:#21282f; text-align:center; }
+    @media (max-width:550px) { main { width:min(100% - 28px,1180px); } .grid { grid-template-columns:1fr; } .survey { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roza Lab<br>Interior Design Review Board</h1>
+    <p>Marketing hub · central monitoring · compact research and roastery-testing suite</p>
+  </header>
+  <main>
+    <p class="notice"><strong>Evidence-led schematic:</strong> true north, dimensions, MEP capacity and plumbing were not supplied. “Project North” is the exterior foliage/glazing reference; measurements and safety approvals are required before construction.</p>
+
+    <section>
+      <h2>Proposed plan</h2>
+      <img class="plan" src="diagrams/proposed-floor-plan.svg" alt="Roza Lab proposed floor plan identifying Roshan, Sangeetha and Nikhil zones">
+    </section>
+
+    <section>
+      <h2>Proposed interior concepts</h2>
+      <div class="grid">
+        <article><img src="visuals/ceo-office.png" alt="CEO office concept"><h3>Roshan — private CEO office</h3><p>Frosted glazing band, acoustic finish and a compact meeting setting.</p></article>
+        <article><img src="visuals/marketing-hub.png" alt="Marketing hub concept"><h3>Nikhil — marketing hub</h3><p>Campaign desk, kit storage and collaboration in the window gallery.</p></article>
+        <article><img src="visuals/qc-rd.png" alt="QC and R&D concept"><h3>Sangeetha — QC / R&amp;D</h3><p>High-CRI sample review and a lab-adjacent specialist desk.</p></article>
+        <article><img src="visuals/roastery-test-lab.png" alt="Roastery test lab concept"><h3>Dedicated test line</h3><p>Electric small-batch testing; extraction and fire approvals remain required.</p></article>
+        <article><img src="visuals/monitoring-station.png" alt="Monitoring station concept"><h3>Central monitoring</h3><p>Three-screen common-area operations console, outside the private office.</p></article>
+        <article><img src="visuals/gallery-circulation.png" alt="Gallery circulation concept"><h3>Gallery circulation</h3><p>Warm Roza brand layer while retaining the long clear passage.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>CCTV coverage</h2>
+      <img class="plan" src="diagrams/monitoring-coverage.svg" alt="CCTV common-area coverage and monitoring station diagram">
+    </section>
+
+    <section>
+      <h2>Source photos and direction plates</h2>
+      <div class="grid" id="survey"></div>
+    </section>
+  </main>
+  <footer>Full specifications, source-photo captions, directions and field-verification requirements: <a href="README.md" style="color:#e8b65e">README.md</a></footer>
+  <script>
+    const captions = [
+      "Central hall / monitoring approach", "Central hall / monitoring approach — duplicate",
+      "Compact glass office", "Entry-side narrow corridor", "Glass-fronted lab / workroom",
+      "Glass-fronted lab / workroom — duplicate", "Compact glass office — duplicate",
+      "Long window gallery", "Window gallery to central hall", "Window gallery to central hall — duplicate",
+      "Long window gallery — duplicate", "Long window gallery, reverse", "Long window gallery, reverse — duplicate"
+    ];
+    document.querySelector("#survey").innerHTML = captions.map((caption, i) => {
+      const id = `P${String(i + 1).padStart(2, "0")}`;
+      return `<article><div class="survey"><img src="survey/originals/${id}.jpg" alt="${id} original"><img src="survey/directional-plates/${id}-directional.jpg" alt="${id} direction plate"></div><h3>${id} — ${caption}</h3><p>Original photo (left) and relative-direction survey plate (right).</p></article>`;
+    }).join("");
+  </script>
+</body>
+</html>
