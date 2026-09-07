@@ -17,8 +17,9 @@ export function refreshMotion(root=document){
   register(n,'copy');
   if(n.tagName==='H2')n.classList.add('scroll-heading');
  });
- root.querySelectorAll('.product-image-button>img,.family-visual>img,.seo-hero-image>img,.seo-pack-format-image').forEach(n=>register(n,'pack',n.parentElement));
- root.querySelectorAll('.hero-image-frame>.frame-photo,.moment-photo>.photo-sequence').forEach(n=>register(n,'photo',n.parentElement));
+ root.querySelectorAll('.product-image-button>img,.family-visual>img,.seo-hero-image>img,.seo-pack-format-image,.partner-art:not(.partner-photo)>img').forEach(n=>register(n,'pack',n.parentElement));
+ root.querySelectorAll('.hero-image-frame>.frame-photo,.hero-image-frame>img,.moment-photo>.photo-sequence,.partner-photo>img').forEach(n=>register(n,'photo',n.parentElement));
+ root.querySelectorAll('[data-care-card]').forEach(n=>register(n,'care'));
  root.querySelectorAll('.brand-strip>b,.circle-stamp').forEach(n=>register(n,'detail',n.parentElement));
  requestScrollFrame();
 }
@@ -91,7 +92,7 @@ export function initMotion(){
    if(type==='pack'){y=(.5-p)*(view.width<=760?38:64);rotation=(p-.5)*(view.width<=760?9:13)*(index%2?-1:1);scale=.965+Math.sin(p*Math.PI)*.055;}
    if(type==='photo'){y=(.5-p)*24;scale=1.06;}
    if(type==='detail')rotation=(p-.5)*40;
-   changes.push(()=>{record.y=y;node.style.setProperty('--scroll-y',`${y.toFixed(2)}px`);node.style.setProperty('--scroll-rotate',`${rotation.toFixed(2)}deg`);node.style.setProperty('--scroll-scale',scale.toFixed(4));node.style.setProperty('--scroll-opacity',opacity.toFixed(3));if(node.classList.contains('scroll-heading'))node.style.setProperty('--line-progress',enter.toFixed(3));});
+   changes.push(()=>{record.y=y;node.style.setProperty('--scroll-y',`${y.toFixed(2)}px`);node.style.setProperty('--scroll-rotate',`${rotation.toFixed(2)}deg`);node.style.setProperty('--scroll-scale',scale.toFixed(4));node.style.setProperty('--scroll-opacity',opacity.toFixed(3));if(type==='care')node.style.setProperty('--care-progress',smooth(p).toFixed(3));if(node.classList.contains('scroll-heading'))node.style.setProperty('--line-progress',enter.toFixed(3));});
   }
   const chapterRects=chapters.map(node=>({node,rect:node.getBoundingClientRect()}));
   const nearest=chapterRects.reduce((best,item)=>{const d=Math.abs(item.rect.top+item.rect.height/2-view.height*.52);return !best||d<best.d?{...item,d}:best;},null);

@@ -1,11 +1,12 @@
 {
-  "revision": "HUBB coordinated scroll experience — 8 September 2026",
+  "revision": "HUBB warm original, visual care story and clearer seed captions — 8 September 2026",
   "motion": {
     "engine": "Native scrolling, IntersectionObserver and one shared event-driven requestAnimationFrame scheduler. Layout reads precede writes; no idle animation loop.",
     "intent": "Follow four everyday Saudi sharing stories without replacing ordinary document scrolling",
     "signature": "Silent edge opening, separate kernel reveal, then empty husks arc into a paper pouch. Four fixed-crop photographic beats per flavour advance and reverse with scroll position.",
     "supporting": [
       "Scroll-driven text opacity/18px entrance and section underline reveal",
+      "Three unpinned visual care cards: seed/kernel drift, four sachets spreading, then a shared family moment",
       "24px total photographic drift with a fixed 1.06 crop scale",
       "Product drift capped at32px desktop and19px phone, with restrained rotation; controls stay stationary",
       "3px reading progress bar"
@@ -20,7 +21,7 @@
     "without_javascript": "Each scene is visible inline; no content relies on motion for comprehension.",
     "performance_evidence": "Independent Node checks passed event coalescing, reads-before-writes, idle shutdown, unsubscribe and visibility recovery. Desktop1440x900 and phone390x844 scrolling observed in browser. CPU-throttled frame rate and physical-device GPU performance were not measured.",
     "ritual": "Silent scroll animation: three-quarter closed seed opens along curved right edge using complementary clips and a restrained tip-first pivot; two empty inner husks separate, kernel emerges, husks drop behind bag front.",
-    "ritual_mobile": "Sticky artwork capped at570px/80svh with its active caption inside. Height480px or below, reduced motion and no JavaScript show a static exploded guide."
+    "ritual_mobile": "Sticky panel capped at680px or viewport minus18px, with large captions above a separately bounded art plane. Height480px or below, reduced motion and no JavaScript show a static exploded guide."
   },
   "assets": {
     "cups": "Four original cup-v3 PNG/WebP assets",
@@ -28,6 +29,6 @@
     "lifestyle": "Five existing1254x1254 AI-generated contact sheets with four beats each: road, gaming, family, TV and football sharing. Fixed responsive crops crossfade; the source imagery and concept disclosures remain unchanged.",
     "ritual": "Selected whole seed: ritual-whole-edge-v5 PNG/WebP. Existing ritual-husk/kernel/bag-v4 remain. Prompts: RITUAL_V4_PROMPTS.md and RITUAL_EDGE_V5_PROMPT.md."
   },
-  "content": "Consumer happiness and sharing lead. Two years of care appear under About HUBB. No market-superiority, award, certification, fabricated-customer-review or real-endorsement claims.",
+  "content": "Original Aref/Georgia editorial typography and warm hero photo restored. Care-to-gathering visuals replace long default About copy. Fuller story and trade details are optional native disclosures. No market-superiority, award, certification, fabricated-customer-review or real-endorsement claims.",
   "commerce": "B2B quantity/count/weight only; visitor prepares price-free enquiry asking team for offers, availability and delivery/supply terms."
 }

@@ -1,20 +1,21 @@
 import {onScrollFrame,requestScrollFrame} from './scroll-frame.js';
 const copy = [
- {title:['حبّة، على مهلك.','One seed. Take your time.'],body:['خذ حبّة من الكيس.','Take one seed from the sachet.'],note:['النواة للأكل. القشر لا يؤكل.','Eat the kernel. Discard the husk.']},
- {title:['طقّة من الطرف.','A little crack at the edge.'],body:['افتح القشر بخفّة، وافصله عن النواة.','Gently crack the shell and separate the kernel.'],note:['لا تمضغ الحبّة بقشرها.','Do not chew the whole shell.']},
- {title:['النكهة في النواة.','Find the flavour inside.'],body:['استمتع بالنواة فقط.','Enjoy only the kernel.'],note:['أبعد أي بقايا قشر.','Remove any shell fragments.']},
- {title:['القشور في كيسها.','Shells away. Company stays.'],body:['اجمع القشور في الكيس الورقي المنفصل.','Drop empty husks into the separate paper bag.'],note:['خلّها بعيدة عن كيس الطعام.','Keep husks out of the food pack.']}
+ {title:['حبّة. ولحظة لك.','One little moment.'],focus:['لك','moment'],body:['خذ حبّة. على مهلك.','Take one seed. Take your time.'],note:['النواة للأكل. القشر لا يؤكل.','Eat the kernel. Discard the husk.']},
+ {title:['طقّة من الطرف.','Crack at the edge.'],focus:['الطرف','edge'],body:['افتح بخفّة، وافصل القشر.','Open gently. Separate the shell.'],note:['لا تمضغ الحبّة بقشرها.','Do not chew the whole shell.']},
+ {title:['النكهة في النواة.','Flavour, inside.'],focus:['النواة','inside'],body:['القرمشة لك. كُل النواة فقط.','Enjoy only the kernel.'],note:['أبعد أي بقايا قشر.','Remove any shell fragments.']},
+ {title:['القشور في كيسها.','Shells away.'],focus:['كيسها','away'],body:['القشر للكيس. واللمّة تكمل.','Empty husks in the paper pouch.'],note:['خلّها بعيدة عن كيس الطعام.','Keep husks out of the food pack.']}
 ];
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+const caption=(item,lang)=>esc(item.title[lang]).replace(esc(item.focus[lang]),`<span class="ink-word">${esc(item.focus[lang])}</span>`);
 const line=(tag,values,lang,cls='')=>`<${tag}${cls?` class="${cls}"`:''} data-ar="${esc(values[0])}" data-en="${esc(values[1])}">${esc(values[lang==='ar'?0:1])}</${tag}>`;
 export function renderCrack(lang){
  const img=(id,cls)=>`<img class="crack-object ${cls}" src="/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp" alt="" width="1024" height="1536" loading="lazy" draggable="false">`;
- return `<section id="ritual" class="crack-section section"><div class="wrap"><div class="section-heading"><div>${line('p',['طقّة، وبعدها تبدأ النكهة','THE LITTLE RITUAL WE LOVE'],lang,'eyebrow')}${line('h2',['طقّة. نواة. لحظة حُبّ.','Crack. Enjoy. Shells away.'],lang)}</div>${line('p',['النواة للأكل. والقشور في كيسها.','Eat the kernel. Collect the husks.'],lang,'section-aside')}</div><div class="crack-scroll-track"><div class="crack-stage" aria-hidden="true"><svg class="crack-edge-masks" width="0" height="0" aria-hidden="true"><defs><clipPath id="crack-front-edge" clipPathUnits="objectBoundingBox"><path d="M0 0H.52C.62 .13 .70 .34 .70 .58C.70 .80 .64 .93 .52 1H0Z"/></clipPath><clipPath id="crack-far-edge" clipPathUnits="objectBoundingBox"><path d="M.52 0H1V1H.52C.64 .93 .70 .80 .70 .58C.70 .34 .62 .13 .52 0Z"/></clipPath></defs></svg><div class="crack-stage-top"><span>H U B B</span>${line('span',['مع كل حبّة','IN EVERY LITTLE SEED'],lang)}</div><div class="crack-studio-light"></div><div class="crack-orbit"></div>${img('bag','crack-bag-back')}${img('kernel','crack-kernel')}${img('husk','crack-husk-left')}${img('husk','crack-husk-right')}${img('whole','crack-whole-left')}${img('whole','crack-whole-right')}${img('bag','crack-bag-front')}${line('span',['النواة للأكل','THE EDIBLE KERNEL'],lang,'crack-kernel-label')}${line('span',['كيس منفصل للقشور','A SEPARATE BAG FOR HUSKS'],lang,'crack-bag-label')}<div class="crack-stage-footer"><span class="crack-stage-count">01 / 04</span><div class="crack-stage-meter"><i></i></div>${line('span',['كمّل التمرير','KEEP SCROLLING'],lang,'crack-scroll-hint')}</div><div class="crack-live-caption"><h3>${esc(copy[0].title[lang==='ar'?0:1])}</h3><p>${esc(copy[0].body[lang==='ar'?0:1])}</p></div></div><ol class="crack-chapters">${copy.map((s,i)=>`<li class="crack-chapter" data-crack-chapter="${i}"><span class="crack-chapter-number">0${i+1}</span>${line('h3',s.title,lang)}${line('p',s.body,lang)}${line('small',s.note,lang)}</li>`).join('')}</ol></div>${line('p',['تصوّر توضيحي لطريقة الأكل والتخلّص من القشور.','An illustrated guide to the eating ritual and shell disposal.'],lang,'crack-concept-note')}</div></section>`;
+ return `<section id="ritual" class="crack-section section"><div class="wrap"><div class="section-heading"><div>${line('p',['طقّة، وبعدها تبدأ النكهة','THE LITTLE RITUAL WE LOVE'],lang,'eyebrow')}${line('h2',['طقّة. نواة. لحظة حُبّ.','Crack. Enjoy. Shells away.'],lang)}</div>${line('p',['النواة للأكل. والقشور في كيسها.','Eat the kernel. Collect the husks.'],lang,'section-aside')}</div><div class="crack-scroll-track"><div class="crack-stage" aria-hidden="true"><div class="crack-stage-top"><span>H U B B</span>${line('span',['مع كل حبّة','IN EVERY LITTLE SEED'],lang)}</div><div class="crack-art-plane"><svg class="crack-edge-masks" width="0" height="0" aria-hidden="true"><defs><clipPath id="crack-front-edge" clipPathUnits="objectBoundingBox"><path d="M0 0H.52C.62 .13 .70 .34 .70 .58C.70 .80 .64 .93 .52 1H0Z"/></clipPath><clipPath id="crack-far-edge" clipPathUnits="objectBoundingBox"><path d="M.52 0H1V1H.52C.64 .93 .70 .80 .70 .58C.70 .34 .62 .13 .52 0Z"/></clipPath></defs></svg><div class="crack-studio-light"></div><div class="crack-orbit"></div>${img('bag','crack-bag-back')}${img('kernel','crack-kernel')}${img('husk','crack-husk-left')}${img('husk','crack-husk-right')}${img('whole','crack-whole-left')}${img('whole','crack-whole-right')}${img('bag','crack-bag-front')}${line('span',['النواة للأكل','THE EDIBLE KERNEL'],lang,'crack-kernel-label')}${line('span',['كيس منفصل للقشور','A SEPARATE BAG FOR HUSKS'],lang,'crack-bag-label')}</div><div class="crack-stage-footer"><span class="crack-stage-count">01 / 04</span><div class="crack-stage-meter"><i></i></div>${line('span',['كمّل التمرير','KEEP SCROLLING'],lang,'crack-scroll-hint')}</div><div class="crack-live-caption"><h3>${caption(copy[0],lang==='ar'?0:1)}</h3><p>${esc(copy[0].body[lang==='ar'?0:1])}</p></div></div><ol class="crack-chapters">${copy.map((s,i)=>`<li class="crack-chapter" data-crack-chapter="${i}"><span class="crack-chapter-number">0${i+1}</span>${line('h3',s.title,lang)}${line('p',s.body,lang)}${line('small',s.note,lang)}</li>`).join('')}</ol></div>${line('p',['تصوّر توضيحي لطريقة الأكل والتخلّص من القشور.','An illustrated guide to the eating ritual and shell disposal.'],lang,'crack-concept-note')}</div></section>`;
 }
 
 export function initCrack(){
- const track=document.querySelector('.crack-scroll-track'),stage=document.querySelector('.crack-stage');
- if(!track||!stage)return;
+ const track=document.querySelector('.crack-scroll-track'),stage=document.querySelector('.crack-stage'),art=document.querySelector('.crack-art-plane');
+ if(!track||!stage||!art)return;
  const preference=matchMedia('(prefers-reduced-motion: reduce)');
  const objects=Object.fromEntries(['kernel','husk-left','husk-right','whole-left','whole-right','bag-back','bag-front'].map(id=>[id,stage.querySelector(`.crack-${id}`)]));
  const chapters=[...track.querySelectorAll('.crack-chapter')];
@@ -27,7 +28,7 @@ export function initCrack(){
  }
  function paint(){
   if(!enabled)return;
-  const rect=track.getBoundingClientRect(),stageHeight=stage.clientHeight,h=stageHeight-138,w=stage.clientWidth;
+  const rect=track.getBoundingClientRect(),stageHeight=stage.clientHeight,h=art.clientHeight,w=art.clientWidth;
   if(!w||!h||rect.bottom<0||rect.top>innerHeight+160)return;
   const top=parseFloat(getComputedStyle(stage).top)||0;
   const p=clamp((top-rect.top)/Math.max(1,rect.height-stageHeight));
@@ -58,7 +59,8 @@ export function initCrack(){
   stage.querySelector('.crack-bag-label').style.opacity=phase(p,.88,.98);
   stage.querySelector('.crack-stage-meter i').style.transform=`scaleX(${p})`;
   const chapter=p<.12?0:p<.40?1:p<.66?2:3;
-  if(chapter!==lastChapter){lastChapter=chapter;const lang=document.documentElement.lang==='ar'?0:1;stage.querySelector('.crack-live-caption h3').textContent=copy[chapter].title[lang];stage.querySelector('.crack-live-caption p').textContent=copy[chapter].body[lang];stage.querySelector('.crack-stage-count').textContent=`0${chapter+1} / 04`;chapters.forEach((n,i)=>n.classList.toggle('is-active',i===chapter));}
+  stage.style.setProperty('--line-progress',(.4+.6*phase(p,chapter===0?0:chapter===1?.12:chapter===2?.40:.66,chapter===0?.10:chapter===1?.35:chapter===2?.61:.96)).toFixed(3));
+  if(chapter!==lastChapter){lastChapter=chapter;const lang=document.documentElement.lang==='ar'?0:1;stage.querySelector('.crack-live-caption h3').innerHTML=caption(copy[chapter],lang);stage.querySelector('.crack-live-caption p').textContent=copy[chapter].body[lang];stage.querySelector('.crack-stage-count').textContent=`0${chapter+1} / 04`;chapters.forEach((n,i)=>n.classList.toggle('is-active',i===chapter));}
   };
  }
  function schedule(){requestScrollFrame();}

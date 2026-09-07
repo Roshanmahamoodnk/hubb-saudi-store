@@ -7,7 +7,7 @@
 .scroll-experience .scroll-pack{backface-visibility:hidden}
 .scroll-experience .product-image-button{overflow:hidden}
 .scroll-experience .hero-copy,.scroll-experience .hero-image-frame{animation:none!important}
-.scroll-experience .hero-image-frame:hover img{transform:none!important}
+.scroll-experience .hero-image-frame:hover img:not(.scroll-photo){transform:none!important}
 .scroll-experience .scene-chapter.is-active .scene-mobile-image{animation:none!important}
 .scroll-experience .scene-chapter-copy{opacity:1;transform:none;transition:none}
 .scene-chapter-inner{width:100%}

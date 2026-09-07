@@ -30,7 +30,7 @@ for(const file of pages){
  const relative=path.relative(out,file).replace(/index\.html$/,'');
  const documentUrl=siteRoot+relative;
  assert.equal((html.match(/<h1\b/g)||[]).length,1,`${relative}: one H1`);
- assert.ok(!/id="(?:scene-story|crack-scroll|gallery-sharing|gallery-road|gallery-gaming)-root"/.test(html),`${relative}: unbuilt placeholder`);
+ assert.ok(!/id="(?:care-story|scene-story|crack-scroll|gallery-sharing|gallery-road|gallery-gaming)-root"/.test(html),`${relative}: unbuilt placeholder`);
  assert.ok(html.includes('scroll-motion.css'),`${relative}: missing shared motion styles`);
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(new Set(ids).size,ids.length,`${relative}: duplicate IDs`);
@@ -40,6 +40,10 @@ for(const file of pages){
   assert.equal((html.match(/data-photo-sequence="/g)||[]).length,11,`${relative}: eight flavour displays and three gallery stories`);
   for(const frame of [0,1,2,3])assert.equal((html.match(new RegExp(`data-photo-frame="${frame}"`,'g'))||[]).length,11,`${relative}: every story includes frame ${frame+1}`);
   assert.ok(html.includes('class="crack-live-caption"'),`${relative}: missing ritual caption`);
+  assert.ok(html.includes('class="crack-art-plane"'),`${relative}: missing bounded ritual artwork`);
+  assert.equal((html.match(/data-care-card/g)||[]).length,3,`${relative}: three visual care beats`);
+  assert.ok(html.includes('<details class="care-details">'),`${relative}: fuller story available on demand`);
+  assert.ok(html.includes('id="review-button"')&&html.includes('id="bulk-form"'),`${relative}: review and trade controls retained`);
   assert.ok(html.includes('<section id="wholesale"'),`${relative}: existing volume section retained`);
  }
  const locale=relative.startsWith('en/')?'en':'ar';

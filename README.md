@@ -48,6 +48,14 @@ Cups, cartons, Family Mix and product-page renders drift and turn gently with sc
 
 Reduced motion presents the four photographs together with their labels, and the seed ritual becomes a static guide. Only empty husks go into the pouch; the edible kernel stays separate. Existing generated-concept disclosures and commerce preview rules remain in place.
 
+## Warm original and less reading — 8 September 2026
+
+The owner preferred the earlier Sites presentation. That live reference remains unchanged. Historical source references are preserved on GitHub under `reference/preferred-original-layout-2026-09-08` and `reference/before-feel-refinement-2026-09-08`; details are in `_fleet/references/preferred-original-2026-09-08/README.md`.
+
+The current revision restores Aref Ruqaa Arabic editorial headings, Georgia English headings and the original warm hero pack photograph. Body and product controls remain in IBM Plex Sans Arabic. After the seed ritual, three visual cards replace the long brand explanation: seed care, four flavours and a shared family moment. Review and partner invitations are shorter, with fuller background and wholesale information in native disclosures. Existing enquiry, feedback, map, product and FAQ controls remain available.
+
+Seed captions now lead from above the artwork, with larger, higher-contrast type and underlined key words. The animation runs in a separate bounded area below the caption; only empty husks enter the paper pouch. The illustrated guide remains available without animation.
+
 ## Proposed online offer
 
 | Format | Count | Net contents | Proposed SAR |

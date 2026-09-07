@@ -70,3 +70,36 @@ html[lang=ar] .crack-chapter h3{font-family:'Aref Ruqaa',serif;font-size:35px;li
 .is-scroll-driven .crack-kernel{max-width:calc(var(--art-height,500px)*.32)}
 .is-scroll-driven .crack-bag-back,.is-scroll-driven .crack-bag-front{max-width:calc(var(--art-height,500px)*.34)}
 .crack-whole-left,.crack-whole-right{filter:none}
+
+/* Words lead each beat, with a separate art plane below for the moving seed. */
+.crack-scroll-track.is-scroll-driven{height:calc(100svh + 500px)}
+.is-scroll-driven .crack-stage{height:min(710px,calc(100svh - 24px));max-height:none;top:12px}
+.crack-art-plane{position:absolute;inset:45px 0 40px}
+.is-scroll-driven .crack-art-plane{inset:170px 0 66px}
+.is-scroll-driven .crack-live-caption{top:52px;bottom:auto;inset-inline:24px;min-height:0;padding:0;border:0;direction:ltr}
+[dir=rtl] .is-scroll-driven .crack-live-caption{direction:rtl}
+.crack-live-caption h3{font:42px/1.2 Georgia,serif;color:#35271f;margin:0 0 17px;letter-spacing:-.025em}
+html[lang=ar] .crack-live-caption h3{font-family:'IBM Plex Sans Arabic',Arial,sans-serif;font-size:36px;font-weight:600;line-height:1.35;letter-spacing:0}
+.crack-live-caption p{font-size:18px;line-height:1.65;color:#4a372a;max-width:42ch;margin:auto}
+.crack-live-caption .ink-word{font-style:inherit;font-weight:inherit}
+.crack-live-caption .ink-word:after{border-bottom-width:3px;bottom:-.10em;opacity:.9}
+.is-scroll-driven .crack-stage-footer{bottom:22px;font-size:12px;color:#57432d}
+.crack-stage-top{top:20px;color:#57432d}.crack-stage-top>span:last-child{display:none}
+.is-scroll-driven .crack-kernel-label{top:49%;color:#473721}
+.is-scroll-driven .crack-bag-label{bottom:0;color:#473721}
+.crack-stage-meter{height:2px}.crack-stage{border-color:#a78c6470}
+@media(max-width:760px){
+ .is-scroll-driven .crack-stage{height:min(680px,calc(100svh - 18px));top:8px}
+ .is-scroll-driven .crack-live-caption{inset-inline:15px;top:51px}
+ .crack-live-caption h3{font-size:34px;line-height:1.2;margin-bottom:17px}
+ html[lang=ar] .crack-live-caption h3{font-size:31px;line-height:1.4}
+ .crack-live-caption p{font-size:17px;line-height:1.6;max-width:31ch}
+ .is-scroll-driven .crack-art-plane{inset:176px 0 62px}
+ .is-scroll-driven .crack-stage-footer{bottom:21px;font-size:11px}
+ .crack-section .section-heading h2{font-size:36px!important}
+ .crack-kernel-label,.crack-bag-label{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce),(max-height:480px){
+ .crack-scroll-track.is-scroll-driven{height:auto}.crack-art-plane{inset:42px 0 35px}
+ .crack-scroll-track .crack-stage{height:380px;position:relative;top:0}
+}
