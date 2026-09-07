@@ -1,0 +1,340 @@
+[
+  {
+    "id": "P01",
+    "file": "01-corridor-facing-north.jpg",
+    "annotated": "01-corridor-facing-north-annotated.jpg",
+    "camera": "N",
+    "zone": "Central corridor (spine)",
+    "brightness": {
+      "global": 119.5,
+      "bands": {
+        "top": 129.7,
+        "middle": 121.2,
+        "bottom": 108.0
+      },
+      "columns": {
+        "left": 112.6,
+        "center": 122.8,
+        "right": 123.0
+      },
+      "brightest_band": "top",
+      "brightest_column": "right"
+    },
+    "size": [
+      577,
+      1024
+    ]
+  },
+  {
+    "id": "P02",
+    "file": "02-corridor-open-plan.jpg",
+    "annotated": "02-corridor-open-plan-annotated.jpg",
+    "camera": "N",
+    "zone": "Corridor looking into glass office",
+    "brightness": {
+      "global": 118.9,
+      "bands": {
+        "top": 129.3,
+        "middle": 120.6,
+        "bottom": 107.4
+      },
+      "columns": {
+        "left": 112.1,
+        "center": 122.2,
+        "right": 122.5
+      },
+      "brightest_band": "top",
+      "brightest_column": "right"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P03",
+    "file": "03-glass-cabin-executive-desk.jpg",
+    "annotated": "03-glass-cabin-executive-desk-annotated.jpg",
+    "camera": "N",
+    "zone": "Glass-door cabin (current cramped office)",
+    "brightness": {
+      "global": 128.3,
+      "bands": {
+        "top": 152.5,
+        "middle": 158.9,
+        "bottom": 75.9
+      },
+      "columns": {
+        "left": 118.5,
+        "center": 117.8,
+        "right": 148.6
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      577,
+      1024
+    ]
+  },
+  {
+    "id": "P04",
+    "file": "04-corridor-dark-partition.jpg",
+    "annotated": "04-corridor-dark-partition-annotated.jpg",
+    "camera": "N",
+    "zone": "Transition corridor",
+    "brightness": {
+      "global": 108.2,
+      "bands": {
+        "top": 117.8,
+        "middle": 114.3,
+        "bottom": 93.2
+      },
+      "columns": {
+        "left": 115.9,
+        "center": 117.6,
+        "right": 91.2
+      },
+      "brightest_band": "top",
+      "brightest_column": "center"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P05",
+    "file": "05-lab-cabin-from-corridor.jpg",
+    "annotated": "05-lab-cabin-from-corridor-annotated.jpg",
+    "camera": "N",
+    "zone": "Roastery / QC lab cabin",
+    "brightness": {
+      "global": 105.1,
+      "bands": {
+        "top": 120.3,
+        "middle": 128.9,
+        "bottom": 67.9
+      },
+      "columns": {
+        "left": 105.9,
+        "center": 93.9,
+        "right": 115.7
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      577,
+      1024
+    ]
+  },
+  {
+    "id": "P06",
+    "file": "06-lab-cabin-sample-jars.jpg",
+    "annotated": "06-lab-cabin-sample-jars-annotated.jpg",
+    "camera": "N",
+    "zone": "Lab cabin (sample storage)",
+    "brightness": {
+      "global": 104.9,
+      "bands": {
+        "top": 119.9,
+        "middle": 128.2,
+        "bottom": 68.3
+      },
+      "columns": {
+        "left": 105.7,
+        "center": 93.6,
+        "right": 115.4
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P07",
+    "file": "07-compact-cabin-three-chairs.jpg",
+    "annotated": "07-compact-cabin-three-chairs-annotated.jpg",
+    "camera": "N",
+    "zone": "Glass cabin \u2014 CEO candidate is too cramped",
+    "brightness": {
+      "global": 127.7,
+      "bands": {
+        "top": 151.4,
+        "middle": 158.0,
+        "bottom": 76.0
+      },
+      "columns": {
+        "left": 117.7,
+        "center": 117.4,
+        "right": 147.9
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P08",
+    "file": "08-window-gallery-facing-north.jpg",
+    "annotated": "08-window-gallery-facing-north-annotated.jpg",
+    "camera": "N",
+    "zone": "Long gallery / CEO prestige candidate",
+    "brightness": {
+      "global": 121.8,
+      "bands": {
+        "top": 70.7,
+        "middle": 154.0,
+        "bottom": 139.8
+      },
+      "columns": {
+        "left": 120.1,
+        "center": 121.1,
+        "right": 124.2
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P09",
+    "file": "09-gallery-threshold-to-inner.jpg",
+    "annotated": "09-gallery-threshold-to-inner-annotated.jpg",
+    "camera": "E",
+    "zone": "Threshold \u2014 gallery to inner suite",
+    "brightness": {
+      "global": 100.4,
+      "bands": {
+        "top": 70.9,
+        "middle": 111.6,
+        "bottom": 117.9
+      },
+      "columns": {
+        "left": 118.6,
+        "center": 97.3,
+        "right": 85.3
+      },
+      "brightest_band": "bottom",
+      "brightest_column": "left"
+    },
+    "size": [
+      577,
+      1024
+    ]
+  },
+  {
+    "id": "P10",
+    "file": "10-threshold-inner-suite.jpg",
+    "annotated": "10-threshold-inner-suite-annotated.jpg",
+    "camera": "E",
+    "zone": "Primary circulation node",
+    "brightness": {
+      "global": 99.7,
+      "bands": {
+        "top": 69.8,
+        "middle": 111.2,
+        "bottom": 117.3
+      },
+      "columns": {
+        "left": 117.6,
+        "center": 96.7,
+        "right": 84.9
+      },
+      "brightest_band": "bottom",
+      "brightest_column": "left"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P11",
+    "file": "11-gallery-windows-west.jpg",
+    "annotated": "11-gallery-windows-west-annotated.jpg",
+    "camera": "N",
+    "zone": "Window gallery (west glazing)",
+    "brightness": {
+      "global": 122.9,
+      "bands": {
+        "top": 71.5,
+        "middle": 155.0,
+        "bottom": 141.2
+      },
+      "columns": {
+        "left": 121.0,
+        "center": 121.9,
+        "right": 125.7
+      },
+      "brightest_band": "middle",
+      "brightest_column": "right"
+    },
+    "size": [
+      577,
+      1024
+    ]
+  },
+  {
+    "id": "P12",
+    "file": "12-gallery-facing-south.jpg",
+    "annotated": "12-gallery-facing-south-annotated.jpg",
+    "camera": "S",
+    "zone": "Gallery looking to south end wall",
+    "brightness": {
+      "global": 109.7,
+      "bands": {
+        "top": 59.6,
+        "middle": 137.5,
+        "bottom": 130.9
+      },
+      "columns": {
+        "left": 124.2,
+        "center": 107.3,
+        "right": 97.5
+      },
+      "brightest_band": "middle",
+      "brightest_column": "left"
+    },
+    "size": [
+      578,
+      1024
+    ]
+  },
+  {
+    "id": "P13",
+    "file": "13-gallery-empty-south-end.jpg",
+    "annotated": "13-gallery-empty-south-end-annotated.jpg",
+    "camera": "S",
+    "zone": "Gallery (vacant \u2014 fit-out ready)",
+    "brightness": {
+      "global": 110.8,
+      "bands": {
+        "top": 60.9,
+        "middle": 138.3,
+        "bottom": 132.1
+      },
+      "columns": {
+        "left": 125.5,
+        "center": 108.4,
+        "right": 98.5
+      },
+      "brightest_band": "middle",
+      "brightest_column": "left"
+    },
+    "size": [
+      721,
+      1280
+    ]
+  }
+]
