@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" role="img">
+  <title>Roza Lab TV monitoring  camera cones and wall-mount TV</title>
+  <rect width="900" height="640" fill="#faf7f2"/>
+  <text x="28" y="32" font-family="Georgia, serif" font-size="20" fill="#3f2a1d">Central monitoring  camera / TV program</text>
+  <text x="28" y="52" font-family="system-ui, sans-serif" font-size="12" fill="#6b5344">Mount only on solid walls. Do not block black-framed windows. 2×2 grid on sunroom south wall.</text>
+
+  <!-- simplified rooms -->
+  <rect x="80" y="80" width="520" height="120" fill="#f3e6c8" stroke="#3f2a1d" stroke-width="2"/>
+  <text x="340" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700">SUNROOM  Nikhil + 65" TV</text>
+  <rect x="120" y="80" width="440" height="10" fill="#cfe4f2" stroke="#111"/>
+  <rect x="250" y="188" width="70" height="18" fill="#2b2b2b"/>
+  <text x="285" y="201" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#eee">TV</text>
+
+  <rect x="250" y="200" width="110" height="250" fill="#f4f1ea" stroke="#3f2a1d"/>
+  <rect x="80" y="320" width="170" height="170" fill="#ead9c8" stroke="#3f2a1d"/>
+  <text x="165" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700">CEO cabin</text>
+  <rect x="360" y="200" width="240" height="200" fill="#e7f0d8" stroke="#3f2a1d"/>
+  <text x="480" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700">LAB / cook test</text>
+  <rect x="80" y="490" width="480" height="90" fill="#efe7dc" stroke="#3f2a1d"/>
+  <text x="320" y="540" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700">OPEN HALL / entry</text>
+
+  <!-- camera cones -->
+  <polygon points="240,196 200,80 360,80" fill="#dc2626" opacity="0.12" stroke="#dc2626" stroke-width="1"/>
+  <polygon points="300,430 90,500 360,580" fill="#dc2626" opacity="0.12" stroke="#dc2626" stroke-width="1"/>
+  <polygon points="372,220 400,210 580,390" fill="#dc2626" opacity="0.12" stroke="#dc2626" stroke-width="1"/>
+  <polygon points="100,500 80,490 200,580" fill="#dc2626" opacity="0.12" stroke="#dc2626" stroke-width="1"/>
+
+  <circle cx="240" cy="196" r="9" fill="#7f1d1d"/><text x="240" y="200" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui" font-weight="700">C1</text>
+  <circle cx="300" cy="430" r="9" fill="#7f1d1d"/><text x="300" y="434" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui" font-weight="700">C2</text>
+  <circle cx="372" cy="220" r="9" fill="#7f1d1d"/><text x="372" y="224" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui" font-weight="700">C3</text>
+  <circle cx="100" cy="500" r="9" fill="#7f1d1d"/><text x="100" y="504" text-anchor="middle" fill="#fff" font-size="9" font-family="system-ui" font-weight="700">C4</text>
+
+  <g font-family="system-ui, sans-serif" font-size="12" fill="#3f2a1d" transform="translate(640, 90)">
+    <text font-size="14" font-weight="700">Mount schedule</text>
+    <text y="28">C1  sunroom south wall, high, looking N</text>
+    <text y="46" fill="#6b5344">covers threshold + corridor spine</text>
+    <text y="74">C2  corridor west bulkhead, looking S</text>
+    <text y="92" fill="#6b5344">covers hall, fridge, CEO door</text>
+    <text y="120">C3  lab west head, looking E</text>
+    <text y="138" fill="#6b5344">benches / cook zone; no washroom</text>
+    <text y="166">C4  hall west/south solid wall</text>
+    <text y="184" fill="#6b5344">entry and visitor pause</text>
+    <text y="220" font-weight="700">TV: 65" on sunroom SOUTH wall</text>
+    <text y="238" fill="#6b5344">solid wall with fan  not glazing</text>
+    <text y="256" fill="#6b5344">2×2: corridor · lab · cabin · sunroom</text>
+    <text y="290" font-weight="700">Do not</text>
+    <text y="308" fill="#6b5344">mount on glass or window mullions</text>
+    <text y="326" fill="#6b5344">point cameras at street / neighbours</text>
+    <text y="344" fill="#6b5344">record audio without policy review</text>
+  </g>
+</svg>

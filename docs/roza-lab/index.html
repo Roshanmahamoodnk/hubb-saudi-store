@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roza Lab — Interior design package</title>
+  <style>
+    :root {
+      --ink: #3f2a1d;
+      --muted: #6b5344;
+      --paper: #faf7f2;
+      --card: #fffdf8;
+      --line: #e4ddd0;
+      --terra: #9a3412;
+      --wood: #8b5e34;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    header {
+      padding: 2.5rem 8vw 1.5rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #f3e6c8 0%, var(--paper) 100%);
+    }
+    header p.kicker { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.75rem; color: var(--terra); margin: 0 0 0.4rem; }
+    h1 { font-family: Georgia, serif; font-weight: 600; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 0.5rem; }
+    h2 { font-family: Georgia, serif; font-size: 1.45rem; margin: 2.5rem 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.4rem 0 0.4rem; }
+    main { padding: 1.5rem 8vw 4rem; max-width: 1100px; }
+    .lede { font-size: 1.15rem; max-width: 42rem; color: var(--muted); }
+    nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; margin: 1rem 0 0; font-size: 0.9rem; }
+    nav a { color: var(--terra); }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin: 0.8rem 0 1.4rem; }
+    th, td { border: 1px solid var(--line); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+    th { background: #f3e6c8; }
+    figure { margin: 1rem 0 1.6rem; background: var(--card); border: 1px solid var(--line); padding: 0.6rem; }
+    figure img, figure object { width: 100%; height: auto; display: block; }
+    figcaption { font-size: 0.85rem; color: var(--muted); padding: 0.5rem 0.2rem 0.2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .note { background: #f7e7d8; border-left: 4px solid var(--terra); padding: 0.7rem 1rem; font-size: 0.92rem; }
+    footer { padding: 1.5rem 8vw 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+    a { color: var(--wood); }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="kicker">Roza Lab · design package</p>
+    <h1>Marketing HQ, central monitoring, and a small roastery lab</h1>
+    <p class="lede">Evidence-based interior concept from 13 current-state photos. Working North is the sunroom tree-canopy / daylight axis — not surveyed true north.</p>
+    <nav>
+      <a href="ROZA_LAB_INTERIOR_DESIGN.md">Full markdown</a>
+      <a href="#photos">Photo index</a>
+      <a href="#plans">Plans</a>
+      <a href="#proposed">Proposed rooms</a>
+      <a href="#tv">Monitoring</a>
+    </nav>
+  </header>
+  <main>
+    <p class="note">Named desks: <strong>Roshan Mahamood</strong> (CEO, existing west glass cabin) · <strong>Nikhil</strong> (Marketing + TV, sunroom) · <strong>Sangeetha</strong> (QC/R&amp;D, existing lab) · roastery cook-test at the lab sink/window — not in the CEO cabin.</p>
+
+    <h2 id="plans">Orientation and plans</h2>
+    <p>Corridor runs south (open hall) to north (sunroom daylight). Lab is east. Cabin, fridge, and AC are west. Black stone threshold is the joint between wood-plank ceiling and white-ceiling inner suite.</p>
+    <figure>
+      <object data="plans/current-layout.svg" type="image/svg+xml">Current layout SVG</object>
+      <figcaption>Current-state plan with Working N–E–S–W, circulation, and photo cameras P01–P13. This drawing is the geometric source of truth.</figcaption>
+    </figure>
+    <figure>
+      <object data="plans/proposed-layout.svg" type="image/svg+xml">Proposed layout SVG</object>
+      <figcaption>Proposed zoning on the same envelope. Existing glass and wood-slat partitions stay.</figcaption>
+    </figure>
+    <div class="grid">
+      <figure>
+        <img src="visuals/current-floor-plan.png" alt="Illustrated current floor plan">
+        <figcaption>Illustrated current plan (mood). Trust the SVG for camera numbers.</figcaption>
+      </figure>
+      <figure>
+        <img src="visuals/proposed-floor-plan.png" alt="Proposed floor plan visualization">
+        <figcaption>Proposed plan visualization with named desks and compass.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <img src="visuals/circulation-facing-north.png" alt="Corridor annotated facing Working North">
+      <figcaption>Annotated circulation, camera facing Working North: CEO cabin west, lab east, sunroom daylight ahead.</figcaption>
+    </figure>
+
+    <h2 id="photos">Current photos</h2>
+    <div class="grid">
+      <figure><img src="photos/current/P01_inner_hall_facing_north.jpg" alt="P01"><figcaption>P01 — Hall, facing N</figcaption></figure>
+      <figure><img src="photos/current/P02_corridor_facing_north.jpg" alt="P02"><figcaption>P02 — Corridor, facing N</figcaption></figure>
+      <figure><img src="photos/current/P03_executive_cabin_facing_west.jpg" alt="P03"><figcaption>P03 — Cabin, facing W</figcaption></figure>
+      <figure><img src="photos/current/P04_side_hall_facing_north.jpg" alt="P04"><figcaption>P04 — Side hall, facing N</figcaption></figure>
+      <figure><img src="photos/current/P05_lab_from_corridor_facing_east.jpg" alt="P05"><figcaption>P05 — Lab, facing E</figcaption></figure>
+      <figure><img src="photos/current/P06_lab_from_corridor_facing_east_alt.jpg" alt="P06"><figcaption>P06 — Lab, facing E</figcaption></figure>
+      <figure><img src="photos/current/P07_executive_cabin_facing_west_alt.jpg" alt="P07"><figcaption>P07 — Cabin, facing W</figcaption></figure>
+      <figure><img src="photos/current/P08_sunroom_facing_east.jpg" alt="P08"><figcaption>P08 — Sunroom, facing E</figcaption></figure>
+      <figure><img src="photos/current/P09_threshold_facing_south.jpg" alt="P09"><figcaption>P09 — Threshold, facing S</figcaption></figure>
+      <figure><img src="photos/current/P10_threshold_facing_south_alt.jpg" alt="P10"><figcaption>P10 — Threshold, facing S</figcaption></figure>
+      <figure><img src="photos/current/P11_sunroom_facing_east_alt.jpg" alt="P11"><figcaption>P11 — Sunroom, facing E</figcaption></figure>
+      <figure><img src="photos/current/P12_sunroom_facing_west.jpg" alt="P12"><figcaption>P12 — Sunroom, facing W</figcaption></figure>
+      <figure><img src="photos/current/P13_sunroom_facing_west_alt.jpg" alt="P13"><figcaption>P13 — Sunroom, facing W</figcaption></figure>
+    </div>
+
+    <h2 id="proposed">Proposed rooms</h2>
+    <div class="grid">
+      <figure>
+        <img src="visuals/ceo-roshan-cabin.png" alt="CEO cabin for Roshan Mahamood">
+        <figcaption>Roshan Mahamood — CEO cabin (existing glass room, west).</figcaption>
+      </figure>
+      <figure>
+        <img src="visuals/nikhil-marketing-monitoring.png" alt="Nikhil marketing studio and TV wall">
+        <figcaption>Nikhil — marketing table on north glass, TV on south solid wall.</figcaption>
+      </figure>
+      <figure>
+        <img src="visuals/sangeetha-qc-rd-bench.png" alt="Sangeetha QC and R&amp;D bench">
+        <figcaption>Sangeetha — QC / R&amp;D at the existing L-bench.</figcaption>
+      </figure>
+      <figure>
+        <img src="visuals/roastery-cook-test.png" alt="Roastery cooking test kitchen">
+        <figcaption>Roastery cook-test at the lab sink/window — not in the CEO cabin.</figcaption>
+      </figure>
+    </div>
+
+    <h2 id="tv">TV monitoring</h2>
+    <figure>
+      <object data="plans/monitoring-plan.svg" type="image/svg+xml">Monitoring SVG</object>
+      <figcaption>C1–C4 on solid walls; 65" TV on the sunroom south wall. Do not mount on windows.</figcaption>
+    </figure>
+    <figure>
+      <img src="visuals/tv-monitoring-plan.png" alt="TV monitoring plan visualization">
+      <figcaption>Camera cones and central monitor program.</figcaption>
+    </figure>
+  </main>
+  <footer>
+    Reconstructed from overlapping site photos. Working North = daylight / trees. Full notes, GitHub method citations, phasing and open items:
+    <a href="ROZA_LAB_INTERIOR_DESIGN.md">ROZA_LAB_INTERIOR_DESIGN.md</a>
+  </footer>
+</body>
+</html>

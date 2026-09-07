@@ -1,5 +1,7 @@
 # HUBB — A little HUBB. Happiness to share. · V3
 
+Roza Lab interior-design package (current photos, Working North plans, named desks, monitoring): [`docs/roza-lab/ROZA_LAB_INTERIOR_DESIGN.md`](docs/roza-lab/ROZA_LAB_INTERIOR_DESIGN.md) · visual booklet [`docs/roza-lab/index.html`](docs/roza-lab/index.html).
+
 A bilingual Saudi ecommerce storefront preview with an Arabic-first shopping experience, original HUBB product artwork, generated Saudi campaign scenes, and consumer-first moments of sharing and the founder's development story.
 
 **Public website preview: no payment collected, no live order received or accepted.** Payments, inventory, fulfilment, order acceptance and review storage are not connected. A WhatsApp link opens a message for the visitor to review and send; opening it does not prove the business received an enquiry. The supplied business number is +966 55 312 7999.
