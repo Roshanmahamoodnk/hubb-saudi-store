@@ -48,5 +48,5 @@ export function initMotion(){
  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
  preference.addEventListener('change',()=>{if(reduced()){revealObserver?.disconnect();document.querySelectorAll('.reveal-target').forEach(n=>n.classList.add('is-revealed'));stage?.style.setProperty('--scene-drift','0px');}schedule();});
  document.querySelectorAll('.scene-nav a').forEach(link=>link.addEventListener('click',()=>select(link.dataset.sceneLink)));
- select('football');schedule();
+ select(scenes[0]?.id);schedule();
 }

@@ -1,14 +1,14 @@
 const copy = [
- {title:['حبّة واحدة. لحظة لك.','One little seed. A moment for you.'], body:['خذ حبّة من الكيس. على مهلك… المتعة تبدأ من هنا.','Take one seed from the sachet. Slow down for a second. This is where the little ritual begins.'], note:['القشر يحمي النواة؛ النواة هي الجزء الذي يؤكل.','The shell holds the kernel. The kernel is the part we eat.']},
- {title:['طقّة خفيفة. وتبدأ الحكاية.','A little crack. And there it is.'], body:['اكسر القشر بخفّة عند حافة الأسنان الأمامية، ثم أبعد الحبّة وافصل نصفي القشر بأصابعك.','Gently crack the shell at the edge of your front teeth. Remove the seed, then separate the two husk halves with your fingers.'], note:['لا تمضغ الحبّة كاملة، ولا تستخدم قوة لفتحها.','Do not chew the whole seed or force the shell open.']},
- {title:['النكهة تكمل للنواة.','The flavour goes a little deeper.'], body:['أخرج النواة، وتخلّص من أي بقايا قشر. قرمشة صغيرة، ونكهة تستاهل هاللحظة.','Lift out the kernel and remove any shell fragments. A little crunch. A little flavour. A little happiness.'], note:['استمتع بالنواة فقط. القشر لا يؤكل.','Enjoy only the kernel. Do not eat the husk.']},
- {title:['القشور في كيسها. واللمّة تحلى.','Shells away. The good company stays.'], body:['القشور الفارغة تروح في كيسها الورقي المنفصل. مرّر العبوة، وخلّ السوالف تكمل.','Drop the empty husks into the separate paper shell bag. Pass the pack. Let the conversation carry on.'], note:['خلّ القشور بعيدة عن كيس الطعام والكوب.','Keep discarded husks out of the food sachet and cup.']}
+ {title:['حبّة، على مهلك.','One seed. Take your time.'],body:['خذ حبّة من الكيس.','Take one seed from the sachet.'],note:['النواة للأكل. القشر لا يؤكل.','Eat the kernel. Discard the husk.']},
+ {title:['طقّة من الطرف.','A little crack at the edge.'],body:['افتح القشر بخفّة، وافصله عن النواة.','Gently crack the shell and separate the kernel.'],note:['لا تمضغ الحبّة بقشرها.','Do not chew the whole shell.']},
+ {title:['النكهة في النواة.','Find the flavour inside.'],body:['استمتع بالنواة فقط.','Enjoy only the kernel.'],note:['أبعد أي بقايا قشر.','Remove any shell fragments.']},
+ {title:['القشور في كيسها.','Shells away. Company stays.'],body:['اجمع القشور في الكيس الورقي المنفصل.','Drop empty husks into the separate paper bag.'],note:['خلّها بعيدة عن كيس الطعام.','Keep husks out of the food pack.']}
 ];
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 const line=(tag,values,lang,cls='')=>`<${tag}${cls?` class="${cls}"`:''} data-ar="${esc(values[0])}" data-en="${esc(values[1])}">${esc(values[lang==='ar'?0:1])}</${tag}>`;
 export function renderCrack(lang){
  const img=(id,cls)=>`<img class="crack-object ${cls}" src="/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp" alt="" width="1024" height="1536" loading="lazy" draggable="false">`;
- return `<section id="ritual" class="crack-section section"><div class="wrap"><div class="section-heading"><div>${line('p',['طقّة، وبعدها تبدأ النكهة','THE LITTLE RITUAL WE LOVE'],lang,'eyebrow')}${line('h2',['اسمع الطقّة. ذوق النواة.','Hear the crack. Find the flavour.'],lang)}</div>${line('p',['لحظة صغيرة. سعادة نتشاركها.','A small pause. A little happiness to share.'],lang,'section-aside')}</div><div class="crack-scroll-track"><div class="crack-stage" aria-hidden="true"><svg class="crack-edge-masks" width="0" height="0" aria-hidden="true"><defs><clipPath id="crack-front-edge" clipPathUnits="objectBoundingBox"><path d="M0 0H.52C.62 .13 .70 .34 .70 .58C.70 .80 .64 .93 .52 1H0Z"/></clipPath><clipPath id="crack-far-edge" clipPathUnits="objectBoundingBox"><path d="M.52 0H1V1H.52C.64 .93 .70 .80 .70 .58C.70 .34 .62 .13 .52 0Z"/></clipPath></defs></svg><div class="crack-stage-top"><span>H U B B</span>${line('span',['مع كل حبّة','IN EVERY LITTLE SEED'],lang)}</div><div class="crack-orbit"></div>${img('bag','crack-bag-back')}${img('kernel','crack-kernel')}${img('husk','crack-husk-left')}${img('husk','crack-husk-right')}${img('whole','crack-whole-left')}${img('whole','crack-whole-right')}${img('bag','crack-bag-front')}${line('span',['النواة للأكل','THE EDIBLE KERNEL'],lang,'crack-kernel-label')}${line('span',['كيس منفصل للقشور','A SEPARATE BAG FOR HUSKS'],lang,'crack-bag-label')}<div class="crack-stage-footer"><span class="crack-stage-count">01 / 04</span><div class="crack-stage-meter"><i></i></div>${line('span',['كمّل التمرير','KEEP SCROLLING'],lang,'crack-scroll-hint')}</div></div><ol class="crack-chapters">${copy.map((s,i)=>`<li class="crack-chapter" data-crack-chapter="${i}"><span class="crack-chapter-number">0${i+1}</span>${line('h3',s.title,lang)}${line('p',s.body,lang)}${line('small',s.note,lang)}</li>`).join('')}</ol></div>${line('p',['تصوّر توضيحي لطريقة الأكل والتخلّص من القشور.','An illustrated guide to the eating ritual and shell disposal.'],lang,'crack-concept-note')}</div></section>`;
+ return `<section id="ritual" class="crack-section section"><div class="wrap"><div class="section-heading"><div>${line('p',['طقّة، وبعدها تبدأ النكهة','THE LITTLE RITUAL WE LOVE'],lang,'eyebrow')}${line('h2',['طقّة. نواة. لحظة حُبّ.','Crack. Enjoy. Shells away.'],lang)}</div>${line('p',['النواة للأكل. والقشور في كيسها.','Eat the kernel. Collect the husks.'],lang,'section-aside')}</div><div class="crack-scroll-track"><div class="crack-stage" aria-hidden="true"><svg class="crack-edge-masks" width="0" height="0" aria-hidden="true"><defs><clipPath id="crack-front-edge" clipPathUnits="objectBoundingBox"><path d="M0 0H.52C.62 .13 .70 .34 .70 .58C.70 .80 .64 .93 .52 1H0Z"/></clipPath><clipPath id="crack-far-edge" clipPathUnits="objectBoundingBox"><path d="M.52 0H1V1H.52C.64 .93 .70 .80 .70 .58C.70 .34 .62 .13 .52 0Z"/></clipPath></defs></svg><div class="crack-stage-top"><span>H U B B</span>${line('span',['مع كل حبّة','IN EVERY LITTLE SEED'],lang)}</div><div class="crack-studio-light"></div><div class="crack-orbit"></div>${img('bag','crack-bag-back')}${img('kernel','crack-kernel')}${img('husk','crack-husk-left')}${img('husk','crack-husk-right')}${img('whole','crack-whole-left')}${img('whole','crack-whole-right')}${img('bag','crack-bag-front')}${line('span',['النواة للأكل','THE EDIBLE KERNEL'],lang,'crack-kernel-label')}${line('span',['كيس منفصل للقشور','A SEPARATE BAG FOR HUSKS'],lang,'crack-bag-label')}<div class="crack-stage-footer"><span class="crack-stage-count">01 / 04</span><div class="crack-stage-meter"><i></i></div>${line('span',['كمّل التمرير','KEEP SCROLLING'],lang,'crack-scroll-hint')}</div><div class="crack-live-caption"><h3>${esc(copy[0].title[lang==='ar'?0:1])}</h3><p>${esc(copy[0].body[lang==='ar'?0:1])}</p></div></div><ol class="crack-chapters">${copy.map((s,i)=>`<li class="crack-chapter" data-crack-chapter="${i}"><span class="crack-chapter-number">0${i+1}</span>${line('h3',s.title,lang)}${line('p',s.body,lang)}${line('small',s.note,lang)}</li>`).join('')}</ol></div>${line('p',['تصوّر توضيحي لطريقة الأكل والتخلّص من القشور.','An illustrated guide to the eating ritual and shell disposal.'],lang,'crack-concept-note')}</div></section>`;
 }
 
 export function initCrack(){
@@ -26,31 +26,37 @@ export function initCrack(){
  }
  function paint(){
   scheduled=false;if(!enabled)return;
-  const rect=track.getBoundingClientRect(),h=stage.clientHeight,w=stage.clientWidth;
+  const rect=track.getBoundingClientRect(),stageHeight=stage.clientHeight,h=stageHeight-138,w=stage.clientWidth;
   if(!w||!h)return;
   const top=parseFloat(getComputedStyle(stage).top)||0;
-  const p=clamp((top-rect.top)/Math.max(1,rect.height-h));
+  const p=clamp((top-rect.top)/Math.max(1,rect.height-stageHeight));
   stage.dataset.progress=p.toFixed(3);
-  const split=phase(p,.13,.37),reveal=phase(p,.16,.30),reward=phase(p,.43,.63),bag=phase(p,.66,.77),moveKernel=phase(p,.78,.94),flip=phase(p,.21,.35),edge=phase(p,.11,.20),peel=phase(p,.19,.35);
-  const fallLeft=phase(p,.65,.91),fallRight=phase(p,.69,.95);
+  stage.style.setProperty('--art-height',`${h}px`);
+  const reward=phase(p,.44,.63),bag=phase(p,.66,.77),moveKernel=phase(p,.59,.70);
   const put=(id,x,y,rot,scale,opacity,xScale=1)=>setObject(id,x,y,rot,scale,opacity,w,h,xScale);
-  put('whole-left',.5-.006*edge-.10*peel,.43,-2*edge-10*peel,1,flip<.5?1:0,Math.abs(Math.cos(flip*Math.PI)));
-  put('whole-right',.5+.004*edge+.11*peel,.43,3*edge+15*peel,1,flip<.5?1:0,Math.abs(Math.cos(flip*Math.PI)));
-  put('kernel',.5-.23*moveKernel,.43-.13*reward,-8*reward,1+.05*reward,reveal);
-  // Empty husks follow distinct arcs. The kernel never enters the bag's path.
-  const husk=(side,drop,sign)=>{
-   const startX=.5+sign*.235*split,startY=.43+.025*split;
-   put(`husk-${side}`,startX+(.72-startX)*drop,startY+(.58-startY)*drop-Math.sin(drop*Math.PI)*.25,sign*(21*split+110*drop),1-.63*drop,(flip>=.5?1:0)*(1-phase(drop,.94,1)),Math.abs(Math.cos(flip*Math.PI)));
+  // The right edge opens first. Each exterior and hollow interior shares one
+  // continuous pose, changing faces only while edge-on, without a position jump.
+  const shell=(side,sign,start,end,dropStart,dropEnd)=>{
+   const peel=phase(p,start,end),travel=phase(p,start,end+.035),drop=phase(p,dropStart,dropEnd);
+   const startX=.5+sign*.235*travel,startY=.43+.025*travel;
+   const x=startX+(.72-startX)*drop,y=startY+(.58-startY)*drop-Math.sin(drop*Math.PI)*.25;
+   const rotation=sign*(21*travel+110*drop),scale=(1.16-.10*travel)*(1-.63*drop);
+   const faceScale=Math.abs(Math.cos(peel*Math.PI));
+   put(`whole-${side}`,x,y,rotation,scale,peel<.5?1:0,faceScale);
+   put(`husk-${side}`,x,y,rotation,scale,(peel>=.5?1:0)*(1-phase(drop,.94,1)),faceScale);
   };
-  husk('left',fallLeft,-1);husk('right',fallRight,1);
+  shell('right',1,.14,.33,.69,.95);
+  shell('left',-1,.22,.40,.65,.91);
+  put('kernel',.5-.23*moveKernel,.43-.13*reward,-8*reward,1+.15*reward,phase(p,.23,.38));
+  stage.style.setProperty('--kernel-light',(phase(p,.30,.52)*(1-.55*moveKernel)).toFixed(3));
   const settle=Math.sin(phase(p,.85,1)*Math.PI)*1.2;
   put('bag-back',.72,.63+(1-bag)*.15,settle,1,bag);
   put('bag-front',.72,.63+(1-bag)*.15,settle,1,bag);
   stage.querySelector('.crack-kernel-label').style.opacity=phase(p,.91,.98);
   stage.querySelector('.crack-bag-label').style.opacity=phase(p,.88,.98);
   stage.querySelector('.crack-stage-meter i').style.transform=`scaleX(${p})`;
-  const chapter=Math.min(3,Math.floor(p*3.99));
-  if(chapter!==lastChapter){lastChapter=chapter;stage.querySelector('.crack-stage-count').textContent=`0${chapter+1} / 04`;chapters.forEach((n,i)=>n.classList.toggle('is-active',i===chapter));}
+  const chapter=p<.12?0:p<.40?1:p<.66?2:3;
+  if(chapter!==lastChapter){lastChapter=chapter;const lang=document.documentElement.lang==='ar'?0:1;stage.querySelector('.crack-live-caption h3').textContent=copy[chapter].title[lang];stage.querySelector('.crack-live-caption p').textContent=copy[chapter].body[lang];stage.querySelector('.crack-stage-count').textContent=`0${chapter+1} / 04`;chapters.forEach((n,i)=>n.classList.toggle('is-active',i===chapter));}
  }
  function schedule(){if(!scheduled&&enabled){scheduled=true;requestAnimationFrame(paint);}}
  function configure(){
@@ -60,7 +66,7 @@ export function initCrack(){
   schedule();
  }
  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',configure,{passive:true});
- addEventListener('pageshow',schedule);addEventListener('hubb:language',schedule);preference.addEventListener('change',configure);
+ addEventListener('pageshow',schedule);addEventListener('hubb:language',()=>{lastChapter=-1;schedule();});preference.addEventListener('change',configure);
  if('ResizeObserver' in window)new ResizeObserver(schedule).observe(track);
  configure();
 }

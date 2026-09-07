@@ -1,3 +1,4 @@
+import {scenes,familyScene,framePhoto} from './scenes.js';
 import { sitePath } from './paths.js';
 import { products, formats, onlinePolicy, money, getLang, t, packImage } from './catalog.js';
 import { initCommerce, openProduct, addToCart, openCart, openSearch } from './commerce.js';
@@ -86,13 +87,11 @@ function preparedMessageLink(body) {
 }
 
 function showMoment(id) {
-  const moment = {
-    majlis: { title: t('سوالف ما تخلص', 'One more story'), body: t('قهوة على الطاولة، كيس ينفتح، وسالفة تجرّ سالفة. تصوّر لحملة حُبّ في المجلس السعودي.', 'Coffee on the table. A pack opens. One story becomes another. A HUBB campaign concept set in a Saudi majlis.'), product: 'sea-salt' },
-    roadtrip: { title: t('الطريق له رفيق', 'Take the long way'), body: t('وقفة هادئة على الطريق. افتح كوب الرحلة، خذ كيسًا وخلّ الباقي مغلقًا. مشهد تصوّري في استراحة آمنة والسيارة متوقفة.', 'A quiet stop along the way. Open a Journey Cup, take one sachet and keep the others sealed. A concept scene at a safe stop with the car parked.'), product: 'pepper-lime' },
-    game: { title: t('باقي جولة', 'Just one more round'), body: t('كل واحد له نكهته، وباقي جولة تجمعنا. تصوّر لحملة حُبّ حول جلسة لعب ومشاركة.', 'Everyone has a flavour. There’s still one more round. A HUBB campaign concept around a shared game-night table.'), product: 'family-mix' },
-  }[id];
-  if (!moment) return;
-  showDialog(`<p class="eyebrow">${t('مشهد حملة مولّد بالذكاء الاصطناعي', 'AI-GENERATED CAMPAIGN CONCEPT')}</p><h2>${moment.title}</h2><img src="${sitePath(`/assets/ugc-${id}.webp`)}" alt="${esc(moment.title)}"><p style="margin-top:20px">${moment.body}</p><button class="button primary" id="moment-shop">${t('تسوّق هذه اللحظة', 'Shop this moment')} ↗</button>`);
+  const lang = getLang();
+  const scene = id==='majlis'?familyScene:scenes.find(s=>s.id===(id==='roadtrip'?'road':'gaming'));
+  if(!scene)return;
+  const moment={title:id==='majlis'?t('مرّر حُبّ للفريق','A little HUBB at half-time'):scene.title[lang],product:id==='majlis'?'family-mix':scene.product};
+  showDialog(`<p class="eyebrow">${t('مشهد حملة مولّد بالذكاء الاصطناعي', 'AI-GENERATED CAMPAIGN CONCEPT')}</p><h2>${moment.title}</h2><div class="moment-story-frames">${scene.beats.map((beat,i)=>`<figure>${framePhoto(scene,i,beat[lang])}<figcaption>${beat[lang]}</figcaption></figure>`).join('')}</div><p style="margin-top:20px">${t('لحظات نتخيّلها مع حُبّ؛ ليست صور عملاء.','Moments we imagine with HUBB; not customer photographs.')}</p><button class="button primary" id="moment-shop">${t('تسوّق هذه اللحظة', 'Shop this moment')} ↗</button>`);
   $('#moment-shop')?.addEventListener('click', () => { closeDialog(); openProduct(moment.product, moment.product === 'family-mix' ? 'family' : 'cup'); });
 }
 

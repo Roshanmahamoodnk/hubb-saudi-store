@@ -33,6 +33,12 @@ for(const file of pages){
  assert.ok(!html.includes('id="scene-story-root"')&&!html.includes('id="crack-scroll-root"'),`${relative}: unbuilt placeholder`);
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(new Set(ids).size,ids.length,`${relative}: duplicate IDs`);
+ for(const match of html.matchAll(/href="#([^"\s]+)"/g))assert.ok(ids.includes(match[1]),`${relative}: broken section link #${match[1]}`);
+ if(!relative.includes('/products/')){
+  assert.equal((html.match(/data-scene="/g)||[]).length,4,`${relative}: four flavour scenes`);
+  assert.ok(html.includes('class="crack-live-caption"'),`${relative}: missing ritual caption`);
+  assert.ok(html.includes('<section id="wholesale"'),`${relative}: existing volume section retained`);
+ }
  const locale=relative.startsWith('en/')?'en':'ar';
  assert.ok(html.includes(`<html lang="${locale}"`),`${relative}: incorrect language`);
  for(const match of html.matchAll(/\b(?:src|href)=["']([^"']+)["']/g))await checkUrl(match[1],documentUrl);

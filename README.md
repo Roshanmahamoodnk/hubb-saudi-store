@@ -12,7 +12,7 @@ Source: https://github.com/Roshanmahamoodnk/hubb-saudi-store
 
 ## Open and run
 
-Run `npm start` and open http://127.0.0.1:8788. No package installation or external JavaScript dependencies required. `npm run check` checks module syntax. `npm run build` creates the static output for hosting. V2 and V3 browser verification is recorded in `_fleet/QA.md`.
+Run `npm start` and open http://127.0.0.1:8788. No package installation or external JavaScript dependencies required. `npm run check` checks module syntax. `npm run build` creates the static output for hosting. Browser verification is recorded in `_fleet/QA.md`.
 
 ## V3 experience
 
@@ -27,6 +27,18 @@ Run `npm start` and open http://127.0.0.1:8788. No package installation or exter
 - Four new original lifestyle concepts: a football break, colleagues after lunch, a family across adult generations, and a parked road stop. Desktop scroll changes the pinned scene; mobile and reduced-motion layouts show each scene in sequence.
 - A silent scroll-controlled ritual: the seed opens along its side edge, the kernel emerges, and the empty husks arc into a separate paper bag. No sound button, synthetic audio or required step clicks. Short-screen, reduced-motion and no-JavaScript views use a static illustrated guide.
 - Keyboard-accessible dialogs, mobile layouts, reduced-motion support and complete Arabic/English controls.
+
+## September visual refinement
+
+The owner confirmed that the existing live layout should stay. The cream/olive palette, arched photographs, product grid, family pack, About, reviews, partners, wholesale, contacts and FAQs retain their original arrangement.
+
+- Clearer IBM Plex Sans Arabic headings in both languages; the Aref Ruqaa HUBB wordmark remains.
+- New original campaign concepts: Classic Sea Salt on a parked road break, Fire Salt between games, Pepper Lime with adult family, Garlic Salt for a TV evening, and Family Mix at a football break. These are imagined occasions, not evidence of consumer preferences or real customer photographs.
+- The existing three gallery controls now open four-frame stories. The new contact-sheet images are cropped responsively by CSS, preserving their proportions.
+- A larger silent macro seed opens from its side edge. Each shell exterior and hollow interior follows the same pose through the flip; the kernel stays separate while empty husks arc into a paper bag. The active caption remains inside the sticky picture on phones.
+- The original shopping model remains a preview. No new payment, order, delivery or review service is connected.
+
+Original image outputs and exact prompts are preserved in `assets/story-*-v4.png` and `assets/STORIES_V4_PROMPTS.md`. The earlier shorter-layout proposal in `_fleet/plans/HUBB_V4_VISUAL_STORY_PLAN.md` was superseded by the owner's direction to keep the live layout.
 
 ## Proposed online offer
 

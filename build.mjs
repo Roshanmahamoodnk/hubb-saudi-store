@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {generateSeoPages} from './seo-pages.mjs';
 import {products,formats,packImage} from './catalog.js';
-import {renderScenes,scenes} from './scenes.js';
+import {renderScenes,scenes,familyScene} from './scenes.js';
 import {renderCrack} from './crack-scroll.js';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const out=path.join(root,process.env.HUBB_OUT_DIR||'out');
@@ -11,10 +11,10 @@ const deployment=new URL(process.env.HUBB_SITE_URL||'https://hubb-saudi-gatherin
 if(!['https:','http:'].includes(deployment.protocol)||deployment.username||deployment.password||deployment.search||deployment.hash)throw new Error('HUBB_SITE_URL must be a plain HTTP(S) deployment URL');
 const basePath=deployment.pathname.replace(/\/+$/,'');
 const origin=deployment.origin+basePath;
-const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
+const requiredImages=[...products.flatMap(p=>['cup','case'].map(f=>packImage(p,f))),...scenes.map(s=>s.image),familyScene.image,...['whole','husk','kernel','bag'].map(id=>`/assets/ritual-${id==='whole'?'whole-edge-v5':id+'-v4'}.webp`)];
 await Promise.all(requiredImages.map(file=>fs.access(path.join(root,file.replace(/^\//,'')))));
 await fs.mkdir(path.join(out,'assets'),{recursive:true});
-for(const file of ['paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
+for(const file of ['refinement.css','paths.js','site-config.js','crack-scroll.js','crack-scroll.css','styles.css','story.css','story.js','motion.js','motion.css','scenes.js','commerce.css','catalog.js','commerce.js','app.js'])await fs.copyFile(path.join(root,file),path.join(out,file));
 for(const file of await fs.readdir(path.join(root,'assets'))){if(file.endsWith('.webp')||file==='favicon.svg')await fs.copyFile(path.join(root,'assets',file),path.join(out,'assets',file));}
 const source=await fs.readFile(path.join(root,'index.html'),'utf8');
 const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');

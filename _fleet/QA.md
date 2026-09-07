@@ -62,3 +62,21 @@ The Pages API was configured to build `main:/` as a legacy branch site. Its serv
 Added a Pages Actions workflow that checks/builds the source and uploads only `out/`. Added configurable deployment URL/output, a generated base-path module, idempotent runtime URL handling, static HTML URL scoping, document-based locale initialization, relative product-page imports and complete SEO deployment paths.
 
 Both the default root build and the `/hubb-saudi-store/` build pass syntax and `check:site`:11pages and444local URL checks each, covering metadata, module imports and dynamic catalogue images. Static guide and audio/B2B corrections remain in the site. Public Pages deployment and live responses are verified after the workflow runs.
+
+
+## Visual refinement — 7 September 2026
+
+Final scope: preserve the live layout; improve typography, campaign imagery and seed visualization. A shorter-layout draft was explored locally but was superseded by the owner's explicit direction. It is not the release candidate.
+
+- In-app browser: existing arched hero and green story layout inspected at 1100×900; scene scrolling changed the active image from road to gaming. New image crops preserve people and pack proportions. The wordmark keeps Aref Ruqaa; page headings use IBM Plex Sans Arabic.
+- Portrait sizes 360×800 and 390×844 inspected. No horizontal overflow at those sizes. Menu opened and closed, returned to shop; four carton images switched correctly. A 430×932 view is included in the final navigation checks.
+- Original product-page format selector retained its case query and carton image on English→Arabic navigation. Product dialog, cart minimum and modal closing checked. A single Fire Salt cup produced SAR12 goods and disabled checkout below SAR39. The test item was removed; bag returned to0 and scroll lock cleared. No request or message was sent.
+- All three gallery controls opened four-frame stories in Arabic: football sharing, road and gaming. All four images in the football dialog loaded, and Escape closed the dialog. Replaced the old gallery-to-product associations with the depicted products.
+- Seed artwork inspected at progress0,0.227,0.505 and1 on a phone. The opening begins at the right side edge; hollow shells and kernel are visibly separate mid-sequence. At progress1 both empty husks have opacity0 inside the bag, the kernel remains outside, and the matching instruction is visible. Caption and artwork share the sticky panel. No sound control or click-through step sequence exists.
+- Landscape844×390 disabled animated mode, used a relative static stage and showed all four instructions as a grid without horizontal overflow. Reduced-motion and no-JavaScript paths reviewed in source; a physical iOS/Android device, real touch inertia and frame-rate benchmark were not measured.
+- Independent read-only review found a gallery language-scope error and stale hero preload; both were fixed before final checks. All active page/gallery lifestyle references now use the new concepts. Existing social-preview metadata is retained.
+- Five generated1254×1254 contact sheets visually inspected and converted to WebP; originals and exact prompts preserved. Generation was requested at2048 but returned1254. These are AI-generated concepts, not actual customer photographs or filmed Riyadh/Dammam locations. The cup/count microtext and physical paper-bag arrangement still need real packaging validation. No fabricated reviews, ratings or endorsements added.
+
+CSS container sizing reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries . Crop rendering was verified in the actual in-app browser; this does not establish support on every physical device.
+
+Final release checks: module syntax, root-hosted build and GitHub project-path build passed. Each build verified11pages and457local URLs, section anchors and runtime path helpers. Desktop seed framing checked at1100×900; font/caption/artwork remained visible. Fresh browser error/warning log was empty, and430×932 had no horizontal overflow or broken loaded images. The kernel now moves left before husks start their journey into the bag.
