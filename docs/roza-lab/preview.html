@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Roza Lab interior design briefing — preview</title>
+  <style>
+    :root { --ink:#201810; --cream:#f6f0e6; --gold:#b0843a; --wood:#5c3824; }
+    body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--cream); color:var(--ink); }
+    header { background:var(--ink); color:#faf6ee; padding:28px 36px; }
+    header p { color:#d4b36a; margin:8px 0 0; }
+    main { max-width:1100px; margin:0 auto; padding:24px 36px 80px; }
+    h2 { border-bottom:2px solid var(--gold); padding-bottom:8px; }
+    img { max-width:100%; height:auto; border-radius:8px; margin:12px 0 28px; box-shadow:0 8px 24px rgba(32,24,18,.15); }
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:800px) { .pair { grid-template-columns:1fr; } }
+    table { border-collapse:collapse; width:100%; background:#fff; margin:16px 0 32px; }
+    td, th { border:1px solid #e4d8c8; padding:8px 10px; text-align:left; font-family:system-ui,sans-serif; font-size:14px; }
+    .note { font-family:system-ui,sans-serif; font-size:14px; color:#6a5a4a; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roza Lab — interior design briefing</h1>
+    <p>Marketing HQ · central monitoring · nutrition / QC · roastery cooking test · Project North = tree window</p>
+  </header>
+  <main>
+    <p class="note">Static preview of <code>docs/roza-lab/README.md</code>. Occupants: Roshan Mahamood (CEO), Nikhil (Marketing), Sangeetha (QC/R&amp;D).</p>
+    <h2>Existing plate (reconstructed)</h2>
+    <img src="plans/01_existing_floor_plan.png" alt="Existing floor plan" />
+    <h2>Proposed zoning</h2>
+    <img src="plans/02_proposed_zoning.png" alt="Proposed zoning" />
+    <h2>Furniture / FF&amp;E</h2>
+    <img src="plans/03_furniture_layout.png" alt="Furniture layout" />
+    <h2>Central monitoring wall</h2>
+    <img src="plans/04_monitoring_wall.png" alt="Monitoring wall" />
+    <h2>Photo survey (current + annotated)</h2>
+    <div class="pair">
+      <img src="photos/current/01_corridor_looking_project_north.jpg" alt="P01 current" />
+      <img src="photos/annotated/01_corridor_looking_project_north_annotated.jpg" alt="P01 annotated" />
+    </div>
+    <div class="pair">
+      <img src="photos/current/06_qc_rd_lab_jars_and_sink.jpg" alt="P06 current" />
+      <img src="photos/annotated/06_qc_rd_lab_jars_and_sink_annotated.jpg" alt="P06 annotated" />
+    </div>
+    <div class="pair">
+      <img src="photos/current/08_sunroom_looking_project_north.jpg" alt="P08 current" />
+      <img src="photos/annotated/08_sunroom_looking_project_north_annotated.jpg" alt="P08 annotated" />
+    </div>
+    <h2>Concept interiors</h2>
+    <img src="plans/08_generated_ceo_office.png" alt="CEO office concept" />
+    <img src="plans/12_generated_monitoring_wall.png" alt="Monitoring concept" />
+    <table>
+      <tr><th>Zone</th><th>Person</th></tr>
+      <tr><td>West glass office</td><td>Roshan Mahamood — CEO</td></tr>
+      <tr><td>Sunroom</td><td>Nikhil — Marketing Head</td></tr>
+      <tr><td>Hub wall</td><td>Central monitoring (shared)</td></tr>
+      <tr><td>East galley</td><td>Sangeetha — Nutrition / QC / R&amp;D</td></tr>
+      <tr><td>South-east bay</td><td>Roastery cooking testing (wet)</td></tr>
+    </table>
+  </main>
+</body>
+</html>
